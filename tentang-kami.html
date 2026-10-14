@@ -14,6 +14,10 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Sistem Multi Bahasa (Indonesian & English) -->
+    <script src="translations_data.js"></script>
+    <script src="i18n.js"></script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -80,21 +84,31 @@
 
                 <!-- Navigasi Menu Lengkap -->
                 <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-200">
-                    <a href="index.html" class="text-slate-300 hover:text-brand-accent transition-colors">Beli Mobil</a>
-                    <a href="jual-mobil.html" class="text-slate-300 hover:text-brand-accent transition-colors">Jual Mobil</a>
+                    <a href="index.html" class="text-slate-300 hover:text-brand-accent transition-colors"><span data-i18n="nav_buy">Beli Mobil</span></a>
+                    <a href="jual-mobil.html" class="text-slate-300 hover:text-brand-accent transition-colors"><span data-i18n="nav_sell">Jual Mobil</span></a>
                     <a href="promo.html" class="text-slate-300 hover:text-brand-accent transition-colors flex items-center gap-1.5">
-                        <span>Promo</span>
+                        <span data-i18n="nav_promo">Promo</span>
                         <span class="bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse">HOT</span>
                     </a>
                     <a href="tentang-kami.html" class="text-brand-accent font-semibold flex items-center gap-1">
-                        Tentang Kami
+                        <span data-i18n="nav_about">Tentang Kami</span>
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
                     </a>
-                    <a href="simulasi-kredit.html" class="text-slate-300 hover:text-brand-accent transition-colors">Simulasi Kredit</a>
+                    <a href="simulasi-kredit.html" class="text-slate-300 hover:text-brand-accent transition-colors"><span data-i18n="nav_loan">Simulasi Kredit</span></a>
                 </nav>
 
-                <!-- Tombol Hotline WhatsApp (Desktop) & Mobile Trigger -->
+                <!-- Tombol Hotline WhatsApp (Desktop), Language Switcher & Mobile Trigger -->
                 <div class="flex items-center gap-3">
+                    <!-- Language Switcher (ID / EN) -->
+                    <div class="lang-switcher flex items-center bg-slate-800/80 p-0.5 rounded-full border border-slate-700/80 text-xs shadow-inner">
+                        <button onclick="setLanguage('id')" class="lang-btn-id px-2.5 py-1 rounded-full transition-all text-xs font-bold bg-brand-orange text-white shadow-sm flex items-center gap-1 cursor-pointer" title="Bahasa Indonesia">
+                            <span>🇮🇩</span> <span>ID</span>
+                        </button>
+                        <button onclick="setLanguage('en')" class="lang-btn-en px-2.5 py-1 rounded-full transition-all text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer" title="English">
+                            <span>🇬🇧</span> <span>EN</span>
+                        </button>
+                    </div>
+
                     <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm">
                         <i class="fa-brands fa-whatsapp text-sm"></i>
                         <span>0812-0000-0000</span>
@@ -108,11 +122,25 @@
 
             <!-- Mobile Nav Menu Dropdown -->
             <div id="mobileNavMenu" class="hidden lg:hidden pt-4 pb-2 border-t border-slate-700/60 mt-4 space-y-3">
-                <a href="index.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Beli Mobil (Katalog)</a>
-                <a href="jual-mobil.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Jual Mobil</a>
-                <a href="promo.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Promo Spesial</a>
-                <a href="tentang-kami.html" class="block text-brand-orange font-semibold py-1 text-sm">Tentang Kami</a>
-                <a href="simulasi-kredit.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Simulasi Kredit</a>
+                <a href="index.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium"><span data-i18n="nav_buy">Beli Mobil</span></a>
+                <a href="jual-mobil.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium"><span data-i18n="nav_sell">Jual Mobil</span></a>
+                <a href="promo.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium"><span data-i18n="nav_promo">Promo</span></a>
+                <a href="tentang-kami.html" class="block text-brand-orange font-semibold py-1 text-sm"><span data-i18n="nav_about">Tentang Kami</span></a>
+                <a href="simulasi-kredit.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium"><span data-i18n="nav_loan">Simulasi Kredit</span></a>
+                
+                <!-- Pilihan Bahasa Mobile -->
+                <div class="pt-3 border-t border-slate-700/60 flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-300">Bahasa / Language:</span>
+                    <div class="lang-switcher flex items-center bg-slate-800 p-0.5 rounded-full border border-slate-700 text-xs">
+                        <button onclick="setLanguage('id')" class="lang-btn-id px-2.5 py-1 rounded-full transition-all text-xs font-bold bg-brand-orange text-white shadow-sm flex items-center gap-1 cursor-pointer">
+                            <span>🇮🇩</span> <span>ID</span>
+                        </button>
+                        <button onclick="setLanguage('en')" class="lang-btn-en px-2.5 py-1 rounded-full transition-all text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer">
+                            <span>🇬🇧</span> <span>EN</span>
+                        </button>
+                    </div>
+                </div>
+
                 <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second" target="_blank" class="block text-emerald-400 font-semibold py-1 text-sm flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> Hubungi WhatsApp Sales</a>
             </div>
         </div>
@@ -220,8 +248,8 @@
 
                 <!-- 3 Pilar Integritas -->
                 <div class="space-y-3 pt-2">
-                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-brand-orange/40 transition-colors">
-                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-brand-orange flex items-center justify-center text-lg flex-shrink-0">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-slate-300 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-slate-900 text-brand-orange flex items-center justify-center text-lg flex-shrink-0 border border-slate-800">
                             <i class="fa-solid fa-scale-balanced"></i>
                         </div>
                         <div>
@@ -230,8 +258,8 @@
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-brand-orange/40 transition-colors">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg flex-shrink-0">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-slate-300 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-slate-900 text-brand-orange flex items-center justify-center text-lg flex-shrink-0 border border-slate-800">
                             <i class="fa-solid fa-microscope"></i>
                         </div>
                         <div>
@@ -240,8 +268,8 @@
                         </div>
                     </div>
 
-                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-brand-orange/40 transition-colors">
-                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg flex-shrink-0">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-slate-300 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-slate-900 text-brand-orange flex items-center justify-center text-lg flex-shrink-0 border border-slate-800">
                             <i class="fa-solid fa-handshake-angle"></i>
                         </div>
                         <div>
@@ -304,58 +332,58 @@
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 <!-- Pilar 1 -->
-                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-emerald-500/50 transition-all space-y-3 group">
-                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-brand-orange/40 transition-all space-y-3 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-navy text-brand-accent flex items-center justify-center text-2xl group-hover:scale-105 transition-transform border border-brand-navyLight shadow-md">
                         <i class="fa-solid fa-clipboard-check"></i>
                     </div>
                     <h3 class="font-extrabold text-slate-900 text-base">Inspeksi 160 Titik</h3>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Pemeriksaan digital & fisik mencakup mesin, transmisi, sasis, rem, suspensi, interior, kelistrikan, dan komputer ECU mobil.
                     </p>
-                    <div class="pt-2 text-[11px] font-bold text-emerald-600 flex items-center gap-1">
-                        <i class="fa-solid fa-check"></i> Laporan Digital Lengkap
+                    <div class="pt-2 text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-brand-orange text-xs"></i> Laporan Digital Lengkap
                     </div>
                 </div>
 
                 <!-- Pilar 2 -->
-                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-blue-500/50 transition-all space-y-3 group">
-                    <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-brand-orange/40 transition-all space-y-3 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-navy text-brand-accent flex items-center justify-center text-2xl group-hover:scale-105 transition-transform border border-brand-navyLight shadow-md">
                         <i class="fa-solid fa-shield-cat"></i>
                     </div>
                     <h3 class="font-extrabold text-slate-900 text-base">Bebas Banjir & Tabrakan</h3>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Kami menolak 100% mobil bekas yang terindikasi pernah terendam banjir atau mengalami benturan struktural pada sasis utama & pilar.
                     </p>
-                    <div class="pt-2 text-[11px] font-bold text-blue-600 flex items-center gap-1">
-                        <i class="fa-solid fa-check"></i> Sasis Orisinil Utuh
+                    <div class="pt-2 text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-brand-orange text-xs"></i> Sasis Orisinil Utuh
                     </div>
                 </div>
 
                 <!-- Pilar 3 -->
-                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-brand-orange/50 transition-all space-y-3 group">
-                    <div class="w-14 h-14 rounded-2xl bg-orange-100 text-brand-orange flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-brand-orange/40 transition-all space-y-3 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-navy text-brand-accent flex items-center justify-center text-2xl group-hover:scale-105 transition-transform border border-brand-navyLight shadow-md">
                         <i class="fa-solid fa-certificate"></i>
                     </div>
                     <h3 class="font-extrabold text-slate-900 text-base">Garansi 1 Tahun Mesin</h3>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Perlindungan gratis garansi mesin, transmisi, dan sistem pendingin udara (AC) selama 365 hari atau 20.000 km di bengkel rekanan.
                     </p>
-                    <div class="pt-2 text-[11px] font-bold text-brand-orange flex items-center gap-1">
-                        <i class="fa-solid fa-check"></i> Klaim Mudah Tanpa Ribet
+                    <div class="pt-2 text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-brand-orange text-xs"></i> Klaim Mudah Tanpa Ribet
                     </div>
                 </div>
 
                 <!-- Pilar 4 -->
-                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-purple-500/50 transition-all space-y-3 group">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-brand-orange/40 transition-all space-y-3 group">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-navy text-brand-accent flex items-center justify-center text-2xl group-hover:scale-105 transition-transform border border-brand-navyLight shadow-md">
                         <i class="fa-solid fa-rotate-left"></i>
                     </div>
                     <h3 class="font-extrabold text-slate-900 text-base">5 Hari Uang Kembali</h3>
                     <p class="text-xs text-slate-500 leading-relaxed">
                         Jika mobil yang Anda beli terbukti tidak sesuai dengan laporan hasil inspeksi kami, kami kembalikan uang Anda 100% tanpa potongan.
                     </p>
-                    <div class="pt-2 text-[11px] font-bold text-purple-600 flex items-center gap-1">
-                        <i class="fa-solid fa-check"></i> 100% Money-Back Guarantee
+                    <div class="pt-2 text-[11px] font-bold text-slate-700 flex items-center gap-1.5">
+                        <i class="fa-solid fa-circle-check text-brand-orange text-xs"></i> 100% Money-Back Guarantee
                     </div>
                 </div>
             </div>
@@ -376,12 +404,12 @@
                     </p>
                 </div>
                 <div class="flex flex-wrap items-center gap-3">
-                    <div class="flex items-center gap-2 bg-emerald-50 text-emerald-800 px-4 py-2 rounded-2xl text-xs font-bold border border-emerald-200">
-                        <i class="fa-solid fa-award text-base text-emerald-600"></i>
+                    <div class="flex items-center gap-2 bg-brand-navy text-white px-4 py-2 rounded-2xl text-xs font-bold border border-white/10 shadow-sm">
+                        <i class="fa-solid fa-award text-base text-brand-orange"></i>
                         <span>Sertifikasi Standar Asosiasi Otomotif</span>
                     </div>
-                    <div class="flex items-center gap-2 bg-blue-50 text-blue-800 px-4 py-2 rounded-2xl text-xs font-bold border border-blue-200">
-                        <i class="fa-solid fa-laptop-code text-base text-blue-600"></i>
+                    <div class="flex items-center gap-2 bg-brand-navy text-white px-4 py-2 rounded-2xl text-xs font-bold border border-white/10 shadow-sm">
+                        <i class="fa-solid fa-laptop-code text-base text-brand-orange"></i>
                         <span>Digital OBD-II Scanner</span>
                     </div>
                 </div>
@@ -691,53 +719,53 @@
             <!-- Grid Cakupan -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Card 1: Mesin -->
-                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4">
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4 hover:border-white/20 transition-all">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-gears"></i>
+                        <div class="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center text-lg border border-white/10">
+                            <i class="fa-solid fa-gears text-brand-accent"></i>
                         </div>
                         <h4 class="font-extrabold text-white text-base">Komponen Mesin</h4>
                     </div>
                     <ul class="text-xs text-slate-300 space-y-2.5">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Blok silinder & kepala silinder</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Crankshaft, connecting rod & bearings</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Piston & ring piston</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Camshaft & klep (intake/exhaust)</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Pompa oli mesin & timing chain</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Blok silinder & kepala silinder</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Crankshaft, connecting rod & bearings</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Piston & ring piston</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Camshaft & klep (intake/exhaust)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Pompa oli mesin & timing chain</li>
                     </ul>
                 </div>
 
                 <!-- Card 2: Transmisi -->
-                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4">
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4 hover:border-white/20 transition-all">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-sliders"></i>
+                        <div class="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center text-lg border border-white/10">
+                            <i class="fa-solid fa-sliders text-brand-accent"></i>
                         </div>
                         <h4 class="font-extrabold text-white text-base">Sistem Transmisi</h4>
                     </div>
                     <ul class="text-xs text-slate-300 space-y-2.5">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Torque converter transmisi otomatis</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Planetary gear set & valve body</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Modul kontrol transmisi (TCM)</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Pompa oli transmisi matic / CVT belt</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Gearbox manual & poros utama</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Torque converter transmisi otomatis</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Planetary gear set & valve body</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Modul kontrol transmisi (TCM)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Pompa oli transmisi matic / CVT belt</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Gearbox manual & poros utama</li>
                     </ul>
                 </div>
 
                 <!-- Card 3: Pendingin & Layanan Darurat -->
-                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4">
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4 hover:border-white/20 transition-all">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
-                            <i class="fa-solid fa-snowflake"></i>
+                        <div class="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center text-lg border border-white/10">
+                            <i class="fa-solid fa-snowflake text-brand-accent"></i>
                         </div>
                         <h4 class="font-extrabold text-white text-base">AC & Layanan 24 Jam</h4>
                     </div>
                     <ul class="text-xs text-slate-300 space-y-2.5">
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Kompresor AC & magnetic clutch</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Kondensor AC & evaporator kabin</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Radiator mesin & kipas pendingin</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Layanan towing darurat 24 jam gratis</li>
-                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Jumper aki darurat & ganti ban serep</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Kompresor AC & magnetic clutch</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Kondensor AC & evaporator kabin</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Radiator mesin & kipas pendingin</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Layanan towing darurat 24 jam gratis</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-amber-400"></i> Jumper aki darurat & ganti ban serep</li>
                     </ul>
                 </div>
             </div>
@@ -862,11 +890,11 @@
                 </div>
 
                 <!-- Showroom 2: Tangerang Selatan (BSD) -->
-                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-blue-500 transition-all flex flex-col justify-between space-y-4 group">
+                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 group">
                     <div class="space-y-3">
                         <div class="h-40 rounded-2xl bg-slate-900 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" alt="Showroom BSD" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Cabang Resmi</span>
+                            <span class="absolute top-2.5 left-2.5 bg-slate-900/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Cabang Resmi</span>
                             <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-0.5 rounded-md">
                                 <i class="fa-solid fa-car"></i> 25+ Unit Ready
                             </span>
@@ -880,9 +908,9 @@
 
                         <!-- Showroom Amenities -->
                         <div class="pt-2 border-t border-slate-100 space-y-1.5 text-[11px] text-slate-600">
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-blue-600"></i> AC Lounge & Free High-Speed WiFi</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-road text-blue-600"></i> Area Parkir Luas & Test Drive</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-car-wash text-blue-600"></i> Detailing Center & Car Wash</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-slate-700"></i> AC Lounge & Free High-Speed WiFi</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-road text-slate-700"></i> Area Parkir Luas & Test Drive</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-car-wash text-slate-700"></i> Detailing Center & Car Wash</div>
                         </div>
 
                         <div class="text-[11px] text-slate-400">
@@ -891,7 +919,7 @@
                     </div>
 
                     <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
-                        <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second%20BSD%20Tangerang,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-blue-600 text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
+                        <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second%20BSD%20Tangerang,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-slate-800 text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
                             <i class="fa-brands fa-whatsapp text-emerald-400"></i> Hubungi Cabang
                         </a>
                         <a href="https://maps.google.com/?q=Tangerang+Selatan" target="_blank" class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors" title="Buka Petunjuk Arah Google Maps">
@@ -901,11 +929,11 @@
                 </div>
 
                 <!-- Showroom 3: Bekasi Barat -->
-                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-emerald-500 transition-all flex flex-col justify-between space-y-4 group">
+                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 group">
                     <div class="space-y-3">
                         <div class="h-40 rounded-2xl bg-slate-900 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" alt="Showroom Bekasi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <span class="absolute top-2.5 left-2.5 bg-emerald-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Cabang Resmi</span>
+                            <span class="absolute top-2.5 left-2.5 bg-slate-900/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Cabang Resmi</span>
                             <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-0.5 rounded-md">
                                 <i class="fa-solid fa-car"></i> 20+ Unit Ready
                             </span>
@@ -919,9 +947,9 @@
 
                         <!-- Showroom Amenities -->
                         <div class="pt-2 border-t border-slate-100 space-y-1.5 text-[11px] text-slate-600">
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-emerald-600"></i> AC Lounge & Free High-Speed WiFi</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-file-invoice text-emerald-600"></i> Meja Konsultasi Kredit Cepat</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-mug-saucer text-emerald-600"></i> Snack & Minuman Gratis</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-slate-700"></i> AC Lounge & Free High-Speed WiFi</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-file-invoice text-slate-700"></i> Meja Konsultasi Kredit Cepat</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-mug-saucer text-slate-700"></i> Snack & Minuman Gratis</div>
                         </div>
 
                         <div class="text-[11px] text-slate-400">
@@ -930,7 +958,7 @@
                     </div>
 
                     <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
-                        <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second%20Bekasi,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-emerald-600 text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
+                        <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second%20Bekasi,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-slate-800 text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
                             <i class="fa-brands fa-whatsapp text-emerald-400"></i> Hubungi Cabang
                         </a>
                         <a href="https://maps.google.com/?q=Kota+Bekasi" target="_blank" class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors" title="Buka Petunjuk Arah Google Maps">
@@ -940,11 +968,11 @@
                 </div>
 
                 <!-- Showroom 4: Bandung Kota -->
-                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-purple-500 transition-all flex flex-col justify-between space-y-4 group">
+                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 group">
                     <div class="space-y-3">
                         <div class="h-40 rounded-2xl bg-slate-900 overflow-hidden relative">
                             <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80" alt="Showroom Bandung" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                            <span class="absolute top-2.5 left-2.5 bg-purple-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Cabang Resmi</span>
+                            <span class="absolute top-2.5 left-2.5 bg-slate-900/90 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Cabang Resmi</span>
                             <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-0.5 rounded-md">
                                 <i class="fa-solid fa-car"></i> 22+ Unit Ready
                             </span>
@@ -958,9 +986,9 @@
 
                         <!-- Showroom Amenities -->
                         <div class="pt-2 border-t border-slate-100 space-y-1.5 text-[11px] text-slate-600">
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-purple-600"></i> AC Lounge & Free High-Speed WiFi</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-wrench text-purple-600"></i> Bengkel Rekanan Inspeksi</div>
-                            <div class="flex items-center gap-2"><i class="fa-solid fa-mug-saucer text-purple-600"></i> Coffee Corner & Musholla</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-slate-700"></i> AC Lounge & Free High-Speed WiFi</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-wrench text-slate-700"></i> Bengkel Rekanan Inspeksi</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-mug-saucer text-slate-700"></i> Coffee Corner & Musholla</div>
                         </div>
 
                         <div class="text-[11px] text-slate-400">
@@ -969,7 +997,7 @@
                     </div>
 
                     <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
-                        <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second%20Bandung,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-purple-600 text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
+                        <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second%20Bandung,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-slate-800 text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
                             <i class="fa-brands fa-whatsapp text-emerald-400"></i> Hubungi Cabang
                         </a>
                         <a href="https://maps.google.com/?q=Kota+Bandung" target="_blank" class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors" title="Buka Petunjuk Arah Google Maps">
@@ -996,7 +1024,7 @@
                 </div>
                 <!-- Google Rating Badge -->
                 <div class="bg-white rounded-2xl p-4 border border-slate-200/90 shadow-sm flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-500 flex items-center justify-center text-xl">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 text-slate-800 border border-slate-200 flex items-center justify-center text-xl">
                         <i class="fa-brands fa-google"></i>
                     </div>
                     <div>

@@ -14,6 +14,10 @@
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
+    <!-- Sistem Multi Bahasa (Indonesian & English) -->
+    <script src="translations_data.js"></script>
+    <script src="i18n.js"></script>
+
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -127,21 +131,31 @@
 
                 <!-- Navigasi Menu Lengkap -->
                 <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-200">
-                    <a href="index.html" class="text-slate-300 hover:text-brand-accent transition-colors">Beli Mobil</a>
-                    <a href="jual-mobil.html" class="text-slate-300 hover:text-brand-accent transition-colors">Jual Mobil</a>
+                    <a href="index.html" class="text-slate-300 hover:text-brand-accent transition-colors"><span data-i18n="nav_buy">Beli Mobil</span></a>
+                    <a href="jual-mobil.html" class="text-slate-300 hover:text-brand-accent transition-colors"><span data-i18n="nav_sell">Jual Mobil</span></a>
                     <a href="promo.html" class="text-slate-300 hover:text-brand-accent transition-colors flex items-center gap-1.5">
-                        <span>Promo</span>
+                        <span data-i18n="nav_promo">Promo</span>
                         <span class="bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse">HOT</span>
                     </a>
-                    <a href="tentang-kami.html" class="text-slate-300 hover:text-brand-accent transition-colors">Tentang Kami</a>
+                    <a href="tentang-kami.html" class="text-slate-300 hover:text-brand-accent transition-colors"><span data-i18n="nav_about">Tentang Kami</span></a>
                     <a href="simulasi-kredit.html" class="text-brand-accent font-semibold flex items-center gap-1">
-                        Simulasi Kredit
+                        <span data-i18n="nav_loan">Simulasi Kredit</span>
                         <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
                     </a>
                 </nav>
 
-                <!-- Tombol Hotline WhatsApp (Desktop) & Mobile Trigger -->
+                <!-- Tombol Hotline WhatsApp (Desktop), Language Switcher & Mobile Trigger -->
                 <div class="flex items-center gap-3">
+                    <!-- Language Switcher (ID / EN) -->
+                    <div class="lang-switcher flex items-center bg-slate-800/80 p-0.5 rounded-full border border-slate-700/80 text-xs shadow-inner">
+                        <button onclick="setLanguage('id')" class="lang-btn-id px-2.5 py-1 rounded-full transition-all text-xs font-bold bg-brand-orange text-white shadow-sm flex items-center gap-1 cursor-pointer" title="Bahasa Indonesia">
+                            <span>🇮🇩</span> <span>ID</span>
+                        </button>
+                        <button onclick="setLanguage('en')" class="lang-btn-en px-2.5 py-1 rounded-full transition-all text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer" title="English">
+                            <span>🇬🇧</span> <span>EN</span>
+                        </button>
+                    </div>
+
                     <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm">
                         <i class="fa-brands fa-whatsapp text-sm"></i>
                         <span>0812-0000-0000</span>
@@ -155,11 +169,25 @@
 
             <!-- Mobile Nav Menu Dropdown -->
             <div id="mobileNavMenu" class="hidden lg:hidden pt-4 pb-2 border-t border-slate-700/60 mt-4 space-y-3">
-                <a href="index.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Beli Mobil (Katalog)</a>
-                <a href="jual-mobil.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Jual Mobil</a>
-                <a href="promo.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Promo Spesial</a>
-                <a href="tentang-kami.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Tentang Kami</a>
-                <a href="simulasi-kredit.html" class="block text-brand-orange font-semibold py-1 text-sm">Simulasi Kredit</a>
+                <a href="index.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium"><span data-i18n="nav_buy">Beli Mobil</span></a>
+                <a href="jual-mobil.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium"><span data-i18n="nav_sell">Jual Mobil</span></a>
+                <a href="promo.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium"><span data-i18n="nav_promo">Promo</span></a>
+                <a href="tentang-kami.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium"><span data-i18n="nav_about">Tentang Kami</span></a>
+                <a href="simulasi-kredit.html" class="block text-brand-orange font-semibold py-1 text-sm"><span data-i18n="nav_loan">Simulasi Kredit</span></a>
+                
+                <!-- Pilihan Bahasa Mobile -->
+                <div class="pt-3 border-t border-slate-700/60 flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-300">Bahasa / Language:</span>
+                    <div class="lang-switcher flex items-center bg-slate-800 p-0.5 rounded-full border border-slate-700 text-xs">
+                        <button onclick="setLanguage('id')" class="lang-btn-id px-2.5 py-1 rounded-full transition-all text-xs font-bold bg-brand-orange text-white shadow-sm flex items-center gap-1 cursor-pointer">
+                            <span>🇮🇩</span> <span>ID</span>
+                        </button>
+                        <button onclick="setLanguage('en')" class="lang-btn-en px-2.5 py-1 rounded-full transition-all text-xs font-bold text-slate-300 hover:text-white flex items-center gap-1 cursor-pointer">
+                            <span>🇬🇧</span> <span>EN</span>
+                        </button>
+                    </div>
+                </div>
+
                 <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second" target="_blank" class="block text-emerald-400 font-semibold py-1 text-sm flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> Hubungi WhatsApp Sales</a>
             </div>
         </div>
@@ -189,26 +217,26 @@
                     <!-- 4 Financial Trust Badges -->
                     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                         <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-sm">
-                            <div class="text-amber-400 text-base font-extrabold flex items-center gap-1.5">
-                                <i class="fa-solid fa-percent text-xs"></i> 6.5% p.a.
+                            <div class="text-white text-base font-extrabold flex items-center gap-1.5">
+                                <i class="fa-solid fa-percent text-xs text-brand-orange"></i> 6.5% p.a.
                             </div>
                             <div class="text-[11px] text-slate-400 mt-0.5">Bunga Rendah Kompetitif</div>
                         </div>
                         <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-sm">
-                            <div class="text-emerald-400 text-base font-extrabold flex items-center gap-1.5">
-                                <i class="fa-solid fa-tag text-xs"></i> Mulai 10%
+                            <div class="text-white text-base font-extrabold flex items-center gap-1.5">
+                                <i class="fa-solid fa-tag text-xs text-brand-orange"></i> Mulai 10%
                             </div>
                             <div class="text-[11px] text-slate-400 mt-0.5">DP Ringan Fleksibel</div>
                         </div>
                         <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-sm">
-                            <div class="text-blue-400 text-base font-extrabold flex items-center gap-1.5">
-                                <i class="fa-solid fa-clock text-xs"></i> 1x24 Jam
+                            <div class="text-white text-base font-extrabold flex items-center gap-1.5">
+                                <i class="fa-solid fa-clock text-xs text-brand-orange"></i> 1x24 Jam
                             </div>
                             <div class="text-[11px] text-slate-400 mt-0.5">Approval Cepat & Praktis</div>
                         </div>
                         <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-sm">
-                            <div class="text-purple-400 text-base font-extrabold flex items-center gap-1.5">
-                                <i class="fa-solid fa-shield-halved text-xs"></i> Resmi OJK
+                            <div class="text-white text-base font-extrabold flex items-center gap-1.5">
+                                <i class="fa-solid fa-shield-halved text-xs text-brand-orange"></i> Resmi OJK
                             </div>
                             <div class="text-[11px] text-slate-400 mt-0.5">BPKB Aman Terjamin</div>
                         </div>
@@ -485,15 +513,15 @@
                         <div class="space-y-1.5 pt-1">
                             <div class="h-2.5 w-full bg-slate-800 rounded-full overflow-hidden flex">
                                 <div id="barDp" class="bg-brand-orange h-full" style="width: 70%" title="DP Murni"></div>
-                                <div id="barFirstInstallment" class="bg-blue-500 h-full" style="width: 15%" title="Angsuran Pertama"></div>
-                                <div id="barInsurance" class="bg-emerald-500 h-full" style="width: 10%" title="Asuransi"></div>
-                                <div id="barAdmin" class="bg-purple-500 h-full" style="width: 5%" title="Biaya Admin & Polis"></div>
+                                <div id="barFirstInstallment" class="bg-amber-400 h-full" style="width: 15%" title="Angsuran Pertama"></div>
+                                <div id="barInsurance" class="bg-slate-300 h-full" style="width: 10%" title="Asuransi"></div>
+                                <div id="barAdmin" class="bg-slate-500 h-full" style="width: 5%" title="Biaya Admin & Polis"></div>
                             </div>
-                            <div class="flex items-center justify-between text-[10px] text-slate-400">
+                            <div class="flex items-center justify-between text-[10px] text-slate-300">
                                 <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-brand-orange"></span> DP</span>
-                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Angs. 1</span>
-                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Asuransi</span>
-                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Admin</span>
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-400"></span> Angs. 1</span>
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-slate-300"></span> Asuransi</span>
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-slate-500"></span> Admin</span>
                             </div>
                         </div>
                     </div>
@@ -769,38 +797,38 @@
             <!-- Konten Dokumen Karyawan -->
             <div id="docContentKaryawan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">1</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">1</div>
                     <h5 class="font-bold text-slate-900 text-xs">Identitas Pribadi & Domisili</h5>
                     <p class="text-[11px] text-slate-500">Fotokopi e-KTP Pemohon & Pasangan (bila sudah menikah) serta Kartu Keluarga (KK).</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">2</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">2</div>
                     <h5 class="font-bold text-slate-900 text-xs">Bukti Penghasilan Resmi</h5>
                     <p class="text-[11px] text-slate-500">Slip gaji asli 3 bulan terakhir atau Surat Keterangan Penghasilan dari HRD perusahaan.</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">3</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">3</div>
                     <h5 class="font-bold text-slate-900 text-xs">Rekening Tabungan (Buku / Koran)</h5>
                     <p class="text-[11px] text-slate-500">Rekening koran mutasi gaji 3 bulan terakhir yang mencerminkan arus kas stabil.</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">4</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">4</div>
                     <h5 class="font-bold text-slate-900 text-xs">NPWP Pribadi</h5>
                     <p class="text-[11px] text-slate-500">Fotokopi Nomor Pokok Wajib Pajak (NPWP) yang masih aktif.</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">5</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">5</div>
                     <h5 class="font-bold text-slate-900 text-xs">Bukti Tempat Tinggal</h5>
                     <p class="text-[11px] text-slate-500">Bukti pembayaran PBB terbaru, rekening listrik PLN, atau bukti kepemilikan rumah.</p>
                 </div>
-                <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2 flex flex-col justify-between">
+                <div class="p-4 rounded-2xl bg-slate-900 text-white border border-slate-800 space-y-2 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center gap-2 text-emerald-700 font-bold text-xs">
-                            <i class="fa-solid fa-truck-fast"></i> Layanan Jemput Berkas
+                        <div class="flex items-center gap-2 text-white font-bold text-xs">
+                            <i class="fa-solid fa-truck-fast text-brand-orange"></i> Layanan Jemput Berkas
                         </div>
-                        <p class="text-[11px] text-emerald-800 mt-1">Tak sempat mengantar berkas? Surveyor leasing kami siap menjemput berkas langsung ke kantor atau rumah Anda!</p>
+                        <p class="text-[11px] text-slate-300 mt-1">Tak sempat mengantar berkas? Surveyor leasing rekanan kami siap menjemput berkas langsung ke kantor atau rumah Anda!</p>
                     </div>
-                    <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second,%20saya%20ingin%20jadwalkan%20penjemputan%20berkas%20kredit" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold py-2 rounded-xl text-center transition-colors">
+                    <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second,%20saya%20ingin%20jadwalkan%20penjemputan%20berkas%20kredit" target="_blank" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white text-[11px] font-bold py-2.5 rounded-xl text-center transition-colors">
                         Jadwalkan Jemput Berkas
                     </a>
                 </div>
@@ -809,38 +837,38 @@
             <!-- Konten Dokumen Wiraswasta -->
             <div id="docContentWiraswasta" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">1</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">1</div>
                     <h5 class="font-bold text-slate-900 text-xs">KTP & Kartu Keluarga</h5>
                     <p class="text-[11px] text-slate-500">Fotokopi e-KTP Pemohon & Pasangan serta Kartu Keluarga (KK).</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">2</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">2</div>
                     <h5 class="font-bold text-slate-900 text-xs">Legalitas Usaha (NIB / SIUP)</h5>
                     <p class="text-[11px] text-slate-500">Nomor Induk Berusaha (NIB), SIUP, atau Surat Keterangan Usaha (SKU) dari kelurahan.</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">3</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">3</div>
                     <h5 class="font-bold text-slate-900 text-xs">Rekening Koran Usaha (6 Bulan)</h5>
                     <p class="text-[11px] text-slate-500">Rekening koran operasional usaha 6 bulan terakhir yang menunjukkan omzet aktif.</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">4</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">4</div>
                     <h5 class="font-bold text-slate-900 text-xs">NPWP Pemilik Usaha</h5>
                     <p class="text-[11px] text-slate-500">Fotokopi kartu NPWP pribadi dan NPWP usaha (jika ada).</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">5</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">5</div>
                     <h5 class="font-bold text-slate-900 text-xs">Foto Lokasi Usaha & Nota Transaksi</h5>
                     <p class="text-[11px] text-slate-500">Dokumentasi fisik tempat usaha/toko serta bukti nota pembelian/penjualan barang.</p>
                 </div>
-                <div class="p-4 rounded-2xl bg-blue-50 border border-blue-200 space-y-2 flex flex-col justify-between">
+                <div class="p-4 rounded-2xl bg-slate-900 text-white border border-slate-800 space-y-2 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center gap-2 text-blue-700 font-bold text-xs">
-                            <i class="fa-solid fa-headset"></i> Bantuan Appraiser Showroom
+                        <div class="flex items-center gap-2 text-white font-bold text-xs">
+                            <i class="fa-solid fa-headset text-brand-orange"></i> Bantuan Analis Showroom
                         </div>
-                        <p class="text-[11px] text-blue-800 mt-1">Khawatir omzet belum rapi? Tim analis kredit kami siap memberikan pendampingan agar data usaha Anda disetujui leasing.</p>
+                        <p class="text-[11px] text-slate-300 mt-1">Khawatir omzet belum rapi? Tim analis kredit kami siap memberikan pendampingan agar data usaha Anda disetujui leasing.</p>
                     </div>
-                    <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second,%20konsultasi%20kredit%20untuk%20usaha%20wiraswasta" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold py-2 rounded-xl text-center transition-colors">
+                    <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second,%20konsultasi%20kredit%20untuk%20usaha%20wiraswasta" target="_blank" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white text-[11px] font-bold py-2.5 rounded-xl text-center transition-colors">
                         Konsultasi Usaha
                     </a>
                 </div>
@@ -849,38 +877,38 @@
             <!-- Konten Dokumen Perusahaan -->
             <div id="docContentPerusahaan" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">1</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">1</div>
                     <h5 class="font-bold text-slate-900 text-xs">Akta Pendirian & Perubahan</h5>
                     <p class="text-[11px] text-slate-500">Salinan Akta Pendirian Perusahaan beserta SK Menkumham dan akta perubahan direksi terakhir.</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">2</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">2</div>
                     <h5 class="font-bold text-slate-900 text-xs">NIB & Izin Operasional</h5>
                     <p class="text-[11px] text-slate-500">Nomor Induk Berusaha (NIB) berbasis risiko dan izin operasional komersial.</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">3</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">3</div>
                     <h5 class="font-bold text-slate-900 text-xs">KTP Direksi & Dewan Komisaris</h5>
                     <p class="text-[11px] text-slate-500">Fotokopi e-KTP seluruh jajaran direksi dan komisaris yang tercantum di akta.</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">4</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">4</div>
                     <h5 class="font-bold text-slate-900 text-xs">Rekening Koran Perusahaan (3 Bln)</h5>
                     <p class="text-[11px] text-slate-500">Rekening koran giro atas nama PT/CV 3 bulan terakhir.</p>
                 </div>
                 <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">5</div>
+                    <div class="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center font-bold text-xs">5</div>
                     <h5 class="font-bold text-slate-900 text-xs">NPWP & Laporan SPT Tahunan</h5>
                     <p class="text-[11px] text-slate-500">NPWP Perusahaan dan bukti lapor SPT Tahunan Badan 1 tahun terakhir.</p>
                 </div>
-                <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200 space-y-2 flex flex-col justify-between">
+                <div class="p-4 rounded-2xl bg-slate-900 text-white border border-slate-800 space-y-2 flex flex-col justify-between">
                     <div>
-                        <div class="flex items-center gap-2 text-purple-700 font-bold text-xs">
-                            <i class="fa-solid fa-briefcase"></i> Paket Armada Perusahaan (Fleet)
+                        <div class="flex items-center gap-2 text-white font-bold text-xs">
+                            <i class="fa-solid fa-briefcase text-brand-orange"></i> Paket Armada Perusahaan (Fleet)
                         </div>
-                        <p class="text-[11px] text-purple-800 mt-1">Tersedia skema pembiayaan khusus pembelian mobil operasional kantor dalam jumlah banyak dengan diskon bunga korporasi.</p>
+                        <p class="text-[11px] text-slate-300 mt-1">Tersedia skema pembiayaan khusus pembelian mobil operasional kantor dalam jumlah banyak dengan diskon bunga korporasi.</p>
                     </div>
-                    <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second,%20konsultasi%20pengadaan%20mobil%20operasional%20perusahaan" target="_blank" class="w-full bg-purple-600 hover:bg-purple-700 text-white text-[11px] font-bold py-2 rounded-xl text-center transition-colors">
+                    <a href="https://wa.me/6281200000000?text=Halo%20Mobile%20Second,%20konsultasi%20pengadaan%20mobil%20operasional%20perusahaan" target="_blank" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white text-[11px] font-bold py-2.5 rounded-xl text-center transition-colors">
                         Konsultasi Fleet Korporasi
                     </a>
                 </div>
