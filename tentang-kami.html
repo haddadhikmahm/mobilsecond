@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tentang Kami & Standar Inspeksi 160 Titik - Mobile Second</title>
+    <meta name="description" content="Profil showroom resmi Mobile Second. Pelajari standar inspeksi 160 titik kami, garansi 1 tahun mesin, dan jaringan showroom resmi di Jabodetabek & Bandung.">
+
+    <!-- Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#121824',
+                            navy: '#1b2434',
+                            navyLight: '#243046',
+                            orange: '#ea580c',
+                            orangeHover: '#c2410c',
+                            accent: '#f97316',
+                            yellow: '#f59e0b',
+                            blue: '#2563eb',
+                            cardBg: '#ffffff',
+                            bg: '#f4f6f9',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 2px 10px rgba(0, 0, 0, 0.04)',
+                        'card-hover': '0 12px 25px -4px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
+                        'nav': '0 4px 20px -2px rgba(15, 23, 42, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-bg text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-orange selection:text-white">
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="fixed top-6 right-6 z-[9999] hidden transform transition-all duration-300">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700">
+            <div id="toastIcon" class="text-emerald-400 text-lg"><i class="fa-solid fa-circle-check"></i></div>
+            <div id="toastMessage" class="text-xs sm:text-sm font-semibold">Pesan notifikasi</div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER & NAVBAR (STICKY) ==================== -->
+    <header id="mainStickyNavbar" class="sticky top-0 z-50 bg-brand-navy text-white py-3.5 px-4 sm:px-6 lg:px-8 border-b border-transparent shadow-none transition-all duration-500 ease-in-out">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="flex items-center justify-between">
+                
+                <!-- Logo & Brand -->
+                <a href="index.html" class="flex items-center gap-3 group focus:outline-none" title="Mobile Second - Halaman Utama">
+                    <div class="h-11 w-11 rounded-xl bg-white p-1 flex items-center justify-center shadow-md overflow-hidden ring-2 ring-white/20 group-hover:ring-brand-accent transition-all">
+                        <img src="logo.jpg" alt="Mobile Second Logo" class="h-full w-full object-contain" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3202/3202926.png';">
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-center tracking-tight font-extrabold text-xl sm:text-2xl leading-none">
+                            <span class="text-white">Mobile</span>
+                            <span class="text-brand-accent ml-1">Second</span>
+                        </div>
+                        <span class="text-[10px] text-amber-400 font-semibold tracking-wider mt-0.5 uppercase flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-[9px]"></i> Jual Beli Mobil Bekas
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Navigasi Menu Lengkap -->
+                <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-200">
+                    <a href="index.html" class="text-slate-300 hover:text-brand-accent transition-colors">Beli Mobil</a>
+                    <a href="jual-mobil.html" class="text-slate-300 hover:text-brand-accent transition-colors">Jual Mobil</a>
+                    <a href="promo.html" class="text-slate-300 hover:text-brand-accent transition-colors flex items-center gap-1.5">
+                        <span>Promo</span>
+                        <span class="bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse">HOT</span>
+                    </a>
+                    <a href="tentang-kami.html" class="text-brand-accent font-semibold flex items-center gap-1">
+                        Tentang Kami
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+                    </a>
+                    <a href="simulasi-kredit.html" class="text-slate-300 hover:text-brand-accent transition-colors">Simulasi Kredit</a>
+                </nav>
+
+                <!-- Tombol Hotline WhatsApp (Desktop) & Mobile Trigger -->
+                <div class="flex items-center gap-3">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>0812-3456-7890</span>
+                    </a>
+                    <!-- Mobile Hamburger -->
+                    <button onclick="toggleMobileNav()" class="lg:hidden p-2 text-slate-200 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Nav Menu Dropdown -->
+            <div id="mobileNavMenu" class="hidden lg:hidden pt-4 pb-2 border-t border-slate-700/60 mt-4 space-y-3">
+                <a href="index.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Beli Mobil (Katalog)</a>
+                <a href="jual-mobil.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Jual Mobil</a>
+                <a href="promo.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Promo Spesial</a>
+                <a href="tentang-kami.html" class="block text-brand-orange font-semibold py-1 text-sm">Tentang Kami</a>
+                <a href="simulasi-kredit.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Simulasi Kredit</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second" target="_blank" class="block text-emerald-400 font-semibold py-1 text-sm flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> Hubungi WhatsApp Sales</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="flex-grow max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-20">
+        
+        <!-- Hero Section with Luxury Automotive Styling -->
+        <div class="relative bg-gradient-to-br from-brand-navy via-slate-900 to-slate-950 rounded-3xl p-6 sm:p-12 lg:p-16 text-white overflow-hidden shadow-2xl border border-slate-800">
+            <!-- Ambient Glow Effect -->
+            <div class="absolute -right-24 -bottom-24 w-[450px] h-[450px] bg-brand-orange/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -top-20 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+            
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-5">
+                    <div class="inline-flex items-center gap-2 bg-brand-orange/20 border border-brand-orange/40 text-brand-accent px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase backdrop-blur-md">
+                        <i class="fa-solid fa-shield-halved"></i> Standar Resmi Showroom Mobil Bekas
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                        Standar Baru Beli Mobil Bekas: <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-amber-400 to-amber-200">Aman, Transparan & Bergaransi</span>
+                    </h1>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                        Sejak didirikan, <strong class="text-white">Mobile Second</strong> mendedikasikan diri untuk merevolusi pengalaman membeli mobil bekas di Indonesia. Kami mengeliminasi rasa cemas akan kilometer putaran, sasis bekas tabrakan fatal, dan unit terendam banjir melalui <span class="text-amber-400 font-semibold">Inspeksi Digital 160 Titik</span> serta jaminan garansi resmi 1 tahun.
+                    </p>
+                    <div class="flex flex-wrap items-center gap-3 pt-2">
+                        <a href="index.html" class="inline-flex items-center gap-2 bg-brand-orange hover:bg-brand-orangeHover text-white px-6 py-3 rounded-2xl text-xs sm:text-sm font-bold shadow-lg shadow-brand-orange/30 transition-all transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-car"></i> Jelajahi Stok Mobil Kami
+                        </a>
+                        <a href="#inspeksi-section" class="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white px-5 py-3 rounded-2xl text-xs sm:text-sm font-semibold border border-slate-700 transition-all">
+                            <i class="fa-solid fa-clipboard-check text-brand-accent"></i> Lihat 160 Titik Inspeksi
+                        </a>
+                        <a href="#showroom-section" class="inline-flex items-center gap-2 bg-slate-800/60 hover:bg-slate-700 text-slate-300 hover:text-white px-5 py-3 rounded-2xl text-xs sm:text-sm font-semibold border border-slate-700/60 transition-all">
+                            <i class="fa-solid fa-location-dot text-emerald-400"></i> Kunjungi 4 Showroom
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Visual Trust Badge Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-white/5 backdrop-blur-md rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl relative space-y-6">
+                        <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-2xl border border-amber-500/30">
+                                    <i class="fa-solid fa-medal"></i>
+                                </div>
+                                <div>
+                                    <div class="text-white font-extrabold text-base">Akreditasi Showroom A+</div>
+                                    <div class="text-xs text-slate-400">Asosiasi Penjual Mobil Indonesia</div>
+                                </div>
+                            </div>
+                            <span class="bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 px-2.5 py-1 rounded-full text-[11px] font-bold">Terverifikasi</span>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/5">
+                                <div class="text-2xl sm:text-3xl font-extrabold text-white">10+ Thn</div>
+                                <div class="text-xs text-slate-400 mt-1">Pengalaman Otomotif</div>
+                            </div>
+                            <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/5">
+                                <div class="text-2xl sm:text-3xl font-extrabold text-brand-accent">12.500+</div>
+                                <div class="text-xs text-slate-400 mt-1">Unit Mobil Terjual</div>
+                            </div>
+                            <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/5">
+                                <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400">99.4%</div>
+                                <div class="text-xs text-slate-400 mt-1">Kepuasan Konsumen</div>
+                            </div>
+                            <div class="bg-slate-900/80 p-4 rounded-2xl border border-white/5">
+                                <div class="text-2xl sm:text-3xl font-extrabold text-amber-400">4 Showroom</div>
+                                <div class="text-xs text-slate-400 mt-1">Cabang Jabodetabek & BDG</div>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 flex items-center gap-3 text-xs text-slate-300 bg-slate-900/60 p-3 rounded-2xl border border-white/5">
+                            <i class="fa-solid fa-certificate text-emerald-400 text-lg"></i>
+                            <span>100% Bebas Putar Kilometer & Odometer Resmi Sesuai Riwayat Servis.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section: Mengapa Mobile Second & Cerita Kami -->
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+            <div class="lg:col-span-6 space-y-6">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-brand-orange uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-flag"></i> Filosofi & Komitmen Kami
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 leading-tight">
+                        Mengubah Keraguan Menjadi <span class="text-brand-orange">Kepastian Nyata</span>
+                    </h2>
+                </div>
+                <div class="space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    <p>
+                        Membeli mobil bekas sering kali diwarnai kecemasan: Apakah odometernya dimundurkan? Apakah pernah tenggelam saat banjir Jakarta? Apakah sambungan sasisnya bekas tabrakan frontal?
+                    </p>
+                    <p>
+                        <strong class="text-slate-900">Mobile Second lahir untuk menyudahi semua rasa was-was tersebut.</strong> Kami menerapkan filosofi keterbukaan total. Setiap lembar lembar inspeksi digital kami bagikan tanpa ada yang ditutupi, dari ketebalan cat hingga foto detail kolong sasis.
+                    </p>
+                    <p>
+                        Dari setiap 10 mobil bekas yang ditawarkan kepada tim kami, <span class="text-brand-orange font-bold">hanya 1 atau 2 unit yang kami loloskan</span> untuk masuk showroom resmi. Standar seleksi ketat ini memastikan Anda mendapatkan unit terbaik yang siap digunakan tanpa perlu pusing servis besar.
+                    </p>
+                </div>
+
+                <!-- 3 Pilar Integritas -->
+                <div class="space-y-3 pt-2">
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-brand-orange/40 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-orange-100 text-brand-orange flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-scale-balanced"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Transparansi Harga & Kondisi</h4>
+                            <p class="text-xs text-slate-500 mt-0.5">Harga tertera adalah harga riil tanpa biaya siluman. Dokumen lengkap, STNK & BPKB asli terverifikasi Samsat.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-brand-orange/40 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-microscope"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Inspeksi Forensik 160 Titik</h4>
+                            <p class="text-xs text-slate-500 mt-0.5">Diagnostik scanner OBD-2, alat ukur ketebalan cat digital (micron coating gauge), serta uji kompresi mesin.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-brand-orange/40 transition-colors">
+                        <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-handshake-angle"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-900 text-sm">Dukungan Pasca-Jual 1 Tahun Penuh</h4>
+                            <p class="text-xs text-slate-500 mt-0.5">Garansi mesin & transmisi 1 tahun, towing darurat 24 jam, serta garansi 5 hari uang kembali 100%.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Showcase with Quality Control Card -->
+            <div class="lg:col-span-6 relative">
+                <div class="relative mx-auto max-w-md lg:max-w-none">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 aspect-[4/3] relative">
+                        <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=1000&q=80" alt="Showroom Mobile Second" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-white">
+                            <div class="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">
+                                <i class="fa-solid fa-circle-check"></i> Quality Control Center
+                            </div>
+                            <h3 class="text-lg sm:text-xl font-extrabold leading-snug">
+                                Showroom Utama & Bengkel Sertifikasi Mobile Second
+                            </h3>
+                            <p class="text-xs text-slate-300 mt-1">Kebayoran Lama, Jakarta Selatan</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Quality Badge Card -->
+                    <div class="hidden sm:flex absolute -bottom-8 -left-6 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 items-center gap-3.5 max-w-xs">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xl flex-shrink-0 shadow-md">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-900">100% Lulus Uji Standar</div>
+                            <div class="text-[11px] text-slate-500">Bebas laka struktural & bebas banjir bersertifikat</div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Odometer Badge Card -->
+                    <div class="hidden sm:flex absolute -top-6 -right-6 bg-slate-900 text-white p-4 rounded-2xl shadow-xl border border-slate-700 items-center gap-3.5 max-w-xs">
+                        <div class="w-11 h-11 rounded-xl bg-brand-orange text-white flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-gauge-high"></i>
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-white">Garansi Odometer Asli</div>
+                            <div class="text-[11px] text-slate-300">Cek rekam jejak servis berkala resmi</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4 Pilar Jaminan Pasti -->
+        <section class="space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Garansi Tanpa Khawatir</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900">4 Jaminan Mutlak Mobile Second</h2>
+                <p class="text-xs sm:text-sm text-slate-500">Standar baku kualitas yang mengikat setiap unit kendaraan yang kami serahkan kepada Anda.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pilar 1 -->
+                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-emerald-500/50 transition-all space-y-3 group">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-clipboard-check"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-base">Inspeksi 160 Titik</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Pemeriksaan digital & fisik mencakup mesin, transmisi, sasis, rem, suspensi, interior, kelistrikan, dan komputer ECU mobil.
+                    </p>
+                    <div class="pt-2 text-[11px] font-bold text-emerald-600 flex items-center gap-1">
+                        <i class="fa-solid fa-check"></i> Laporan Digital Lengkap
+                    </div>
+                </div>
+
+                <!-- Pilar 2 -->
+                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-blue-500/50 transition-all space-y-3 group">
+                    <div class="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-cat"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-base">Bebas Banjir & Tabrakan</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Kami menolak 100% mobil bekas yang terindikasi pernah terendam banjir atau mengalami benturan struktural pada sasis utama & pilar.
+                    </p>
+                    <div class="pt-2 text-[11px] font-bold text-blue-600 flex items-center gap-1">
+                        <i class="fa-solid fa-check"></i> Sasis Orisinil Utuh
+                    </div>
+                </div>
+
+                <!-- Pilar 3 -->
+                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-brand-orange/50 transition-all space-y-3 group">
+                    <div class="w-14 h-14 rounded-2xl bg-orange-100 text-brand-orange flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-base">Garansi 1 Tahun Mesin</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Perlindungan gratis garansi mesin, transmisi, dan sistem pendingin udara (AC) selama 365 hari atau 20.000 km di bengkel rekanan.
+                    </p>
+                    <div class="pt-2 text-[11px] font-bold text-brand-orange flex items-center gap-1">
+                        <i class="fa-solid fa-check"></i> Klaim Mudah Tanpa Ribet
+                    </div>
+                </div>
+
+                <!-- Pilar 4 -->
+                <div class="bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-purple-500/50 transition-all space-y-3 group">
+                    <div class="w-14 h-14 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-rotate-left"></i>
+                    </div>
+                    <h3 class="font-extrabold text-slate-900 text-base">5 Hari Uang Kembali</h3>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Jika mobil yang Anda beli terbukti tidak sesuai dengan laporan hasil inspeksi kami, kami kembalikan uang Anda 100% tanpa potongan.
+                    </p>
+                    <div class="pt-2 text-[11px] font-bold text-purple-600 flex items-center gap-1">
+                        <i class="fa-solid fa-check"></i> 100% Money-Back Guarantee
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== INTERAKTIF: RINCIAN STANDAR INSPEKSI 160 TITIK ==================== -->
+        <section id="inspeksi-section" class="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-card border border-slate-200/90 space-y-8">
+            <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-slate-100">
+                <div class="space-y-2 max-w-2xl">
+                    <span class="text-xs font-bold text-brand-orange uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-stethoscope"></i> Uji Kelayakan Menyeluruh
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                        Eksplorasi Standar Inspeksi 160 Titik
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500">
+                        Setiap mobil melewati 6 sektor pemeriksaan ketat oleh Master Inspector bersertifikasi menggunakan peralatan uji digital modern.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <div class="flex items-center gap-2 bg-emerald-50 text-emerald-800 px-4 py-2 rounded-2xl text-xs font-bold border border-emerald-200">
+                        <i class="fa-solid fa-award text-base text-emerald-600"></i>
+                        <span>Sertifikasi Standar Asosiasi Otomotif</span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-blue-50 text-blue-800 px-4 py-2 rounded-2xl text-xs font-bold border border-blue-200">
+                        <i class="fa-solid fa-laptop-code text-base text-blue-600"></i>
+                        <span>Digital OBD-II Scanner</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Filter Sektor Inspeksi -->
+            <div class="flex flex-wrap gap-2 pb-2 border-b border-slate-100" id="inspectionTabs">
+                <button onclick="filterInspection('all', this)" class="inspection-tab-btn active px-4 py-2 rounded-xl text-xs font-bold bg-brand-navy text-white transition-all shadow-sm">
+                    Semua Sektor (160 Titik)
+                </button>
+                <button onclick="filterInspection('mesin', this)" class="inspection-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+                    <i class="fa-solid fa-gears mr-1"></i> Mesin & Transmisi (45)
+                </button>
+                <button onclick="filterInspection('sasis', this)" class="inspection-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+                    <i class="fa-solid fa-car-side mr-1"></i> Sasis & Bodi (35)
+                </button>
+                <button onclick="filterInspection('listrik', this)" class="inspection-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+                    <i class="fa-solid fa-microchip mr-1"></i> Kelistrikan & OBD-II (30)
+                </button>
+                <button onclick="filterInspection('kaki', this)" class="inspection-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+                    <i class="fa-solid fa-circle-notch mr-1"></i> Kaki-kaki & Rem (25)
+                </button>
+                <button onclick="filterInspection('interior', this)" class="inspection-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+                    <i class="fa-solid fa-couch mr-1"></i> Interior & Banjir (15)
+                </button>
+                <button onclick="filterInspection('dokumen', this)" class="inspection-tab-btn px-4 py-2 rounded-xl text-xs font-bold bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">
+                    <i class="fa-solid fa-file-contract mr-1"></i> Legalitas Dokumen (10)
+                </button>
+            </div>
+
+            <!-- Grid Kartu Inspeksi Detail -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="inspectionCardsContainer">
+                
+                <!-- Blok 1: Mesin & Transmisi -->
+                <div class="inspection-item p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-brand-orange/50 hover:bg-white transition-all space-y-4 shadow-sm" data-category="mesin">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-navy text-white flex items-center justify-center text-xl shadow-sm">
+                                <i class="fa-solid fa-gears text-brand-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-slate-900 text-sm">Mesin & Transmisi</h4>
+                                <span class="text-xs font-bold text-brand-orange">45 Titik Pemeriksaan</span>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">Pass Standard</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Pemeriksaan kompresi silinder, transmisi otomatis/manual, dan sistem pendingin mesin bebas overheat.
+                    </p>
+                    <ul class="text-xs text-slate-700 space-y-2 pt-1 border-t border-slate-200/60">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Uji kompresi silinder & suara mesin waktu idle</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Bebas kebocoran oli mesin, paking, & seal kruk as</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Responsivitas transmisi otomatis & clutch MT</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Uji tekanan radiator, water pump, & ekstra fan</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Sensor gas buang & emisi knalpot standar</li>
+                    </ul>
+                </div>
+
+                <!-- Blok 2: Rangka & Sasis -->
+                <div class="inspection-item p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-brand-orange/50 hover:bg-white transition-all space-y-4 shadow-sm" data-category="sasis">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-navy text-white flex items-center justify-center text-xl shadow-sm">
+                                <i class="fa-solid fa-car-side text-brand-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-slate-900 text-sm">Rangka, Sasis & Bodi</h4>
+                                <span class="text-xs font-bold text-brand-orange">35 Titik Pemeriksaan</span>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">Pass Standard</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Pemeriksaan integritas struktur monokok/ladder frame bebas tabrakan frontal, samping, maupun belakang.
+                    </p>
+                    <ul class="text-xs text-slate-700 space-y-2 pt-1 border-t border-slate-200/60">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Pilar A, B, C dan apron radiator depan 100% orisinil</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Ruang ban cadangan & lantai bagasi bebas tekukan</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Uji ketebalan cat bodi dengan Paint Micron Gauge</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Presisi celah antar panel (gaps alignment)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Sealer pintu & kap mesin orisinil pabrikan</li>
+                    </ul>
+                </div>
+
+                <!-- Blok 3: Kelistrikan & OBD-II Scanner -->
+                <div class="inspection-item p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-brand-orange/50 hover:bg-white transition-all space-y-4 shadow-sm" data-category="listrik">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-navy text-white flex items-center justify-center text-xl shadow-sm">
+                                <i class="fa-solid fa-microchip text-brand-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-slate-900 text-sm">Kelistrikan & Komputer</h4>
+                                <span class="text-xs font-bold text-brand-orange">30 Titik Pemeriksaan</span>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">Pass Standard</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Pemindaian komputerisasi seluruh modul ECU, sensor keselamatan airbag, dan sistem elektrikal kabin.
+                    </p>
+                    <ul class="text-xs text-slate-700 space-y-2 pt-1 border-t border-slate-200/60">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Scan DTC diagnostic error code pada ECU & TCM</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Kondisi kesehatan aki (CCA), alternator, & starter</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Seluruh lampu LED, foglamp, sein, & klakson</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Sistem infotainment head unit, speaker, & kamera 360°</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Power window, electric mirror, & central lock</li>
+                    </ul>
+                </div>
+
+                <!-- Blok 4: Suspensi, Rem & Kaki-kaki -->
+                <div class="inspection-item p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-brand-orange/50 hover:bg-white transition-all space-y-4 shadow-sm" data-category="kaki">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-navy text-white flex items-center justify-center text-xl shadow-sm">
+                                <i class="fa-solid fa-circle-notch text-brand-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-slate-900 text-sm">Suspensi, Rem & Ban</h4>
+                                <span class="text-xs font-bold text-brand-orange">25 Titik Pemeriksaan</span>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">Pass Standard</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Kestabilan kemudi, keheningan peredaman suspensi, dan performa pengereman darurat ABS/EBD.
+                    </p>
+                    <ul class="text-xs text-slate-700 space-y-2 pt-1 border-t border-slate-200/60">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Ketebalan tapak 4 ban minimal 75% - 90%</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Shockbreaker bebas bocor oli & tidak berbunyi</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Ketebalan kampas rem (brake pads) & piringan cakram</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Tie rod, ball joint, rack steer, & bushing arm stabil</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Uji kelurusan laju kemudi (wheel alignment/spooring)</li>
+                    </ul>
+                </div>
+
+                <!-- Blok 5: Interior & Bebas Banjir -->
+                <div class="inspection-item p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-brand-orange/50 hover:bg-white transition-all space-y-4 shadow-sm" data-category="interior">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-navy text-white flex items-center justify-center text-xl shadow-sm">
+                                <i class="fa-solid fa-couch text-brand-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-slate-900 text-sm">Interior & Bebas Banjir</h4>
+                                <span class="text-xs font-bold text-brand-orange">15 Titik Pemeriksaan</span>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">Pass Standard</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Pemeriksaan higienitas kabin menyeluruh, bebas bau apek, dan deteksi karat lumpur tersembunyi.
+                    </p>
+                    <ul class="text-xs text-slate-700 space-y-2 pt-1 border-t border-slate-200/60">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Kolong jok & balik karpet dasar bebas lumpur/karat</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Kondisi jok kulit/fabric bersih, wangi & steril ozon</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Suhu hembusan AC dingin optimal (4°C - 8°C)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Mekanisme seatbelt bergerak mulus tanpa noda air</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Sunroof/panoramic roof kedap air & bergerak normal</li>
+                    </ul>
+                </div>
+
+                <!-- Blok 6: Legalitas & Dokumen -->
+                <div class="inspection-item p-6 rounded-2xl bg-slate-50 border border-slate-200/80 hover:border-brand-orange/50 hover:bg-white transition-all space-y-4 shadow-sm" data-category="dokumen">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-brand-navy text-white flex items-center justify-center text-xl shadow-sm">
+                                <i class="fa-solid fa-file-contract text-brand-accent"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-slate-900 text-sm">Legalitas & Dokumen</h4>
+                                <span class="text-xs font-bold text-brand-orange">10 Titik Pemeriksaan</span>
+                            </div>
+                        </div>
+                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-0.5 rounded-full">Pass Standard</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Verifikasi keaslian surat-surat kendaraan langsung melalui sistem Samsat & kepolisian setempat.
+                    </p>
+                    <ul class="text-xs text-slate-700 space-y-2 pt-1 border-t border-slate-200/60">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Kesesuaian fisik nomor rangka & mesin ke Samsat</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> BPKB, STNK, & Faktur asli bebas sengketa leasing</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Riwayat servis berkala & buku manual kendaraan</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Bebas blokir tilang elektronik (ETLE) kepolisian</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-emerald-600 text-xs"></i> Kunci serep/smart key cadangan lengkap tersedia</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PROSES 5 TAHAP STANDAR SHOWROOM ==================== -->
+        <section class="space-y-10">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Alur Mutu Kami</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900">
+                    Proses 5 Tahap Dari Kurasi Hingga Garansi
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-500">
+                    Bagaimana satu unit mobil bekas melewati proses standardisasi sebelum dipajang di showroom Mobile Second.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-4 relative">
+                <!-- Step 1 -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4 hover:border-brand-orange transition-all relative">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-slate-900 text-white font-extrabold flex items-center justify-center text-sm shadow">
+                            01
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Kurasi & Seleksi Awal</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Pengecekan riwayat servis ATPM dan keabsahan awal BPKB. Hanya unit ber-track record baik yang kami beli.
+                        </p>
+                    </div>
+                    <div class="text-[11px] font-semibold text-slate-400 border-t border-slate-100 pt-3">
+                        <i class="fa-solid fa-filter text-brand-accent"></i> Seleksi 1 dari 10 Mobil
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4 hover:border-brand-orange transition-all relative">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-navy text-brand-accent font-extrabold flex items-center justify-center text-sm shadow">
+                            02
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Deep Inspection 160 Titik</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Pemeriksaan di atas lift car workshop: sasis laser, kompresi mesin, transmisi, scan OBD-2, dan uji rem.
+                        </p>
+                    </div>
+                    <div class="text-[11px] font-semibold text-slate-400 border-t border-slate-100 pt-3">
+                        <i class="fa-solid fa-microscope text-brand-accent"></i> 160 Parameter Teruji
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4 hover:border-brand-orange transition-all relative">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-brand-orange text-white font-extrabold flex items-center justify-center text-sm shadow">
+                            03
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Peremajaan & Detailing</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Poles 3-step nano ceramic, sterilisasi kabin dengan ozon anti-bakteri, serta penggantian oli baru gratis.
+                        </p>
+                    </div>
+                    <div class="text-[11px] font-semibold text-slate-400 border-t border-slate-100 pt-3">
+                        <i class="fa-solid fa-sparkles text-brand-accent"></i> Kondisi Seperti Baru
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4 hover:border-brand-orange transition-all relative">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-extrabold flex items-center justify-center text-sm shadow">
+                            04
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Penerbitan Sertifikat & Garansi</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Penerbitan buku polis garansi 1 tahun mesin & transmisi serta barcode laporan inspeksi digital.
+                        </p>
+                    </div>
+                    <div class="text-[11px] font-semibold text-slate-400 border-t border-slate-100 pt-3">
+                        <i class="fa-solid fa-file-shield text-brand-accent"></i> Polis Garansi Resmi
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-white rounded-3xl p-5 border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4 hover:border-brand-orange transition-all relative">
+                    <div class="space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white font-extrabold flex items-center justify-center text-sm shadow">
+                            05
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-sm">Delivery & Handover</h4>
+                        <p class="text-xs text-slate-500 leading-relaxed">
+                            Serah terima unit di showroom atau diantar towing langsung ke garasi rumah Anda dengan tangki bensin penuh.
+                        </p>
+                    </div>
+                    <div class="text-[11px] font-semibold text-slate-400 border-t border-slate-100 pt-3">
+                        <i class="fa-solid fa-truck-ramp-box text-emerald-500"></i> Antar Se-Jabodetabek
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TABEL CAKUPAN GARANSI 1 TAHUN ==================== -->
+        <section class="bg-gradient-to-br from-brand-navy to-slate-900 rounded-3xl p-6 sm:p-10 lg:p-12 text-white shadow-2xl space-y-8 border border-slate-800">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div class="space-y-2">
+                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-wider">
+                        <i class="fa-solid fa-shield-virus"></i> Perlindungan Menyeluruh
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white">
+                        Rincian Cakupan Garansi 1 Tahun
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-300">
+                        Kami menjamin komponen vital kendaraan Anda selama 365 hari atau 20.000 KM (mana yang tercapai lebih dulu).
+                    </p>
+                </div>
+                <div class="bg-white/10 px-5 py-3 rounded-2xl border border-white/10 text-right">
+                    <div class="text-xs text-slate-300">Nilai Manfaat Garansi Hingga</div>
+                    <div class="text-2xl font-extrabold text-amber-400">Rp 50.000.000 / thn</div>
+                </div>
+            </div>
+
+            <!-- Grid Cakupan -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1: Mesin -->
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base">Komponen Mesin</h4>
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-2.5">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Blok silinder & kepala silinder</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Crankshaft, connecting rod & bearings</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Piston & ring piston</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Camshaft & klep (intake/exhaust)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Pompa oli mesin & timing chain</li>
+                    </ul>
+                </div>
+
+                <!-- Card 2: Transmisi -->
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-sliders"></i>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base">Sistem Transmisi</h4>
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-2.5">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Torque converter transmisi otomatis</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Planetary gear set & valve body</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Modul kontrol transmisi (TCM)</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Pompa oli transmisi matic / CVT belt</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Gearbox manual & poros utama</li>
+                    </ul>
+                </div>
+
+                <!-- Card 3: Pendingin & Layanan Darurat -->
+                <div class="bg-white/5 rounded-2xl p-6 border border-white/10 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-snowflake"></i>
+                        </div>
+                        <h4 class="font-extrabold text-white text-base">AC & Layanan 24 Jam</h4>
+                    </div>
+                    <ul class="text-xs text-slate-300 space-y-2.5">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Kompresor AC & magnetic clutch</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Kondensor AC & evaporator kabin</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Radiator mesin & kipas pendingin</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Layanan towing darurat 24 jam gratis</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-check text-emerald-400"></i> Jumper aki darurat & ganti ban serep</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="p-4 rounded-2xl bg-white/10 border border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+                <div class="flex items-center gap-3 text-slate-200">
+                    <i class="fa-solid fa-circle-info text-amber-400 text-lg"></i>
+                    <span>Klaim garansi dapat dilakukan di 45+ jaringan bengkel rekanan resmi kami di seluruh Jabodetabek & Bandung.</span>
+                </div>
+                <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20tanya%20syarat%20klaim%20garansi%201%20tahun" target="_blank" class="bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-xl whitespace-nowrap transition-colors">
+                    Tanya Klaim Garansi
+                </a>
+            </div>
+        </section>
+
+        <!-- ==================== PROFIL MASTER INSPECTOR ==================== -->
+        <section class="space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Keahlian & Integritas</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Dipimpin Tim Ahli & Master Inspector</h2>
+                <p class="text-xs sm:text-sm text-slate-500">Mantan kepala mekanik ATPM ternama dengan sertifikasi keahlian inspeksi forensik otomotif.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                <!-- Inspector 1 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-card text-center space-y-4 hover:shadow-card-hover transition-all">
+                    <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-orange-100 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=300&q=80" alt="Bambang Suryono" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 text-base">Ir. Bambang Suryono</h4>
+                        <div class="text-xs font-bold text-brand-orange">Head of Quality Inspection</div>
+                        <p class="text-[11px] text-slate-400 mt-0.5">18+ Tahun Pengalaman (Ex-Senior Workshop Manager ATPM Jepang)</p>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Memastikan kalibrasi alat ukur dan validasi akhir setiap laporan 160 titik mobil sebelum sertifikat diterbitkan.
+                    </p>
+                </div>
+
+                <!-- Inspector 2 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-card text-center space-y-4 hover:shadow-card-hover transition-all">
+                    <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-blue-100 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Dian Pratama" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 text-base">Dian Pratama, S.T.</h4>
+                        <div class="text-xs font-bold text-blue-600">Specialist Chassis & Forensic</div>
+                        <p class="text-[11px] text-slate-400 mt-0.5">12+ Tahun Pengalaman (Sertifikasi Collision Repair Specialist)</p>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Ahli dalam mendeteksi riwayat perbaikan sasis tersembunyi, pengerjaan las bodi tidak standar, dan indikasi banjir.
+                    </p>
+                </div>
+
+                <!-- Inspector 3 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-card text-center space-y-4 hover:shadow-card-hover transition-all">
+                    <div class="w-24 h-24 mx-auto rounded-full overflow-hidden ring-4 ring-emerald-100 shadow-md">
+                        <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&q=80" alt="Reza Firmansyah" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-extrabold text-slate-900 text-base">Reza Firmansyah</h4>
+                        <div class="text-xs font-bold text-emerald-600">ECU & Powertrain Diagnostic</div>
+                        <p class="text-[11px] text-slate-400 mt-0.5">10+ Tahun Pengalaman (Master Tech Scanner & Engine Management)</p>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Spesialis pemindaian elektronik mendalam pada transmisi otomatis, modul sensor keselamatan ABS, dan sistem injeksi bahan bakar.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== JARINGAN 4 SHOWROOM LENGKAP ==================== -->
+        <section id="showroom-section" class="space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Kunjungi Showroom Kami</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900">
+                    Jaringan 4 Showroom Resmi Mobile Second
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-500">
+                    Kunjungi cabang terdekat untuk melihat fisik unit, test drive gratis sepuasnya, atau konsultasi simulasi pembiayaan syariah & konvensional.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Showroom 1: Jakarta Selatan -->
+                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-brand-orange transition-all flex flex-col justify-between space-y-4 group">
+                    <div class="space-y-3">
+                        <div class="h-40 rounded-2xl bg-slate-900 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1541899481282-d53bffe3c35d?auto=format&fit=crop&w=600&q=80" alt="Showroom Jakarta" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2.5 left-2.5 bg-brand-orange text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Head Showroom</span>
+                            <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-0.5 rounded-md">
+                                <i class="fa-solid fa-car"></i> 35+ Unit Ready
+                            </span>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base">Jakarta Selatan</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Jl. Sultan Iskandar Muda No. 88, Kebayoran Lama, Jakarta Selatan
+                            </p>
+                        </div>
+                        
+                        <!-- Showroom Amenities -->
+                        <div class="pt-2 border-t border-slate-100 space-y-1.5 text-[11px] text-slate-600">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-brand-orange"></i> AC Lounge & Free High-Speed WiFi</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-road text-brand-orange"></i> Jalur Test Drive Khusus</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-mug-saucer text-brand-orange"></i> Coffee Bar & Ruang VIP</div>
+                        </div>
+
+                        <div class="text-[11px] text-slate-400">
+                            <i class="fa-regular fa-clock"></i> Buka Setiap Hari (08:00 - 20:00)
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second%20Jakarta%20Selatan,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-brand-orange text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i> Hubungi Cabang
+                        </a>
+                        <a href="https://maps.google.com/?q=Kebayoran+Lama+Jakarta+Selatan" target="_blank" class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors" title="Buka Petunjuk Arah Google Maps">
+                            <i class="fa-solid fa-location-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Showroom 2: Tangerang Selatan (BSD) -->
+                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-blue-500 transition-all flex flex-col justify-between space-y-4 group">
+                    <div class="space-y-3">
+                        <div class="h-40 rounded-2xl bg-slate-900 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=600&q=80" alt="Showroom BSD" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2.5 left-2.5 bg-blue-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Cabang Resmi</span>
+                            <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-0.5 rounded-md">
+                                <i class="fa-solid fa-car"></i> 25+ Unit Ready
+                            </span>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base">Tangerang Selatan (BSD)</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Kawasan Otomotif BSD Blok A No. 12, Serpong, Tangerang Selatan
+                            </p>
+                        </div>
+
+                        <!-- Showroom Amenities -->
+                        <div class="pt-2 border-t border-slate-100 space-y-1.5 text-[11px] text-slate-600">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-blue-600"></i> AC Lounge & Free High-Speed WiFi</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-road text-blue-600"></i> Area Parkir Luas & Test Drive</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-car-wash text-blue-600"></i> Detailing Center & Car Wash</div>
+                        </div>
+
+                        <div class="text-[11px] text-slate-400">
+                            <i class="fa-regular fa-clock"></i> Buka Setiap Hari (08:00 - 20:00)
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second%20BSD%20Tangerang,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-blue-600 text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i> Hubungi Cabang
+                        </a>
+                        <a href="https://maps.google.com/?q=BSD+Serpong+Tangerang" target="_blank" class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors" title="Buka Petunjuk Arah Google Maps">
+                            <i class="fa-solid fa-location-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Showroom 3: Bekasi Barat -->
+                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-emerald-500 transition-all flex flex-col justify-between space-y-4 group">
+                    <div class="space-y-3">
+                        <div class="h-40 rounded-2xl bg-slate-900 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=600&q=80" alt="Showroom Bekasi" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2.5 left-2.5 bg-emerald-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Cabang Resmi</span>
+                            <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-0.5 rounded-md">
+                                <i class="fa-solid fa-car"></i> 20+ Unit Ready
+                            </span>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base">Bekasi Barat</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Jl. Ahmad Yani No. 45, Summarecon Mall Bekasi, Bekasi Barat
+                            </p>
+                        </div>
+
+                        <!-- Showroom Amenities -->
+                        <div class="pt-2 border-t border-slate-100 space-y-1.5 text-[11px] text-slate-600">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-emerald-600"></i> AC Lounge & Free High-Speed WiFi</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-file-invoice text-emerald-600"></i> Meja Konsultasi Kredit Cepat</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-mug-saucer text-emerald-600"></i> Snack & Minuman Gratis</div>
+                        </div>
+
+                        <div class="text-[11px] text-slate-400">
+                            <i class="fa-regular fa-clock"></i> Buka Setiap Hari (08:00 - 20:00)
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second%20Bekasi,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-emerald-600 text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i> Hubungi Cabang
+                        </a>
+                        <a href="https://maps.google.com/?q=Summarecon+Bekasi" target="_blank" class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors" title="Buka Petunjuk Arah Google Maps">
+                            <i class="fa-solid fa-location-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Showroom 4: Bandung Kota -->
+                <div class="bg-white rounded-3xl p-5 shadow-card hover:shadow-card-hover border border-slate-200/90 hover:border-purple-500 transition-all flex flex-col justify-between space-y-4 group">
+                    <div class="space-y-3">
+                        <div class="h-40 rounded-2xl bg-slate-900 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80" alt="Showroom Bandung" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-2.5 left-2.5 bg-purple-600 text-white text-[10px] font-extrabold px-2.5 py-0.5 rounded-md shadow">Cabang Resmi</span>
+                            <span class="absolute bottom-2.5 right-2.5 bg-black/70 backdrop-blur-md text-white text-[10px] font-semibold px-2 py-0.5 rounded-md">
+                                <i class="fa-solid fa-car"></i> 22+ Unit Ready
+                            </span>
+                        </div>
+                        <div>
+                            <h4 class="font-extrabold text-slate-900 text-base">Bandung Kota</h4>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Jl. Soekarno Hatta No. 518, Batununggal, Kota Bandung
+                            </p>
+                        </div>
+
+                        <!-- Showroom Amenities -->
+                        <div class="pt-2 border-t border-slate-100 space-y-1.5 text-[11px] text-slate-600">
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-wifi text-purple-600"></i> AC Lounge & Free High-Speed WiFi</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-wrench text-purple-600"></i> Bengkel Rekanan Inspeksi</div>
+                            <div class="flex items-center gap-2"><i class="fa-solid fa-mug-saucer text-purple-600"></i> Coffee Corner & Musholla</div>
+                        </div>
+
+                        <div class="text-[11px] text-slate-400">
+                            <i class="fa-regular fa-clock"></i> Buka Setiap Hari (08:00 - 20:00)
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-100 flex items-center gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second%20Bandung,%20saya%20ingin%20jadwalkan%20kunjungan" target="_blank" class="flex-1 bg-brand-navy hover:bg-purple-600 text-white text-xs font-bold py-2.5 rounded-xl text-center transition-colors flex items-center justify-center gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-emerald-400"></i> Hubungi Cabang
+                        </a>
+                        <a href="https://maps.google.com/?q=Soekarno+Hatta+Bandung" target="_blank" class="p-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl transition-colors" title="Buka Petunjuk Arah Google Maps">
+                            <i class="fa-solid fa-location-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== TESTIMONI PEMBELI ASLI & RATING GOOGLE ==================== -->
+        <section class="space-y-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold text-brand-orange uppercase tracking-wider flex items-center gap-1.5">
+                        <i class="fa-solid fa-comments"></i> Ulasan Pembeli
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                        Kata Mereka yang Sudah Membeli di Mobile Second
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500">
+                        Lebih dari 12.500 keluarga dan profesional mempercayakan mobil impian mereka kepada kami.
+                    </p>
+                </div>
+                <!-- Google Rating Badge -->
+                <div class="bg-white rounded-2xl p-4 border border-slate-200/90 shadow-sm flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-500 flex items-center justify-center text-xl">
+                        <i class="fa-brands fa-google"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-1 text-amber-400 text-sm">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <span class="text-slate-900 font-extrabold text-sm ml-1">4.9 / 5.0</span>
+                        </div>
+                        <div class="text-[11px] text-slate-500">Berdasarkan 1.840+ Ulasan Asli Google</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Testimoni 1 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4 hover:shadow-card-hover transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 text-xs gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[10px] text-slate-400 font-semibold">1 Minggu Lalu</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed italic">
+                            "Awalnya takut beli mobil bekas karena banyak berita odometer dimundurkan. Di Mobile Second, laporan inspeksinya tebal dan jelas banget. Pihak showroom bahkan ngajak saya cek kolong mobil pakai lift bengkel. Mobil Toyota Innova Reborn yang saya beli halus banget rasanya!"
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Hendro Kusuma" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-900">Hendro Kusuma</div>
+                            <div class="text-[11px] text-brand-orange font-medium">Beli Toyota Innova Reborn (2020)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimoni 2 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4 hover:shadow-card-hover transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 text-xs gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[10px] text-slate-400 font-semibold">2 Minggu Lalu</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed italic">
+                            "Proses kreditnya dibantu sampai approve hanya dalam waktu 2 hari kerja. DP-nya sesuai simulasi di website, tidak ada biaya administrasi siluman di akhir. Garansi mesin 1 tahunnya bikin tenang buat mobil harian kerja ke kantor."
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" alt="Siti Rahmawati" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-900">Siti Rahmawati, M.M.</div>
+                            <div class="text-[11px] text-blue-600 font-medium">Beli Honda HR-V 1.5 E CVT (2021)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimoni 3 -->
+                <div class="bg-white rounded-3xl p-6 border border-slate-200/90 shadow-card flex flex-col justify-between space-y-4 hover:shadow-card-hover transition-all">
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex text-amber-400 text-xs gap-1">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <span class="text-[10px] text-slate-400 font-semibold">1 Bulan Lalu</span>
+                        </div>
+                        <p class="text-xs text-slate-600 leading-relaxed italic">
+                            "Pelayanan cabang BSD sangat top. Saya beli dari Bandung via online karena lagi ada promo diskon DP, mobil diantar pakai towing sampai depan pagar rumah tepat waktu dengan kondisi interior yang wangi dan kinclong. Terima kasih Mobile Second!"
+                        </p>
+                    </div>
+                    <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-slate-200 overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Aditya Pratama" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-900">Aditya Pratama</div>
+                            <div class="text-[11px] text-emerald-600 font-medium">Beli Mitsubishi Xpander Ultimate (2022)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FAQ INTERAKTIF ==================== -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-card border border-slate-200/90 space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Pertanyaan Sering Diajukan</span>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">FAQ Seputar Showroom & Garansi</h2>
+                <p class="text-xs sm:text-sm text-slate-500">Hal-hal yang sering ditanyakan pembeli sebelum melakukan pemesanan.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-4" id="faqAccordion">
+                
+                <!-- FAQ Item 1 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Bolehkah saya membawa montir atau jasa inspeksi independen pihak ketiga?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        <strong>Sangat dipersilakan!</strong> Showroom kami menjunjung tinggi transparansi 100%. Anda dipersilakan membawa mekanik kepercayaan keluarga, montir langganan, ataupun jasa inspeksi independen pihak ketiga (seperti Otospector, Carsome Inspector, dll). Kami bahkan menyediakan fasilitas dongkrak dan area terang untuk inspeksi leluasa.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Bagaimana cara kerja garansi 5 hari uang kembali (Money Back Guarantee)?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Jika dalam waktu 5 hari kalender setelah serah terima unit, Anda menemukan bahwa mobil pernah mengalami benturan struktural sasis atau terendam banjir yang tidak tercantum dalam laporan inspeksi resmi kami, Anda berhak mengembalikan unit tersebut dan kami akan mengembalikan dana Anda 100% tanpa potongan biaya administrasi apapun.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Apakah kilometer / odometer dijamin asli tanpa pernah dimundurkan?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        <strong>Ya, kami menjamin 100% keaslian odometer.</strong> Tim inspeksi kami mencocokkan riwayat kilometer dengan buku servis resmi di bengkel ATPM resmi (Toyota, Honda, Mitsubishi, Suzuki, dll), riwayat penggantian oli, keausan pedal gas/rem, serta data digital internal yang tersimpan pada modul ECU mesin.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Bagaimana jika saya berasal dari luar Jabodetabek?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Kami melayani pembelian jarak jauh antar pulau / antar kota ke seluruh wilayah Indonesia. Sales consultant kami siap melakukan video call live walkaround unit, memperlihatkan hasil scan scanner OBD-2, dan mengirim unit melalui jasa towing atau ekspedisi terpercaya sampai ke garasi rumah Anda.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Apakah melayani tukar tambah (Trade-In) dengan mobil lama saya?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Ya! Anda dapat melakukan tukar tambah (trade-in) merek dan tipe apapun. Bawa mobil lama Anda ke salah satu dari 4 cabang showroom kami atau isi formulir di menu <a href="jual-mobil.html" class="text-brand-orange font-bold underline">Jual & Tukar Mobil</a>. Tim appraiser kami akan memberikan taksiran harga pasar yang adil dan kompetitif dalam waktu 45 menit.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== LUXURY CTA SECTION ==================== -->
+        <div class="relative bg-gradient-to-r from-brand-orange via-orange-600 to-amber-600 rounded-3xl p-8 sm:p-12 text-white shadow-2xl overflow-hidden">
+            <div class="absolute -right-16 -top-16 w-80 h-80 bg-white/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-6">
+                <div class="space-y-3 text-center lg:text-left max-w-2xl">
+                    <span class="inline-flex items-center gap-2 bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
+                        <i class="fa-solid fa-calendar-check"></i> Konsultasi & Test Drive Gratis
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                        Siap Menemukan Mobil Idaman Anda Hari Ini?
+                    </h3>
+                    <p class="text-white/90 text-xs sm:text-sm leading-relaxed">
+                        Kunjungi showroom kami, rasakan kenyamanan unit di jalanan, atau konsultasikan kebutuhan keluarga Anda dengan konsultan otomotif terpercaya kami.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-3">
+                    <a href="index.html" class="bg-white hover:bg-slate-100 text-slate-900 px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-extrabold shadow-lg transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-solid fa-magnifying-glass mr-1.5"></i> Lihat Semua Mobil
+                    </a>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20saya%20ingin%20konsultasi%20pembelian%20mobil" target="_blank" class="bg-slate-950/40 hover:bg-slate-950 text-white border border-white/30 px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-extrabold shadow-lg transition-all flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i> Hubungi WhatsApp Sales
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-brand-navy text-slate-400 text-xs mt-16 pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="h-9 w-9 rounded-lg bg-white p-1 flex items-center justify-center">
+                            <img src="logo.jpg" alt="Logo" class="h-full w-full object-contain">
+                        </div>
+                        <span class="text-white font-extrabold text-lg">Mobile <span class="text-brand-accent">Second</span></span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Showroom resmi penjualan mobil bekas berkualitas. Semua unit bergaransi mesin 1 tahun dan lulus inspeksi 160 titik.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Navigasi Halaman</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-brand-accent">Beli Mobil (Katalog Lengkap)</a></li>
+                        <li><a href="jual-mobil.html" class="hover:text-brand-accent">Jual & Tukar Tambah Mobil</a></li>
+                        <li><a href="promo.html" class="hover:text-brand-accent">Promo & Diskon DP Spesial</a></li>
+                        <li><a href="simulasi-kredit.html" class="hover:text-brand-accent">Kalkulator Simulasi Kredit</a></li>
+                        <li><a href="tentang-kami.html" class="hover:text-brand-accent text-brand-orange font-bold">Tentang Kami & Inspeksi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Layanan Showroom</h4>
+                    <ul class="space-y-2">
+                        <li>Garansi 1 Tahun Mesin & Transmisi</li>
+                        <li>Inspeksi 160 Titik Bersertifikat</li>
+                        <li>5 Hari Garansi Uang Kembali</li>
+                        <li>Layanan Antar Unit se-Jabodetabek</li>
+                        <li>Bantuan Pengurusan Balik Nama & STNK</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Hubungi Showroom</h4>
+                    <p class="text-slate-400 leading-relaxed mb-2">
+                        Jl. Sultan Iskandar Muda No. 88, Kebayoran Lama, Jakarta Selatan
+                    </p>
+                    <p class="text-slate-300 font-semibold mb-1">WhatsApp: 0812-3456-7890</p>
+                    <p class="text-slate-300 font-semibold">Email: halo@mobilesecond.id</p>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-3">
+                <p>&copy; 2026 Mobile Second. Seluruh Hak Cipta Dilindungi.</p>
+                <div class="flex gap-4">
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Kebijakan Privasi</a>
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts for Tabs & FAQ -->
+    <script>
+        function toggleMobileNav() {
+            const menu = document.getElementById('mobileNavMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Filter Inspeksi Tabs
+        function filterInspection(category, button) {
+            // Update button styles
+            const buttons = document.querySelectorAll('.inspection-tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-navy', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-600');
+            });
+            button.classList.remove('bg-slate-100', 'text-slate-600');
+            button.classList.add('bg-brand-navy', 'text-white', 'shadow-sm');
+
+            // Filter items
+            const items = document.querySelectorAll('.inspection-item');
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.classList.remove('hidden');
+                } else {
+                    item.classList.add('hidden');
+                }
+            });
+        }
+
+        // FAQ Accordion
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+            const isHidden = content.classList.contains('hidden');
+
+            // Close all
+            document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotate-180'));
+
+            // Toggle selected
+            if (isHidden) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        // DYNAMIC STICKY NAVBAR SCROLL (SMOOTH TRANSITION)
+        const mainNavbar = document.getElementById('mainStickyNavbar');
+        function updateNavbarOnScroll() {
+            if (!mainNavbar) return;
+            if (window.scrollY > 20) {
+                mainNavbar.classList.add('border-slate-700/80', 'shadow-[0_4px_25px_rgba(0,0,0,0.35)]');
+                mainNavbar.classList.remove('border-transparent', 'shadow-none');
+            } else {
+                mainNavbar.classList.remove('border-slate-700/80', 'shadow-[0_4px_25px_rgba(0,0,0,0.35)]');
+                mainNavbar.classList.add('border-transparent', 'shadow-none');
+            }
+        }
+        window.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
+        document.addEventListener('DOMContentLoaded', updateNavbarOnScroll);
+    </script>
+
+    <!-- ==================== FLOATING ROUND WHATSAPP BUTTON ==================== -->
+    <a 
+        href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20tanya%20profil%20showroom" 
+        target="_blank" 
+        class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group"
+        title="Hubungi WhatsApp Sales"
+        aria-label="WhatsApp Sales"
+    >
+        <i class="fa-brands fa-whatsapp text-3xl group-hover:scale-105 transition-transform"></i>
+        <!-- Ping Indicator -->
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white"></span>
+        </span>
+        <!-- Tooltip on Hover (Desktop) -->
+        <span class="hidden md:group-hover:block absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl whitespace-nowrap shadow-xl border border-slate-700 pointer-events-none transition-all">
+            Chat WhatsApp Sales
+        </span>
+    </a>
+</body>
+</html>

@@ -1,0 +1,2153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Simulasi Kredit & Cicilan Mobil Bekas - Mobile Second</title>
+    <meta name="description" content="Hitung estimasi cicilan bulanan, DP murni, dan total pembayaran pertama kredit mobil bekas dengan suku bunga kompetitif dan leasing resmi di Mobile Second.">
+
+    <!-- Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#121824',
+                            navy: '#1b2434',
+                            navyLight: '#243046',
+                            orange: '#ea580c',
+                            orangeHover: '#c2410c',
+                            accent: '#f97316',
+                            yellow: '#f59e0b',
+                            blue: '#2563eb',
+                            cardBg: '#ffffff',
+                            bg: '#f4f6f9',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 2px 10px rgba(0, 0, 0, 0.04)',
+                        'card-hover': '0 12px 25px -4px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
+                        'nav': '0 4px 20px -2px rgba(15, 23, 42, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ==================== PRINT MEDIA STYLESHEET (STANDAR INDUSTRI QUOTATION) ==================== */
+        @media print {
+            body {
+                background: #ffffff !important;
+                color: #0f172a !important;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            /* Sembunyikan elemen website yang tidak perlu dicetak */
+            header, nav, main, footer, #toastNotification, .floating-btn, #floatingWaBtn, #printModalBackdropActions {
+                display: none !important;
+            }
+            /* Tampilkan lembar resmi penawaran kredit A4 */
+            #printQuotationModal {
+                display: block !important;
+                position: static !important;
+                background: transparent !important;
+                padding: 0 !important;
+                margin: 0 !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            #printableCreditQuotation {
+                display: block !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+                box-shadow: none !important;
+                border: none !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            @page {
+                size: A4 portrait;
+                margin: 10mm 12mm 12mm 12mm;
+            }
+        }
+    </style>
+</head>
+<body class="bg-brand-bg text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-orange selection:text-white">
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="fixed top-6 right-6 z-[9999] hidden transform transition-all duration-300">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700">
+            <div id="toastIcon" class="text-emerald-400 text-lg"><i class="fa-solid fa-circle-check"></i></div>
+            <div id="toastMessage" class="text-xs sm:text-sm font-semibold">Pesan notifikasi</div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER & NAVBAR (STICKY) ==================== -->
+    <!-- ==================== HEADER & NAVBAR (STICKY) ==================== -->
+    <header id="mainStickyNavbar" class="sticky top-0 z-50 bg-brand-navy text-white py-3.5 px-4 sm:px-6 lg:px-8 border-b border-transparent shadow-none transition-all duration-500 ease-in-out">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="flex items-center justify-between">
+                
+                <!-- Logo & Brand -->
+                <a href="index.html" class="flex items-center gap-3 group focus:outline-none" title="Mobile Second - Halaman Utama">
+                    <div class="h-11 w-11 rounded-xl bg-white p-1 flex items-center justify-center shadow-md overflow-hidden ring-2 ring-white/20 group-hover:ring-brand-accent transition-all">
+                        <img src="logo.jpg" alt="Mobile Second Logo" class="h-full w-full object-contain" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3202/3202926.png';">
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-center tracking-tight font-extrabold text-xl sm:text-2xl leading-none">
+                            <span class="text-white">Mobile</span>
+                            <span class="text-brand-accent ml-1">Second</span>
+                        </div>
+                        <span class="text-[10px] text-amber-400 font-semibold tracking-wider mt-0.5 uppercase flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-[9px]"></i> Jual Beli Mobil Bekas
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Navigasi Menu Lengkap -->
+                <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-200">
+                    <a href="index.html" class="text-slate-300 hover:text-brand-accent transition-colors">Beli Mobil</a>
+                    <a href="jual-mobil.html" class="text-slate-300 hover:text-brand-accent transition-colors">Jual Mobil</a>
+                    <a href="promo.html" class="text-slate-300 hover:text-brand-accent transition-colors flex items-center gap-1.5">
+                        <span>Promo</span>
+                        <span class="bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse">HOT</span>
+                    </a>
+                    <a href="tentang-kami.html" class="text-slate-300 hover:text-brand-accent transition-colors">Tentang Kami</a>
+                    <a href="simulasi-kredit.html" class="text-brand-accent font-semibold flex items-center gap-1">
+                        Simulasi Kredit
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+                    </a>
+                </nav>
+
+                <!-- Tombol Hotline WhatsApp (Desktop) & Mobile Trigger -->
+                <div class="flex items-center gap-3">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>0812-3456-7890</span>
+                    </a>
+                    <!-- Mobile Hamburger -->
+                    <button onclick="toggleMobileNav()" class="lg:hidden p-2 text-slate-200 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Nav Menu Dropdown -->
+            <div id="mobileNavMenu" class="hidden lg:hidden pt-4 pb-2 border-t border-slate-700/60 mt-4 space-y-3">
+                <a href="index.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Beli Mobil (Katalog)</a>
+                <a href="jual-mobil.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Jual Mobil</a>
+                <a href="promo.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Promo Spesial</a>
+                <a href="tentang-kami.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Tentang Kami</a>
+                <a href="simulasi-kredit.html" class="block text-brand-orange font-semibold py-1 text-sm">Simulasi Kredit</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second" target="_blank" class="block text-emerald-400 font-semibold py-1 text-sm flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> Hubungi WhatsApp Sales</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="flex-grow max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-16">
+        
+        <!-- Header Hero Section with Financial Highlights -->
+        <div class="relative bg-gradient-to-br from-brand-navy via-slate-900 to-slate-950 rounded-3xl p-6 sm:p-10 lg:p-12 text-white overflow-hidden shadow-2xl border border-slate-800">
+            <!-- Glow Effect -->
+            <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-20 -top-20 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8 space-y-4">
+                    <span class="inline-flex items-center gap-2 bg-brand-orange/20 border border-brand-orange/40 text-brand-accent px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md">
+                        <i class="fa-solid fa-calculator"></i> Kalkulator Finansial Resmi & Terpercaya
+                    </span>
+                    <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight leading-tight">
+                        Kalkulator Simulasi Kredit <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-amber-400 to-amber-200">Mobil Bekas</span>
+                    </h1>
+                    <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
+                        Rencanakan pembiayaan mobil impian Anda dengan transparansi 100%. Hitung angsuran bulanan, uang muka (DP), total pembayaran pertama (TDP), serta perbandingan skema <strong class="text-white">Konvensional & Syariah</strong> dari 7 mitra leasing berizin OJK.
+                    </p>
+
+                    <!-- 4 Financial Trust Badges -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-sm">
+                            <div class="text-amber-400 text-base font-extrabold flex items-center gap-1.5">
+                                <i class="fa-solid fa-percent text-xs"></i> 6.5% p.a.
+                            </div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Bunga Rendah Kompetitif</div>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-sm">
+                            <div class="text-emerald-400 text-base font-extrabold flex items-center gap-1.5">
+                                <i class="fa-solid fa-tag text-xs"></i> Mulai 10%
+                            </div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">DP Ringan Fleksibel</div>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-sm">
+                            <div class="text-blue-400 text-base font-extrabold flex items-center gap-1.5">
+                                <i class="fa-solid fa-clock text-xs"></i> 1x24 Jam
+                            </div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">Approval Cepat & Praktis</div>
+                        </div>
+                        <div class="bg-white/5 border border-white/10 rounded-2xl p-3 backdrop-blur-sm">
+                            <div class="text-purple-400 text-base font-extrabold flex items-center gap-1.5">
+                                <i class="fa-solid fa-shield-halved text-xs"></i> Resmi OJK
+                            </div>
+                            <div class="text-[11px] text-slate-400 mt-0.5">BPKB Aman Terjamin</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Quick Info Card -->
+                <div class="lg:col-span-4 bg-white/5 border border-white/10 rounded-3xl p-6 backdrop-blur-md space-y-4">
+                    <div class="flex items-center gap-3 border-b border-white/10 pb-4">
+                        <div class="w-10 h-10 rounded-xl bg-brand-orange/20 text-brand-accent flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-handshake"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-extrabold text-white">Konsultasi Bebas Biaya</div>
+                            <div class="text-[11px] text-slate-400">Dapatkan rekomendasi leasing terbaik</div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Pusing dengan berkas administrasi? Tim sales dan leasing specialist kami siap menjemput berkas dan membantu proses verifikasi hingga unit mobil terparkir di rumah Anda.
+                    </p>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20saya%20ingin%20konsultasi%20kredit%20mobil%20bekas" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors">
+                        <i class="fa-brands fa-whatsapp text-sm"></i> Chat Sales Specialist
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mode Switcher Tabs: Mode 1 (By Car Price) vs Mode 2 (By Monthly Budget) -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-200 pb-4">
+            <div class="inline-flex p-1.5 bg-slate-200/80 rounded-2xl text-xs font-bold" id="simModeTabs">
+                <button type="button" onclick="switchSimMode('price')" id="tabModePrice" class="px-5 py-2.5 rounded-xl bg-brand-navy text-white shadow-sm transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-car"></i>
+                    <span>Hitung dari Harga Mobil</span>
+                </button>
+                <button type="button" onclick="switchSimMode('budget')" id="tabModeBudget" class="px-5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Hitung dari Budget / Gaji</span>
+                </button>
+            </div>
+            <div class="text-xs text-slate-500 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-brand-orange"></i>
+                <span>Simulasi otomatis diperbarui saat Anda mengubah nilai input.</span>
+            </div>
+        </div>
+
+        <!-- ==================== MODE 1: KALKULATOR DARI HARGA MOBIL ==================== -->
+        <div id="modePriceContainer" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Form Inputs (7 Cols) -->
+            <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200/90 space-y-6">
+                
+                <!-- Pilih Mobil dari Showroom atau Input Manual -->
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <label class="block text-xs font-bold text-slate-800">
+                            Pilih Unit Mobil dari Stok Showroom
+                        </label>
+                        <span class="text-[11px] text-brand-orange font-medium flex items-center gap-1">
+                            <i class="fa-solid fa-bolt text-[10px]"></i> 74+ Stok Mobil Siap Kirim
+                        </span>
+                    </div>
+
+                    <div class="relative">
+                        <select id="selectCarCatalog" onchange="onSelectCarChange()" class="w-full text-xs font-semibold px-4 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange text-slate-800 cursor-pointer shadow-sm">
+                            <option value="custom">-- Input Harga Bebas Manual (Custom) --</option>
+                            <!-- Populated dynamically by JS -->
+                        </select>
+                    </div>
+
+                    <!-- Mini Car Card Preview (Visible when a car is chosen) -->
+                    <div id="carSelectedPreview" class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 transition-all">
+                        <div class="flex items-center gap-3.5 w-full sm:w-auto">
+                            <div class="w-16 h-16 rounded-xl bg-slate-200 overflow-hidden flex-shrink-0 relative">
+                                <img id="previewCarImg" src="" alt="Preview Car" class="w-full h-full object-cover">
+                            </div>
+                            <div>
+                                <h4 id="previewCarTitle" class="font-bold text-slate-900 text-xs sm:text-sm">Daihatsu Sigra 1.2 R Deluxe MT</h4>
+                                <div class="flex flex-wrap items-center gap-2 mt-1 text-[11px] text-slate-500">
+                                    <span id="previewCarYear" class="bg-slate-200 px-2 py-0.5 rounded-md font-semibold text-slate-700">2019</span>
+                                    <span id="previewCarTrans">Manual</span>
+                                    <span>•</span>
+                                    <span id="previewCarMileage">48.000 km</span>
+                                    <span>•</span>
+                                    <span id="previewCarCity" class="text-brand-orange font-semibold">Bekasi</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto border-t sm:border-t-0 pt-2 sm:pt-0">
+                            <div class="text-right">
+                                <div class="text-[10px] text-slate-400">Harga OTR:</div>
+                                <div id="previewCarPrice" class="font-extrabold text-sm sm:text-base text-brand-orange">Rp 108.000.000</div>
+                            </div>
+                            <a id="previewCarDetailBtn" href="detail.html?id=102" class="p-2.5 bg-brand-navy hover:bg-brand-orange text-white rounded-xl text-xs transition-colors" title="Lihat Spesifikasi Lengkap Mobil">
+                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Harga Mobil (OTR) Manual & Preset Chips -->
+                <div class="space-y-2 pt-2 border-t border-slate-100">
+                    <div class="flex items-center justify-between">
+                        <label class="block text-xs font-bold text-slate-800">Harga Kendaraan (OTR)</label>
+                        <span class="text-[11px] text-slate-400">Dapat diedit manual</span>
+                    </div>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 font-extrabold text-sm text-slate-400">Rp</span>
+                        <input type="number" id="inputCarPrice" value="210000000" step="1000000" min="50000000" oninput="calculateSimulation()" class="w-full text-sm font-extrabold text-slate-900 pl-12 pr-4 py-3.5 rounded-2xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange shadow-sm transition-all">
+                    </div>
+                    
+                    <!-- Quick Price Preset Chips -->
+                    <div class="flex flex-wrap items-center gap-1.5 pt-1">
+                        <span class="text-[10px] text-slate-400 mr-1 font-semibold">Cepat:</span>
+                        <button type="button" onclick="setCarPrice(100000000)" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">100 Jt</button>
+                        <button type="button" onclick="setCarPrice(150000000)" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">150 Jt</button>
+                        <button type="button" onclick="setCarPrice(200000000)" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">200 Jt</button>
+                        <button type="button" onclick="setCarPrice(250000000)" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">250 Jt</button>
+                        <button type="button" onclick="setCarPrice(350000000)" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">350 Jt</button>
+                        <button type="button" onclick="setCarPrice(500000000)" class="px-2.5 py-1 rounded-lg text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">500 Jt</button>
+                    </div>
+                </div>
+
+                <!-- Pilihan Skema: Konvensional vs Syariah & ADDM vs ADDB -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+                    <!-- Tipe Pembiayaan -->
+                    <div class="space-y-1.5">
+                        <label class="block text-xs font-bold text-slate-800">Prinsip Pembiayaan</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" onclick="setFinanceType('konvensional')" id="btnFinKonven" class="p-2.5 rounded-xl text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange flex items-center justify-center gap-1.5 transition-all">
+                                <i class="fa-solid fa-building-columns"></i> Konvensional
+                            </button>
+                            <button type="button" onclick="setFinanceType('syariah')" id="btnFinSyariah" class="p-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange flex items-center justify-center gap-1.5 transition-all">
+                                <i class="fa-solid fa-moon"></i> Syariah (Murabahah)
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Skema Pembayaran: ADDM vs ADDB -->
+                    <div class="space-y-1.5">
+                        <div class="flex items-center justify-between">
+                            <label class="block text-xs font-bold text-slate-800">Skema Angsuran</label>
+                            <span class="text-[10px] text-slate-400 font-semibold" id="schemeHint">Angsuran pertama di muka</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button type="button" onclick="setPaymentScheme('ADDM')" id="btnSchemeADDM" class="p-2.5 rounded-xl text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange transition-all" title="Angsuran Dibayar Di Muka (Masuk TDP Awal)">
+                                ADDM <span class="text-[10px] font-normal block text-brand-orange/80">Cicilan Di Muka</span>
+                            </button>
+                            <button type="button" onclick="setPaymentScheme('ADDB')" id="btnSchemeADDB" class="p-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all" title="Angsuran Dibayar Di Belakang (TDP Lebih Ringan)">
+                                ADDB <span class="text-[10px] font-normal block text-slate-400">Cicilan Bln Depan</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Uang Muka (DP) Slider & Quick Chips -->
+                <div class="space-y-3 pt-2 border-t border-slate-100">
+                    <div class="flex items-center justify-between text-xs font-bold text-slate-800">
+                        <span>Uang Muka (Down Payment - DP)</span>
+                        <span id="dpPercentLabel" class="text-brand-orange text-sm font-extrabold">20% (<span id="dpAmountPreview">Rp 42.000.000</span>)</span>
+                    </div>
+
+                    <input type="range" id="sliderDp" min="10" max="60" step="5" value="20" oninput="onDpSliderChange(this.value)" class="w-full accent-brand-orange h-2.5 bg-slate-200 rounded-lg cursor-pointer">
+
+                    <!-- Quick DP Chips -->
+                    <div class="flex flex-wrap items-center justify-between gap-1.5 pt-1">
+                        <button type="button" onclick="setDpPercent(10)" class="dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all" data-dp="10">10%</button>
+                        <button type="button" onclick="setDpPercent(15)" class="dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all" data-dp="15">15%</button>
+                        <button type="button" onclick="setDpPercent(20)" class="dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange transition-all" data-dp="20">20% (Std)</button>
+                        <button type="button" onclick="setDpPercent(25)" class="dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all" data-dp="25">25%</button>
+                        <button type="button" onclick="setDpPercent(30)" class="dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all" data-dp="30">30%</button>
+                        <button type="button" onclick="setDpPercent(40)" class="dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all" data-dp="40">40%</button>
+                        <button type="button" onclick="setDpPercent(50)" class="dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all" data-dp="50">50%</button>
+                    </div>
+                </div>
+
+                <!-- Pilihan Tenor Cicilan (1 - 6 Tahun) -->
+                <div class="space-y-2 pt-2 border-t border-slate-100">
+                    <label class="block text-xs font-bold text-slate-800">Pilih Jangka Waktu (Tenor)</label>
+                    <div class="grid grid-cols-3 sm:grid-cols-6 gap-2">
+                        <button type="button" onclick="setTenor(12)" class="tenor-btn py-2.5 px-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:border-brand-orange transition-all text-center" data-tenor="12">
+                            1 Thn<br><span class="text-[10px] font-normal text-slate-400">12 Bln</span>
+                        </button>
+                        <button type="button" onclick="setTenor(24)" class="tenor-btn py-2.5 px-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:border-brand-orange transition-all text-center" data-tenor="24">
+                            2 Thn<br><span class="text-[10px] font-normal text-slate-400">24 Bln</span>
+                        </button>
+                        <button type="button" onclick="setTenor(36)" class="tenor-btn py-2.5 px-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:border-brand-orange transition-all text-center" data-tenor="36">
+                            3 Thn<br><span class="text-[10px] font-normal text-slate-400">36 Bln</span>
+                        </button>
+                        <button type="button" onclick="setTenor(48)" class="tenor-btn py-2.5 px-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:border-brand-orange transition-all text-center" data-tenor="48">
+                            4 Thn<br><span class="text-[10px] font-normal text-slate-400">48 Bln</span>
+                        </button>
+                        <button type="button" onclick="setTenor(60)" class="tenor-btn active py-2.5 px-2 rounded-xl text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange transition-all text-center" data-tenor="60">
+                            5 Thn<br><span class="text-[10px] font-normal text-brand-orange/80">60 Bln</span>
+                        </button>
+                        <button type="button" onclick="setTenor(72)" class="tenor-btn py-2.5 px-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:border-brand-orange transition-all text-center" data-tenor="72">
+                            6 Thn<br><span class="text-[10px] font-normal text-slate-400">72 Bln</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mitra Leasing, Jenis Asuransi & Suku Bunga -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2 border-t border-slate-100">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-800 mb-1.5">Mitra Leasing Resmi (OJK)</label>
+                        <select id="selectLeasing" onchange="onLeasingChange()" class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange text-slate-800">
+                            <option value="bca" data-rate="7.5">BCA Finance (Bunga 7.5% Flat/Thn)</option>
+                            <option value="mandiri" data-rate="7.8">Mandiri Tunas Finance (MTF 7.8%)</option>
+                            <option value="adira" data-rate="8.2">Adira Finance (Proses Cepat 8.2%)</option>
+                            <option value="cimb" data-rate="7.6">CIMB Niaga Auto Finance (7.6%)</option>
+                            <option value="oto" data-rate="8.5">OTO Multiartha (Approval Mudah 8.5%)</option>
+                            <option value="maybank" data-rate="7.9">Maybank Finance (7.9%)</option>
+                            <option value="bsi" data-rate="7.4">BSI OTO Syariah (Bebas Riba 7.4%)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-800 mb-1.5">Paket Asuransi Mobil</label>
+                        <select id="selectInsurance" onchange="calculateSimulation()" class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange text-slate-800">
+                            <option value="kombinasi">Kombinasi (All Risk Thn 1, TLO Sisa)</option>
+                            <option value="allrisk">All Risk Penuh (Selama Masa Tenor)</option>
+                            <option value="tlo">Total Loss Only (TLO Saja)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Suku Bunga Custom Toggle -->
+                <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200/80 flex items-center justify-between text-xs">
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-sliders text-brand-orange"></i>
+                        <span class="font-bold text-slate-800">Suku Bunga Efektif per Tahun:</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <input type="number" id="inputCustomRate" value="8.0" step="0.1" min="4.0" max="15.0" oninput="calculateSimulation()" class="w-20 px-2 py-1 text-center font-extrabold text-brand-orange bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-brand-orange">
+                        <span class="font-bold text-slate-600">% Flat/Thn</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Results Card (5 Cols Sticky) -->
+            <div class="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
+                
+                <div class="bg-gradient-to-br from-slate-900 via-brand-navy to-slate-950 rounded-3xl p-6 sm:p-8 text-white shadow-2xl space-y-6 border border-slate-800 relative overflow-hidden">
+                    
+                    <div class="flex items-center justify-between border-b border-white/10 pb-4">
+                        <span class="inline-flex items-center gap-1.5 text-[10px] font-extrabold tracking-widest text-brand-accent uppercase bg-brand-orange/20 px-3 py-1 rounded-full border border-brand-orange/30">
+                            <i class="fa-solid fa-calculator"></i> Estimasi Finansial
+                        </span>
+                        <span id="badgeFinanceScheme" class="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
+                            Konvensional • ADDM
+                        </span>
+                    </div>
+
+                    <!-- Highlight Monthly Payment -->
+                    <div>
+                        <div class="text-xs text-slate-300 font-medium">Estimasi Angsuran per Bulan:</div>
+                        <div class="flex items-baseline gap-2 mt-1">
+                            <div id="resultMonthlyPayment" class="text-3xl sm:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-amber-400 to-amber-200 tracking-tight">
+                                Rp 3.584.000
+                            </div>
+                            <span class="text-xs text-slate-400 font-semibold">/ bln</span>
+                        </div>
+                        <div id="resultTenorText" class="text-xs text-slate-400 mt-1">Tenor 5 Tahun (60 Bulan Angsuran)</div>
+                    </div>
+
+                    <!-- Total Pembayaran Pertama (TDP) -->
+                    <div class="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-slate-300">Total Pembayaran Pertama (TDP):</span>
+                            <span id="resultTdp" class="text-lg font-extrabold text-amber-300">Rp 48.084.000</span>
+                        </div>
+                        
+                        <!-- Visual Segmented Bar Breakdown of TDP -->
+                        <div class="space-y-1.5 pt-1">
+                            <div class="h-2.5 w-full bg-slate-800 rounded-full overflow-hidden flex">
+                                <div id="barDp" class="bg-brand-orange h-full" style="width: 70%" title="DP Murni"></div>
+                                <div id="barFirstInstallment" class="bg-blue-500 h-full" style="width: 15%" title="Angsuran Pertama"></div>
+                                <div id="barInsurance" class="bg-emerald-500 h-full" style="width: 10%" title="Asuransi"></div>
+                                <div id="barAdmin" class="bg-purple-500 h-full" style="width: 5%" title="Biaya Admin & Polis"></div>
+                            </div>
+                            <div class="flex items-center justify-between text-[10px] text-slate-400">
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-brand-orange"></span> DP</span>
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-500"></span> Angs. 1</span>
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Asuransi</span>
+                                <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-purple-500"></span> Admin</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rincian Itemized Angka Transparan -->
+                    <div class="space-y-2.5 pt-2 border-t border-slate-700/60 text-xs">
+                        <div class="flex items-center justify-between text-slate-300">
+                            <span>Harga Kendaraan (OTR):</span>
+                            <span id="resultOtrPrice" class="font-bold text-white">Rp 210.000.000</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-300">
+                            <span>Uang Muka Murni (DP):</span>
+                            <span id="resultDpAmount" class="font-bold text-white">Rp 42.000.000 (20%)</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-300">
+                            <span>Pokok Pembiayaan (Hutang):</span>
+                            <span id="resultPrincipalLoan" class="font-bold text-white">Rp 168.000.000</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-300">
+                            <span>Total Bunga / Margin (<span id="resultRateLabel">8.0%</span>):</span>
+                            <span id="resultTotalInterest" class="font-bold text-white">Rp 67.200.000</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-300">
+                            <span>Estimasi Asuransi Kendaraan:</span>
+                            <span id="resultInsuranceFee" class="font-bold text-white">Rp 3.150.000</span>
+                        </div>
+                        <div class="flex items-center justify-between text-slate-300">
+                            <span>Biaya Administrasi & Fidusia:</span>
+                            <span id="resultAdminFee" class="font-bold text-white">Rp 2.500.000</span>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons: WhatsApp & Cetak PDF -->
+                    <div class="space-y-2.5 pt-2">
+                        <a id="btnConsultLeasing" href="#" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3.5 px-4 rounded-2xl text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/30 transition-all transform hover:-translate-y-0.5">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Konsultasi & Ajukan Kredit via WA</span>
+                        </a>
+                        <button type="button" onclick="openPrintQuotationModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2 transition-colors border border-slate-700">
+                            <i class="fa-solid fa-print"></i> Pratinjau & Cetak Ringkasan Kredit (PDF)
+                        </button>
+                    </div>
+
+                    <p class="text-[10px] text-slate-400 text-center leading-relaxed">
+                        *Hasil simulasi merupakan estimasi resmi. Nilai akhir disesuaikan dengan profil kredit, paket promo bunga dari leasing, dan verifikasi berkas.
+                    </p>
+                </div>
+
+                <!-- 7 Mitra Leasing Resmi Terdaftar OJK -->
+                <div class="bg-white rounded-3xl p-6 shadow-card border border-slate-200/90 space-y-4">
+                    <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-shield-check text-brand-orange"></i>
+                        <span>7 Mitra Leasing Resmi Terdaftar OJK</span>
+                    </h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Proses pengajuan kredit di Mobile Second dijamin aman tanpa calo. BPKB kendaraan Anda tersimpan di lembaga pembiayaan terpercaya.
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs font-bold text-slate-700 text-center">
+                        <div class="p-2 bg-slate-50 border border-slate-100 rounded-xl">BCA Finance</div>
+                        <div class="p-2 bg-slate-50 border border-slate-100 rounded-xl">Mandiri MTF</div>
+                        <div class="p-2 bg-slate-50 border border-slate-100 rounded-xl">Adira Finance</div>
+                        <div class="p-2 bg-slate-50 border border-slate-100 rounded-xl">CIMB Niaga</div>
+                        <div class="p-2 bg-slate-50 border border-slate-100 rounded-xl">OTO Finance</div>
+                        <div class="p-2 bg-slate-50 border border-slate-100 rounded-xl">BSI Syariah</div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ==================== MODE 2: REKOMENDASI MOBIL DARI BUDGET GAJI ==================== -->
+        <div id="modeBudgetContainer" class="hidden bg-white rounded-3xl p-6 sm:p-10 shadow-card border border-slate-200/90 space-y-8">
+            <div class="max-w-2xl space-y-2">
+                <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Perencanaan Keuangan Sehat</span>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900">Hitung Mobil yang Sesuai dengan Budget Anda</h3>
+                <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                    Masukkan batas angsuran bulanan yang Anda sanggupi dan dana DP yang tersedia. Sistem kami akan menghitung plafon maksimal harga mobil yang ideal dan merekomendasikan stok unit yang cocok.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 p-6 rounded-2xl bg-slate-50 border border-slate-200/80">
+                <!-- Input Budget Cicilan -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-slate-800">Budget Cicilan Maksimal / Bulan</label>
+                    <div class="relative">
+                        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-xs text-slate-400">Rp</span>
+                        <input type="number" id="inputBudgetMonthly" value="3500000" step="250000" oninput="calculateBudgetAffordability()" class="w-full text-xs font-bold pl-10 pr-3 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-brand-orange">
+                    </div>
+                    <span class="text-[10px] text-slate-400">Contoh: Rp 2.500.000 s/d Rp 5.000.000</span>
+                </div>
+
+                <!-- Input Dana DP Tersedia -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-slate-800">Dana DP yang Anda Miliki</label>
+                    <div class="relative">
+                        <span class="absolute left-3.5 top-1/2 -translate-y-1/2 font-bold text-xs text-slate-400">Rp</span>
+                        <input type="number" id="inputBudgetDp" value="35000000" step="5000000" oninput="calculateBudgetAffordability()" class="w-full text-xs font-bold pl-10 pr-3 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-brand-orange">
+                    </div>
+                    <span class="text-[10px] text-slate-400">Uang muka yang siap dibayarkan</span>
+                </div>
+
+                <!-- Pilihan Tenor Nyaman -->
+                <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-slate-800">Target Tenor Pinjaman</label>
+                    <select id="selectBudgetTenor" onchange="calculateBudgetAffordability()" class="w-full text-xs font-bold px-3 py-3 rounded-xl border border-slate-200 bg-white focus:outline-none focus:border-brand-orange">
+                        <option value="36">3 Tahun (36 Bulan)</option>
+                        <option value="48">4 Tahun (48 Bulan)</option>
+                        <option value="60" selected>5 Tahun (60 Bulan)</option>
+                        <option value="72">6 Tahun (72 Bulan)</option>
+                    </select>
+                    <span class="text-[10px] text-slate-400">Pilih jangka waktu cicilan</span>
+                </div>
+            </div>
+
+            <!-- Hasil Rekomendasi Plafon -->
+            <div class="p-6 rounded-2xl bg-gradient-to-r from-brand-navy to-slate-900 text-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+                <div class="space-y-2 text-center md:text-left">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-amber-400 bg-amber-400/20 px-3 py-1 rounded-full">Plafon Maksimal Aman</span>
+                    <h4 class="text-2xl sm:text-3xl font-extrabold">
+                        Rekomendasi Harga Mobil: <span id="budgetMaxPriceDisplay" class="text-brand-accent">Rp 195.000.000</span>
+                    </h4>
+                    <p class="text-xs text-slate-300">
+                        Dengan cicilan <strong class="text-white" id="budgetAffordMonthly">Rp 3.500.000/bln</strong> dan DP <strong class="text-white" id="budgetAffordDp">Rp 35.000.000</strong>, Anda dapat membeli mobil hingga rentang harga tersebut.
+                    </p>
+                </div>
+                <button type="button" onclick="applyBudgetToCalculator()" class="bg-brand-orange hover:bg-brand-orangeHover text-white text-xs font-bold px-6 py-3.5 rounded-xl whitespace-nowrap shadow-lg transition-transform transform hover:-translate-y-0.5">
+                    Gunakan Nilai Ini di Simulasi &rarr;
+                </button>
+            </div>
+
+            <!-- Rekomendasi 3 Mobil Pilihan dari Stok Showroom Sesuai Budget -->
+            <div class="space-y-4">
+                <div class="flex items-center justify-between">
+                    <h4 class="font-extrabold text-slate-900 text-sm">Mobil yang Cocok dengan Budget Anda:</h4>
+                    <a href="index.html" class="text-xs font-bold text-brand-orange hover:underline">Lihat Semua di Katalog &rarr;</a>
+                </div>
+                <div id="budgetCarRecommendations" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <!-- Populated dynamically by JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TABEL PERBANDINGAN SEMUA TENOR (12 - 72 BULAN) ==================== -->
+        <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200/90 space-y-6">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Perbandingan Komprehensif</span>
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Tabel Perbandingan Semua Tenor (1 s/d 6 Tahun)</h3>
+                    <p class="text-xs text-slate-500 mt-1">Bandingkan angsuran bulanan dan total pembayaran pertama (TDP) dari harga mobil dan DP yang dipilih.</p>
+                </div>
+                <div class="text-xs font-semibold text-slate-600 bg-slate-100 px-3.5 py-2 rounded-xl">
+                    Harga Acuan: <span id="tableReferencePrice" class="font-bold text-brand-orange">Rp 210.000.000</span>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-700 font-bold border-b border-slate-200">
+                            <th class="p-3.5 rounded-l-xl">Tenor Pinjaman</th>
+                            <th class="p-3.5">Durasi</th>
+                            <th class="p-3.5">Estimasi Bunga</th>
+                            <th class="p-3.5">Angsuran / Bulan</th>
+                            <th class="p-3.5">Estimasi TDP</th>
+                            <th class="p-3.5">Total Bunga</th>
+                            <th class="p-3.5 rounded-r-xl text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tenorTableBody" class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <!-- Populated dynamically by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== JADWAL AMORTISASI ANGSURAN BULANAN (12 BULAN PERTAMA) ==================== -->
+        <section class="bg-white rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200/90 space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Transparansi Finansial</span>
+                    <h3 class="text-lg sm:text-xl font-extrabold text-slate-900 mt-0.5">Estimasi Jadwal Pembayaran Angsuran (Tahun Pertama)</h3>
+                    <p class="text-xs text-slate-500">Melihat pembagian porsi pokok hutang dan porsi bunga pada angsuran tiap bulannya.</p>
+                </div>
+                <button type="button" onclick="toggleAmortizationTable()" id="btnToggleAmortization" class="text-xs font-bold text-brand-orange hover:underline flex items-center gap-1.5">
+                    <span id="amortizationToggleText">Buka Jadwal</span>
+                    <i id="amortizationToggleIcon" class="fa-solid fa-chevron-down text-[11px] transition-transform"></i>
+                </button>
+            </div>
+
+            <div id="amortizationContainer" class="hidden overflow-x-auto pt-3 border-t border-slate-100">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-600 font-bold border-b border-slate-200">
+                            <th class="p-3 rounded-l-xl">Bulan Ke</th>
+                            <th class="p-3">Angsuran Total</th>
+                            <th class="p-3">Porsi Pokok Pinjaman</th>
+                            <th class="p-3">Porsi Bunga / Margin</th>
+                            <th class="p-3 rounded-r-xl">Sisa Pokok Hutang</th>
+                        </tr>
+                    </thead>
+                    <tbody id="amortizationTableBody" class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <!-- Populated dynamically by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ==================== CEK KELAYAKAN GAJI (30% DEBT-TO-INCOME RATIO) ==================== -->
+        <section class="bg-gradient-to-br from-slate-900 to-brand-navy rounded-3xl p-6 sm:p-10 text-white shadow-xl space-y-6 border border-slate-800">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-7 space-y-3">
+                    <span class="inline-flex items-center gap-1.5 text-xs font-bold text-amber-400 uppercase tracking-wider">
+                        <i class="fa-solid fa-scale-balanced"></i> Standar Analisis Leasing (OJK)
+                    </span>
+                    <h3 class="text-xl sm:text-2xl font-extrabold text-white">
+                        Cek Rasio Kelayakan Cicilan dari Gaji Anda
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Leasing umumnya menerapkan batas maksimal rasio cicilan hutang sebesar <strong class="text-amber-400">30% - 35%</strong> dari total penghasilan bersih bulanan agar pengajuan kredit Anda langsung disetujui tanpa penolakan.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center gap-3 pt-2">
+                        <div class="relative w-full sm:w-64">
+                            <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">Rp</span>
+                            <input type="number" id="inputSalary" value="12000000" step="1000000" oninput="checkSalaryRatio()" class="w-full text-xs font-extrabold text-slate-900 pl-10 pr-3 py-3 rounded-xl bg-white focus:outline-none focus:ring-2 focus:ring-brand-orange">
+                        </div>
+                        <button type="button" onclick="checkSalaryRatio()" class="w-full sm:w-auto bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-3 rounded-xl text-xs font-bold whitespace-nowrap transition-colors">
+                            Cek Kelayakan Sekarang
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 bg-white/10 rounded-2xl p-5 border border-white/10 space-y-3">
+                    <div class="flex items-center justify-between text-xs">
+                        <span class="text-slate-300">Rasio Cicilan Terhadap Gaji:</span>
+                        <span id="salaryRatioPercent" class="font-extrabold text-emerald-400 text-sm">29.8%</span>
+                    </div>
+                    <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
+                        <div id="salaryRatioBar" class="bg-emerald-400 h-full rounded-full transition-all duration-500" style="width: 29.8%"></div>
+                    </div>
+                    <div id="salaryRatioStatus" class="p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-base"></i>
+                        <span>Status: <strong>Sangat Aman!</strong> Kemungkinan besar disetujui leasing.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PANDUAN PERSYARATAN DOKUMEN PENGAJUAN KREDIT ==================== -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 shadow-card border border-slate-200/90 space-y-6">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Persiapan Berkas</span>
+                <h3 class="text-xl sm:text-3xl font-extrabold text-slate-900">Dokumen Persyaratan Kredit Mobil</h3>
+                <p class="text-xs sm:text-sm text-slate-500">Siapkan dokumen berikut untuk proses verifikasi leasing yang cepat dan lancar.</p>
+            </div>
+
+            <!-- Tab Dokumen Selector -->
+            <div class="flex justify-center border-b border-slate-200 pb-2">
+                <div class="inline-flex p-1 bg-slate-100 rounded-2xl text-xs font-bold" id="docTabs">
+                    <button type="button" onclick="switchDocTab('karyawan')" id="tabDocKaryawan" class="px-5 py-2.5 rounded-xl bg-brand-navy text-white shadow-sm transition-all">
+                        Karyawan / Pegawai Swasta & PNS
+                    </button>
+                    <button type="button" onclick="switchDocTab('wiraswasta')" id="tabDocWiraswasta" class="px-5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition-all">
+                        Wiraswasta / Pengusaha
+                    </button>
+                    <button type="button" onclick="switchDocTab('perusahaan')" id="tabDocPerusahaan" class="px-5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition-all">
+                        Perusahaan (PT / CV)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Konten Dokumen Karyawan -->
+            <div id="docContentKaryawan" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">1</div>
+                    <h5 class="font-bold text-slate-900 text-xs">Identitas Pribadi & Domisili</h5>
+                    <p class="text-[11px] text-slate-500">Fotokopi e-KTP Pemohon & Pasangan (bila sudah menikah) serta Kartu Keluarga (KK).</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">2</div>
+                    <h5 class="font-bold text-slate-900 text-xs">Bukti Penghasilan Resmi</h5>
+                    <p class="text-[11px] text-slate-500">Slip gaji asli 3 bulan terakhir atau Surat Keterangan Penghasilan dari HRD perusahaan.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">3</div>
+                    <h5 class="font-bold text-slate-900 text-xs">Rekening Tabungan (Buku / Koran)</h5>
+                    <p class="text-[11px] text-slate-500">Rekening koran mutasi gaji 3 bulan terakhir yang mencerminkan arus kas stabil.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">4</div>
+                    <h5 class="font-bold text-slate-900 text-xs">NPWP Pribadi</h5>
+                    <p class="text-[11px] text-slate-500">Fotokopi Nomor Pokok Wajib Pajak (NPWP) yang masih aktif.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-orange-100 text-brand-orange flex items-center justify-center font-bold text-sm">5</div>
+                    <h5 class="font-bold text-slate-900 text-xs">Bukti Tempat Tinggal</h5>
+                    <p class="text-[11px] text-slate-500">Bukti pembayaran PBB terbaru, rekening listrik PLN, atau bukti kepemilikan rumah.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-emerald-700 font-bold text-xs">
+                            <i class="fa-solid fa-truck-fast"></i> Layanan Jemput Berkas
+                        </div>
+                        <p class="text-[11px] text-emerald-800 mt-1">Tak sempat mengantar berkas? Surveyor leasing kami siap menjemput berkas langsung ke kantor atau rumah Anda!</p>
+                    </div>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20saya%20ingin%20jadwalkan%20penjemputan%20berkas%20kredit" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-bold py-2 rounded-xl text-center transition-colors">
+                        Jadwalkan Jemput Berkas
+                    </a>
+                </div>
+            </div>
+
+            <!-- Konten Dokumen Wiraswasta -->
+            <div id="docContentWiraswasta" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">1</div>
+                    <h5 class="font-bold text-slate-900 text-xs">KTP & Kartu Keluarga</h5>
+                    <p class="text-[11px] text-slate-500">Fotokopi e-KTP Pemohon & Pasangan serta Kartu Keluarga (KK).</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">2</div>
+                    <h5 class="font-bold text-slate-900 text-xs">Legalitas Usaha (NIB / SIUP)</h5>
+                    <p class="text-[11px] text-slate-500">Nomor Induk Berusaha (NIB), SIUP, atau Surat Keterangan Usaha (SKU) dari kelurahan.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">3</div>
+                    <h5 class="font-bold text-slate-900 text-xs">Rekening Koran Usaha (6 Bulan)</h5>
+                    <p class="text-[11px] text-slate-500">Rekening koran operasional usaha 6 bulan terakhir yang menunjukkan omzet aktif.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">4</div>
+                    <h5 class="font-bold text-slate-900 text-xs">NPWP Pemilik Usaha</h5>
+                    <p class="text-[11px] text-slate-500">Fotokopi kartu NPWP pribadi dan NPWP usaha (jika ada).</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-blue-100 text-blue-600 font-bold text-sm">5</div>
+                    <h5 class="font-bold text-slate-900 text-xs">Foto Lokasi Usaha & Nota Transaksi</h5>
+                    <p class="text-[11px] text-slate-500">Dokumentasi fisik tempat usaha/toko serta bukti nota pembelian/penjualan barang.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-blue-50 border border-blue-200 space-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-blue-700 font-bold text-xs">
+                            <i class="fa-solid fa-headset"></i> Bantuan Appraiser Showroom
+                        </div>
+                        <p class="text-[11px] text-blue-800 mt-1">Khawatir omzet belum rapi? Tim analis kredit kami siap memberikan pendampingan agar data usaha Anda disetujui leasing.</p>
+                    </div>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20konsultasi%20kredit%20untuk%20usaha%20wiraswasta" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold py-2 rounded-xl text-center transition-colors">
+                        Konsultasi Usaha
+                    </a>
+                </div>
+            </div>
+
+            <!-- Konten Dokumen Perusahaan -->
+            <div id="docContentPerusahaan" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 pt-2">
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">1</div>
+                    <h5 class="font-bold text-slate-900 text-xs">Akta Pendirian & Perubahan</h5>
+                    <p class="text-[11px] text-slate-500">Salinan Akta Pendirian Perusahaan beserta SK Menkumham dan akta perubahan direksi terakhir.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">2</div>
+                    <h5 class="font-bold text-slate-900 text-xs">NIB & Izin Operasional</h5>
+                    <p class="text-[11px] text-slate-500">Nomor Induk Berusaha (NIB) berbasis risiko dan izin operasional komersial.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">3</div>
+                    <h5 class="font-bold text-slate-900 text-xs">KTP Direksi & Dewan Komisaris</h5>
+                    <p class="text-[11px] text-slate-500">Fotokopi e-KTP seluruh jajaran direksi dan komisaris yang tercantum di akta.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">4</div>
+                    <h5 class="font-bold text-slate-900 text-xs">Rekening Koran Perusahaan (3 Bln)</h5>
+                    <p class="text-[11px] text-slate-500">Rekening koran giro atas nama PT/CV 3 bulan terakhir.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
+                    <div class="w-8 h-8 rounded-lg bg-purple-100 text-purple-600 font-bold text-sm">5</div>
+                    <h5 class="font-bold text-slate-900 text-xs">NPWP & Laporan SPT Tahunan</h5>
+                    <p class="text-[11px] text-slate-500">NPWP Perusahaan dan bukti lapor SPT Tahunan Badan 1 tahun terakhir.</p>
+                </div>
+                <div class="p-4 rounded-2xl bg-purple-50 border border-purple-200 space-y-2 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-2 text-purple-700 font-bold text-xs">
+                            <i class="fa-solid fa-briefcase"></i> Paket Armada Perusahaan (Fleet)
+                        </div>
+                        <p class="text-[11px] text-purple-800 mt-1">Tersedia skema pembiayaan khusus pembelian mobil operasional kantor dalam jumlah banyak dengan diskon bunga korporasi.</p>
+                    </div>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20konsultasi%20pengadaan%20mobil%20operasional%20perusahaan" target="_blank" class="w-full bg-purple-600 hover:bg-purple-700 text-white text-[11px] font-bold py-2 rounded-xl text-center transition-colors">
+                        Konsultasi Fleet Korporasi
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FORMULIR PENGAJUAN PRE-APPROVAL CEPAT ==================== -->
+        <section class="bg-gradient-to-r from-brand-orange via-orange-600 to-amber-600 rounded-3xl p-6 sm:p-10 lg:p-12 text-white shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-6 space-y-3">
+                    <span class="inline-flex items-center gap-2 bg-white/20 text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-sm">
+                        <i class="fa-solid fa-bolt"></i> Fast-Track Approval 24 Jam
+                    </span>
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight">
+                        Ajukan Pra-Persetujuan Kredit Mobil Sekarang
+                    </h3>
+                    <p class="text-xs sm:text-sm text-white/90 leading-relaxed">
+                        Kirim data diri singkat Anda untuk mengetahui status kelayakan kredit dan rekomendasi plafon leasing terbaik tanpa mempengaruhi riwayat SLIK OJK Anda.
+                    </p>
+                    <ul class="text-xs text-white/90 space-y-2 pt-2">
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-300"></i> Gratis konsultasi dengan leasing officer bersertifikasi</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-300"></i> Kerahasiaan data pribadi 100% terlindungi enkripsi</li>
+                        <li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-amber-300"></i> Respon cepat dalam waktu kurang dari 15 menit</li>
+                    </ul>
+                </div>
+
+                <!-- Form Box -->
+                <div class="lg:col-span-6 bg-white rounded-3xl p-6 sm:p-7 text-slate-800 shadow-2xl space-y-4">
+                    <h4 class="font-extrabold text-slate-900 text-sm flex items-center justify-between">
+                        <span>Formulir Pra-Persetujuan Kredit</span>
+                        <span class="text-[10px] font-bold text-brand-orange bg-orange-100 px-2 py-0.5 rounded-full">Respon Cepat</span>
+                    </h4>
+
+                    <form onsubmit="handleQuickCreditSubmit(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-700 mb-1">Nama Lengkap (Sesuai KTP)</label>
+                            <input type="text" id="leadName" required placeholder="Contoh: Budi Santoso" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Nomor WhatsApp Aktif</label>
+                                <input type="tel" id="leadPhone" required placeholder="Contoh: 08123456789" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Kota Domisili</label>
+                                <select id="leadCity" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="Jakarta">Jakarta</option>
+                                    <option value="Tangerang">Tangerang / BSD</option>
+                                    <option value="Bekasi">Bekasi</option>
+                                    <option value="Depok">Depok</option>
+                                    <option value="Bogor">Bogor</option>
+                                    <option value="Bandung">Bandung</option>
+                                    <option value="Lainnya">Luar Jabodetabek</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Status Pekerjaan</label>
+                                <select id="leadJob" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="Karyawan Swasta">Karyawan Swasta</option>
+                                    <option value="PNS / BUMN">PNS / BUMN</option>
+                                    <option value="Wiraswasta">Wiraswasta / Pengusaha</option>
+                                    <option value="Profesional">Profesional / Dokter</option>
+                                    <option value="Lainnya">Lainnya</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Rencana Pembayaran DP</label>
+                                <select id="leadDpPlan" class="w-full text-xs px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="DP 10% - 15%">DP Ringan (10% - 15%)</option>
+                                    <option value="DP 20% - 25%" selected>DP Standar (20% - 25%)</option>
+                                    <option value="DP 30%+">DP Besar (30% ke atas)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-extrabold py-3 px-4 rounded-xl text-xs transition-colors shadow-md flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-base"></i>
+                            <span>Kirim & Terhubung ke WhatsApp Tim Analis</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FAQ SIMULASI KREDIT ==================== -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-card border border-slate-200/90 space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Pertanyaan Seputar Kredit</span>
+                <h3 class="text-xl sm:text-3xl font-extrabold text-slate-900">FAQ Simulasi & Pembiayaan Mobil</h3>
+                <p class="text-xs sm:text-sm text-slate-500">Jawaban lengkap seputar mekanisme kredit, biaya, dan proses persetujuan leasing.</p>
+            </div>
+
+            <div class="max-w-3xl mx-auto space-y-3" id="creditFaqAccordion">
+                
+                <!-- FAQ 1 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Apa perbedaan antara skema ADDM dan ADDB?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        <strong>ADDM (Angsuran Dibayar di Muka):</strong> Angsuran bulan pertama dibayarkan bersamaan dengan Total Down Payment (TDP) saat serah terima mobil. Jumlah tenor sisa pembayaran adalah (Tenor - 1).<br><br>
+                        <strong>ADDB (Angsuran Dibayar di Belakang):</strong> Angsuran bulan pertama baru dibayar 1 bulan setelah mobil diterima. Sehingga TDP awal yang harus dibayarkan di muka jauh lebih ringan karena belum termasuk cicilan bulan pertama.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Berapa lama proses persetujuan (approval) kredit di Mobile Second?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Jika berkas dokumen telah lengkap dan profil kredit Anda memenuhi standar, proses persetujuan dari mitra leasing kami rata-rata memakan waktu <strong>1x24 jam kerja</strong> (maksimal 2 hari kerja). Setelah approved dan PO leasing terbit, mobil bisa langsung diserahterimakan.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Apakah bisa mengajukan kredit jika tempat tinggal masih kontrak / sewa?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        <strong>Bisa!</strong> Banyak mitra leasing kami yang menerima pengajuan kredit bagi pemohon berstatus rumah sewa/kontrak, asalkan memiliki masa tinggal yang cukup lama (disertai surat perjanjian sewa atau kwitansi kontrak) dan didukung dengan riwayat mutasi rekening tabungan yang sehat.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Bagaimana jika saya ingin melunasi kredit lebih cepat (Pelunasan Dipercepat)?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Anda berhak melakukan pelunasan dipercepat kapan saja sebelum masa tenor berakhir. Pihak leasing akan menghitung sisa pokok hutang dengan potongan porsi bunga di masa depan, sesuai dengan ketentuan polis kontrak pembiayaan yang berlaku.
+                    </div>
+                </div>
+
+                <!-- FAQ 5 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Apakah ada jaminan uang tanda jadi (booking fee) kembali jika kredit ditolak?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        <strong>Ya, 100% kembali tanpa potongan.</strong> Jika pengajuan kredit mobil Anda tidak disetujui oleh seluruh mitra leasing alternatif kami, uang tanda jadi atau booking fee yang telah Anda setorkan akan kami kembalikan utuh tanpa biaya administrasi tersembunyi.
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-brand-navy text-slate-400 text-xs mt-16 pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="h-9 w-9 rounded-lg bg-white p-1 flex items-center justify-center">
+                            <img src="logo.jpg" alt="Logo" class="h-full w-full object-contain">
+                        </div>
+                        <span class="text-white font-extrabold text-lg">Mobile <span class="text-brand-accent">Second</span></span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Showroom resmi penjualan mobil bekas berkualitas. Semua unit bergaransi mesin 1 tahun dan lulus inspeksi 160 titik.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Navigasi Halaman</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-brand-accent">Beli Mobil (Katalog Lengkap)</a></li>
+                        <li><a href="jual-mobil.html" class="hover:text-brand-accent">Jual & Tukar Tambah Mobil</a></li>
+                        <li><a href="promo.html" class="hover:text-brand-accent">Promo & Diskon DP Spesial</a></li>
+                        <li><a href="simulasi-kredit.html" class="hover:text-brand-accent text-brand-orange font-bold">Kalkulator Simulasi Kredit</a></li>
+                        <li><a href="tentang-kami.html" class="hover:text-brand-accent">Tentang Kami & Inspeksi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Layanan Showroom</h4>
+                    <ul class="space-y-2">
+                        <li>Garansi 1 Tahun Mesin & Transmisi</li>
+                        <li>Inspeksi 160 Titik Bersertifikat</li>
+                        <li>5 Hari Garansi Uang Kembali</li>
+                        <li>Layanan Antar Unit se-Jabodetabek</li>
+                        <li>Bantuan Pengurusan Balik Nama & STNK</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Hubungi Showroom</h4>
+                    <p class="text-slate-400 leading-relaxed mb-2">
+                        Jl. Sultan Iskandar Muda No. 88, Kebayoran Lama, Jakarta Selatan
+                    </p>
+                    <p class="text-slate-300 font-semibold mb-1">WhatsApp: 0812-3456-7890</p>
+                    <p class="text-slate-300 font-semibold">Email: halo@mobilesecond.id</p>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-3">
+                <p>&copy; 2026 Mobile Second. Seluruh Hak Cipta Dilindungi.</p>
+                <div class="flex gap-4">
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Kebijakan Privasi</a>
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Shared Cars Data Script -->
+    <script src="cars-data.js"></script>
+
+    <!-- Comprehensive Financial Calculation Engine -->
+    <script>
+        let selectedTenor = 60;
+        let selectedFinanceType = 'konvensional'; // 'konvensional' or 'syariah'
+        let selectedPaymentScheme = 'ADDM'; // 'ADDM' or 'ADDB'
+
+        function initSimulationPage() {
+            populateCarDropdown();
+
+            // Cek parameter URL ?id=... atau ?price=...
+            const urlParams = new URLSearchParams(window.location.search);
+            const carId = urlParams.get('id');
+            const carPrice = urlParams.get('price');
+
+            if (carId) {
+                const select = document.getElementById('selectCarCatalog');
+                select.value = carId;
+                onSelectCarChange();
+            } else if (carPrice) {
+                document.getElementById('inputCarPrice').value = carPrice;
+                calculateSimulation();
+            } else {
+                // Pilih mobil pertama sebagai default
+                if (carCatalog.length > 0) {
+                    const select = document.getElementById('selectCarCatalog');
+                    select.value = carCatalog[1] ? carCatalog[1].id : carCatalog[0].id;
+                    onSelectCarChange();
+                } else {
+                    calculateSimulation();
+                }
+            }
+
+            calculateBudgetAffordability();
+            checkSalaryRatio();
+        }
+
+        // Populate 74 Cars into Dropdown
+        function populateCarDropdown() {
+            const select = document.getElementById('selectCarCatalog');
+            carCatalog.forEach(car => {
+                const opt = document.createElement('option');
+                opt.value = car.id;
+                opt.textContent = `${car.brand} ${car.model} (${car.year}) - ${car.priceDisplay}`;
+                select.appendChild(opt);
+            });
+        }
+
+        function onSelectCarChange() {
+            const select = document.getElementById('selectCarCatalog');
+            const previewCard = document.getElementById('carSelectedPreview');
+
+            if (select.value === 'custom') {
+                previewCard.classList.add('hidden');
+                calculateSimulation();
+                return;
+            }
+
+            const car = getCarById(select.value);
+            if (car) {
+                document.getElementById('inputCarPrice').value = car.price;
+                
+                // Update Preview Card
+                previewCard.classList.remove('hidden');
+                document.getElementById('previewCarImg').src = car.image;
+                document.getElementById('previewCarTitle').textContent = `${car.brand} ${car.model}`;
+                document.getElementById('previewCarYear').textContent = car.year;
+                document.getElementById('previewCarTrans').textContent = car.transmission;
+                document.getElementById('previewCarMileage').textContent = car.mileageText || `${car.mileage.toLocaleString('id-ID')} km`;
+                document.getElementById('previewCarCity').textContent = car.city;
+                document.getElementById('previewCarPrice').textContent = car.priceDisplay;
+                document.getElementById('previewCarDetailBtn').href = `detail.html?id=${car.id}`;
+
+                calculateSimulation();
+            }
+        }
+
+        function setCarPrice(amount) {
+            document.getElementById('inputCarPrice').value = amount;
+            document.getElementById('selectCarCatalog').value = 'custom';
+            document.getElementById('carSelectedPreview').classList.add('hidden');
+            calculateSimulation();
+        }
+
+        function setDpPercent(percent) {
+            document.getElementById('sliderDp').value = percent;
+            onDpSliderChange(percent);
+
+            // Update chip styles
+            document.querySelectorAll('.dp-chip').forEach(btn => {
+                const p = parseInt(btn.getAttribute('data-dp'));
+                if (p === percent) {
+                    btn.className = "dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange transition-all";
+                } else {
+                    btn.className = "dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all";
+                }
+            });
+        }
+
+        function onDpSliderChange(val) {
+            const price = parseFloat(document.getElementById('inputCarPrice').value) || 0;
+            const dpAmount = price * (parseFloat(val) / 100);
+            document.getElementById('dpPercentLabel').innerHTML = `${val}% (<span id="dpAmountPreview">${formatRupiah(dpAmount)}</span>)`;
+            
+            // Sync chips
+            document.querySelectorAll('.dp-chip').forEach(btn => {
+                const p = parseInt(btn.getAttribute('data-dp'));
+                if (p === parseInt(val)) {
+                    btn.className = "dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange transition-all";
+                } else {
+                    btn.className = "dp-chip px-2.5 py-1 rounded-lg text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all";
+                }
+            });
+
+            calculateSimulation();
+        }
+
+        function setTenor(months) {
+            selectedTenor = months;
+            document.querySelectorAll('.tenor-btn').forEach(btn => {
+                const t = parseInt(btn.getAttribute('data-tenor'));
+                if (t === months) {
+                    btn.className = "tenor-btn active py-2.5 px-2 rounded-xl text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange transition-all text-center";
+                } else {
+                    btn.className = "tenor-btn py-2.5 px-2 rounded-xl text-xs font-bold border border-slate-200 bg-white hover:border-brand-orange transition-all text-center";
+                }
+            });
+            calculateSimulation();
+        }
+
+        function setFinanceType(type) {
+            selectedFinanceType = type;
+            const btnKonven = document.getElementById('btnFinKonven');
+            const btnSyariah = document.getElementById('btnFinSyariah');
+            const selectLeasing = document.getElementById('selectLeasing');
+
+            if (type === 'konvensional') {
+                btnKonven.className = "p-2.5 rounded-xl text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange flex items-center justify-center gap-1.5 transition-all";
+                btnSyariah.className = "p-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange flex items-center justify-center gap-1.5 transition-all";
+                if (selectLeasing.value === 'bsi') {
+                    selectLeasing.value = 'bca';
+                    onLeasingChange();
+                }
+            } else {
+                btnSyariah.className = "p-2.5 rounded-xl text-xs font-bold border-2 border-emerald-600 bg-emerald-50 text-emerald-700 flex items-center justify-center gap-1.5 transition-all";
+                btnKonven.className = "p-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange flex items-center justify-center gap-1.5 transition-all";
+                selectLeasing.value = 'bsi';
+                onLeasingChange();
+            }
+            updateBadge();
+            calculateSimulation();
+        }
+
+        function setPaymentScheme(scheme) {
+            selectedPaymentScheme = scheme;
+            const btnADDM = document.getElementById('btnSchemeADDM');
+            const btnADDB = document.getElementById('btnSchemeADDB');
+            const hint = document.getElementById('schemeHint');
+
+            if (scheme === 'ADDM') {
+                btnADDM.className = "p-2.5 rounded-xl text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange transition-all";
+                btnADDB.className = "p-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all";
+                hint.textContent = "Angsuran pertama di muka";
+            } else {
+                btnADDB.className = "p-2.5 rounded-xl text-xs font-bold border-2 border-brand-orange bg-orange-50 text-brand-orange transition-all";
+                btnADDM.className = "p-2.5 rounded-xl text-xs font-bold border border-slate-200 bg-white text-slate-600 hover:border-brand-orange transition-all";
+                hint.textContent = "Angsuran pertama bulan depan (TDP lebih hemat)";
+            }
+            updateBadge();
+            calculateSimulation();
+        }
+
+        function updateBadge() {
+            const badge = document.getElementById('badgeFinanceScheme');
+            const schemeName = selectedFinanceType === 'konvensional' ? 'Konvensional' : 'Syariah';
+            badge.textContent = `${schemeName} • ${selectedPaymentScheme}`;
+        }
+
+        function onLeasingChange() {
+            const select = document.getElementById('selectLeasing');
+            const rate = select.options[select.selectedIndex].getAttribute('data-rate');
+            if (rate) {
+                document.getElementById('inputCustomRate').value = rate;
+            }
+            calculateSimulation();
+        }
+
+        // CORE SIMULATION CALCULATION
+        function calculateSimulation() {
+            const price = parseFloat(document.getElementById('inputCarPrice').value) || 0;
+            const dpPercent = parseFloat(document.getElementById('sliderDp').value) || 20;
+            const insuranceType = document.getElementById('selectInsurance').value;
+            const annualRate = (parseFloat(document.getElementById('inputCustomRate').value) || 8.0) / 100;
+
+            const dpAmount = price * (dpPercent / 100);
+            const loanPrincipal = Math.max(0, price - dpAmount);
+
+            // Perhitungan bunga flat per tahun
+            const tenorYears = selectedTenor / 12;
+            const totalInterest = loanPrincipal * annualRate * tenorYears;
+            const totalLoan = loanPrincipal + totalInterest;
+            const monthlyPayment = selectedTenor > 0 ? (totalLoan / selectedTenor) : 0;
+
+            // Biaya asuransi
+            let insuranceRatePerYear = 0.015; // TLO
+            if (insuranceType === 'allrisk') insuranceRatePerYear = 0.026;
+            if (insuranceType === 'kombinasi') insuranceRatePerYear = 0.021;
+            const insuranceFee = Math.round(price * insuranceRatePerYear * (tenorYears > 3 ? 1.5 : 1.0));
+
+            // Biaya administrasi & fidusia
+            const adminFee = selectedTenor >= 48 ? 2500000 : 2000000;
+            const fidusiaFee = 500000;
+            const totalAdminFee = adminFee + fidusiaFee;
+
+            // Total Pembayaran Pertama (TDP)
+            let tdp = 0;
+            if (selectedPaymentScheme === 'ADDM') {
+                tdp = dpAmount + monthlyPayment + insuranceFee + totalAdminFee;
+            } else {
+                // ADDB: angsuran pertama tidak masuk TDP
+                tdp = dpAmount + insuranceFee + totalAdminFee;
+            }
+
+            // Update UI Numbers
+            document.getElementById('dpAmountPreview').textContent = formatRupiah(dpAmount);
+            document.getElementById('resultMonthlyPayment').textContent = formatRupiah(monthlyPayment);
+            document.getElementById('resultTenorText').textContent = `Tenor ${tenorYears} Tahun (${selectedTenor} Bulan Angsuran)`;
+            document.getElementById('resultOtrPrice').textContent = formatRupiah(price);
+            document.getElementById('resultDpAmount').textContent = `${formatRupiah(dpAmount)} (${dpPercent}%)`;
+            document.getElementById('resultPrincipalLoan').textContent = formatRupiah(loanPrincipal);
+            document.getElementById('resultTotalInterest').textContent = formatRupiah(totalInterest);
+            document.getElementById('resultRateLabel').textContent = `${(annualRate * 100).toFixed(1)}%`;
+            document.getElementById('resultInsuranceFee').textContent = formatRupiah(insuranceFee);
+            document.getElementById('resultAdminFee').textContent = formatRupiah(totalAdminFee);
+            document.getElementById('resultTdp').textContent = formatRupiah(tdp);
+            document.getElementById('tableReferencePrice').textContent = formatRupiah(price);
+
+            // Update TDP Visual Segmented Bar
+            if (tdp > 0) {
+                const pctDp = Math.round((dpAmount / tdp) * 100);
+                const pctFirstInst = selectedPaymentScheme === 'ADDM' ? Math.round((monthlyPayment / tdp) * 100) : 0;
+                const pctIns = Math.round((insuranceFee / tdp) * 100);
+                const pctAdmin = Math.max(1, 100 - pctDp - pctFirstInst - pctIns);
+
+                document.getElementById('barDp').style.width = pctDp + '%';
+                document.getElementById('barFirstInstallment').style.width = pctFirstInst + '%';
+                document.getElementById('barInsurance').style.width = pctIns + '%';
+                document.getElementById('barAdmin').style.width = pctAdmin + '%';
+            }
+
+            // Update WhatsApp Link
+            const leasingName = document.getElementById('selectLeasing').selectedOptions[0].text;
+            const carSelectText = document.getElementById('selectCarCatalog').selectedOptions[0].text;
+            const carName = carSelectText.includes('Input') ? 'Mobil Pilihan' : carSelectText;
+            
+            const waMsg = encodeURIComponent(
+                `Halo Showroom Mobile Second, saya ingin konsultasi kredit mobil:\n` +
+                `• Unit/Harga: ${carName} (${formatRupiah(price)})\n` +
+                `• Uang Muka (DP ${dpPercent}%): ${formatRupiah(dpAmount)}\n` +
+                `• Tenor: ${tenorYears} Tahun (${selectedTenor} Bulan)\n` +
+                `• Skema: ${selectedFinanceType.toUpperCase()} (${selectedPaymentScheme})\n` +
+                `• Estimasi Cicilan: ${formatRupiah(monthlyPayment)} /bulan\n` +
+                `• Total Bayar Pertama (TDP): ${formatRupiah(tdp)}\n` +
+                `• Mitra Leasing: ${leasingName}\n\n` +
+                `Mohon dibantu info persyaratan berkas dan proses survei approval-nya. Terima kasih!`
+            );
+            document.getElementById('btnConsultLeasing').href = `https://wa.me/6281234567890?text=${waMsg}`;
+
+            // Update Tenor Comparison Table
+            updateTenorTable(price, dpPercent);
+
+            // Update Amortization Table
+            updateAmortizationTable(loanPrincipal, annualRate, monthlyPayment);
+
+            // Re-check salary ratio against new monthly payment
+            checkSalaryRatio();
+        }
+
+        // TABEL KOMPARASI SEMUA TENOR (12 - 72 BULAN)
+        function updateTenorTable(price, dpPercent) {
+            const tableBody = document.getElementById('tenorTableBody');
+            tableBody.innerHTML = '';
+
+            const tenors = [
+                { years: 1, months: 12, rate: 7.2 },
+                { years: 2, months: 24, rate: 7.5 },
+                { years: 3, months: 36, rate: 7.8 },
+                { years: 4, months: 48, rate: 8.0 },
+                { years: 5, months: 60, rate: 8.3 },
+                { years: 6, months: 72, rate: 8.8 },
+            ];
+
+            const dpAmount = price * (dpPercent / 100);
+            const loanPrincipal = Math.max(0, price - dpAmount);
+
+            tenors.forEach(t => {
+                const interestRate = t.rate / 100;
+                const totalInterest = loanPrincipal * interestRate * t.years;
+                const totalLoan = loanPrincipal + totalInterest;
+                const monthly = totalLoan / t.months;
+
+                const insuranceFee = Math.round(price * 0.02 * (t.years > 3 ? 1.5 : 1.0));
+                const adminFee = t.months >= 48 ? 3000000 : 2500000;
+                let tdp = dpAmount + insuranceFee + adminFee;
+                if (selectedPaymentScheme === 'ADDM') {
+                    tdp += monthly;
+                }
+
+                const isCurrent = t.months === selectedTenor;
+
+                const tr = document.createElement('tr');
+                tr.className = isCurrent ? "bg-orange-50 font-bold text-slate-900 border-l-4 border-brand-orange" : "hover:bg-slate-50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3.5 flex items-center gap-2">
+                        ${isCurrent ? '<i class="fa-solid fa-circle-check text-brand-orange text-xs"></i>' : '<span class="w-3 h-3 rounded-full border border-slate-300"></span>'}
+                        <span>${t.years} Tahun</span>
+                    </td>
+                    <td class="p-3.5">${t.months} Bulan</td>
+                    <td class="p-3.5">${t.rate}% Flat</td>
+                    <td class="p-3.5 font-extrabold ${isCurrent ? 'text-brand-orange' : 'text-slate-900'}">${formatRupiah(monthly)} / bln</td>
+                    <td class="p-3.5 text-slate-800 font-semibold">${formatRupiah(tdp)}</td>
+                    <td class="p-3.5 text-slate-500">${formatRupiah(totalInterest)}</td>
+                    <td class="p-3.5 text-center">
+                        <button type="button" onclick="setTenor(${t.months})" class="px-3 py-1.5 rounded-lg text-[11px] font-bold ${isCurrent ? 'bg-brand-orange text-white' : 'bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-700'} transition-colors">
+                            ${isCurrent ? 'Sedang Dipilih' : 'Gunakan'}
+                        </button>
+                    </td>
+                `;
+                tableBody.appendChild(tr);
+            });
+        }
+
+        // JADWAL AMORTISASI 12 BULAN PERTAMA
+        function updateAmortizationTable(principal, annualRate, monthly) {
+            const tableBody = document.getElementById('amortizationTableBody');
+            tableBody.innerHTML = '';
+
+            let remainingPrincipal = principal;
+            const monthlyInterest = (principal * annualRate) / 12;
+
+            for (let i = 1; i <= 12; i++) {
+                const principalPortion = Math.max(0, monthly - monthlyInterest);
+                remainingPrincipal = Math.max(0, remainingPrincipal - principalPortion);
+
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50 transition-colors";
+                tr.innerHTML = `
+                    <td class="p-3 font-bold text-slate-900">Bulan ${i}</td>
+                    <td class="p-3 font-semibold text-brand-orange">${formatRupiah(monthly)}</td>
+                    <td class="p-3 text-slate-700">${formatRupiah(principalPortion)}</td>
+                    <td class="p-3 text-slate-500">${formatRupiah(monthlyInterest)}</td>
+                    <td class="p-3 font-bold text-slate-800">${formatRupiah(remainingPrincipal)}</td>
+                `;
+                tableBody.appendChild(tr);
+            }
+        }
+
+        function toggleAmortizationTable() {
+            const container = document.getElementById('amortizationContainer');
+            const text = document.getElementById('amortizationToggleText');
+            const icon = document.getElementById('amortizationToggleIcon');
+
+            if (container.classList.contains('hidden')) {
+                container.classList.remove('hidden');
+                text.textContent = 'Tutup Jadwal';
+                icon.classList.add('rotate-180');
+            } else {
+                container.classList.add('hidden');
+                text.textContent = 'Buka Jadwal';
+                icon.classList.remove('rotate-180');
+            }
+        }
+
+        // CEK KELAYAKAN GAJI (30% DEBT SERVICE RATIO)
+        function checkSalaryRatio() {
+            const salary = parseFloat(document.getElementById('inputSalary').value) || 0;
+            const monthlyText = document.getElementById('resultMonthlyPayment').textContent;
+            const monthlyNum = parseFloat(monthlyText.replace(/[^0-9]/g, '')) || 0;
+
+            if (salary <= 0) return;
+
+            const ratio = (monthlyNum / salary) * 100;
+            const ratioRounded = Math.min(100, Math.round(ratio * 10) / 10);
+
+            document.getElementById('salaryRatioPercent').textContent = `${ratioRounded}%`;
+            const bar = document.getElementById('salaryRatioBar');
+            bar.style.width = `${ratioRounded}%`;
+
+            const statusBox = document.getElementById('salaryRatioStatus');
+            if (ratio <= 35) {
+                bar.className = "bg-emerald-400 h-full rounded-full transition-all duration-500";
+                document.getElementById('salaryRatioPercent').className = "font-extrabold text-emerald-400 text-sm";
+                statusBox.className = "p-3 rounded-xl bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center gap-2";
+                statusBox.innerHTML = `<i class="fa-solid fa-circle-check text-base"></i> <span>Status: <strong>Sangat Aman!</strong> Rasio cicilan di bawah 35% batas maksimal leasing.</span>`;
+            } else if (ratio <= 45) {
+                bar.className = "bg-amber-400 h-full rounded-full transition-all duration-500";
+                document.getElementById('salaryRatioPercent').className = "font-extrabold text-amber-400 text-sm";
+                statusBox.className = "p-3 rounded-xl bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-semibold flex items-center gap-2";
+                statusBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-base"></i> <span>Status: <strong>Perlu Ditinjau.</strong> Disarankan memperbesar DP atau memperpanjang tenor.</span>`;
+            } else {
+                bar.className = "bg-red-500 h-full rounded-full transition-all duration-500";
+                document.getElementById('salaryRatioPercent').className = "font-extrabold text-red-400 text-sm";
+                statusBox.className = "p-3 rounded-xl bg-red-500/20 border border-red-500/30 text-red-300 text-xs font-semibold flex items-center gap-2";
+                statusBox.innerHTML = `<i class="fa-solid fa-circle-xmark text-base"></i> <span>Status: <strong>Beresiko Ditolak.</strong> Rasio melebihi 45% gaji. Hubungi tim kami untuk solusi join-income suami/istri.</span>`;
+            }
+        }
+
+        // MODE 2: BUDGET AFFORDABILITY CALCULATOR
+        function switchSimMode(mode) {
+            const btnPrice = document.getElementById('tabModePrice');
+            const btnBudget = document.getElementById('tabModeBudget');
+            const contPrice = document.getElementById('modePriceContainer');
+            const contBudget = document.getElementById('modeBudgetContainer');
+
+            if (mode === 'price') {
+                btnPrice.className = "px-5 py-2.5 rounded-xl bg-brand-navy text-white shadow-sm transition-all flex items-center gap-2";
+                btnBudget.className = "px-5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2";
+                contPrice.classList.remove('hidden');
+                contBudget.classList.add('hidden');
+            } else {
+                btnBudget.className = "px-5 py-2.5 rounded-xl bg-brand-navy text-white shadow-sm transition-all flex items-center gap-2";
+                btnPrice.className = "px-5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2";
+                contPrice.classList.add('hidden');
+                contBudget.classList.remove('hidden');
+                calculateBudgetAffordability();
+            }
+        }
+
+        function calculateBudgetAffordability() {
+            const monthlyBudget = parseFloat(document.getElementById('inputBudgetMonthly').value) || 3500000;
+            const dpAvailable = parseFloat(document.getElementById('inputBudgetDp').value) || 35000000;
+            const tenorMonths = parseInt(document.getElementById('selectBudgetTenor').value) || 60;
+
+            const annualRate = 0.08;
+            const tenorYears = tenorMonths / 12;
+
+            // Plafon hutang = monthly * tenor / (1 + (annualRate * tenorYears))
+            const loanPrincipalAffordable = (monthlyBudget * tenorMonths) / (1 + (annualRate * tenorYears));
+            const maxCarPrice = Math.round(loanPrincipalAffordable + dpAvailable);
+
+            document.getElementById('budgetMaxPriceDisplay').textContent = formatRupiah(maxCarPrice);
+            document.getElementById('budgetAffordMonthly').textContent = `${formatRupiah(monthlyBudget)}/bln`;
+            document.getElementById('budgetAffordDp').textContent = formatRupiah(dpAvailable);
+
+            // Cari 3 mobil rekomendasi dari katalog dengan harga <= maxCarPrice
+            renderBudgetCarRecommendations(maxCarPrice);
+        }
+
+        function renderBudgetCarRecommendations(maxPrice) {
+            const container = document.getElementById('budgetCarRecommendations');
+            container.innerHTML = '';
+
+            // Filter mobil yang harganya di bawah atau mendekati maxPrice
+            const matchingCars = carCatalog
+                .filter(c => c.price <= maxPrice * 1.05 && c.price >= maxPrice * 0.5)
+                .slice(0, 3);
+
+            const displayCars = matchingCars.length > 0 ? matchingCars : carCatalog.slice(0, 3);
+
+            displayCars.forEach(car => {
+                const card = document.createElement('div');
+                card.className = "bg-white p-3 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-3 hover:border-brand-orange transition-all";
+                card.innerHTML = `
+                    <div class="w-16 h-16 rounded-xl bg-slate-200 overflow-hidden flex-shrink-0">
+                        <img src="${car.image}" alt="${car.model}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <div class="font-bold text-slate-900 text-xs truncate">${car.brand} ${car.model}</div>
+                        <div class="text-[11px] text-slate-500">${car.year} • ${car.transmission}</div>
+                        <div class="text-xs font-extrabold text-brand-orange mt-0.5">${car.priceDisplay}</div>
+                    </div>
+                    <button type="button" onclick="selectCarFromRecommendation(${car.id})" class="p-2 bg-slate-100 hover:bg-brand-navy hover:text-white rounded-lg text-xs transition-colors" title="Pilih Mobil Ini">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function selectCarFromRecommendation(carId) {
+            switchSimMode('price');
+            document.getElementById('selectCarCatalog').value = carId;
+            onSelectCarChange();
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+        }
+
+        function applyBudgetToCalculator() {
+            const priceText = document.getElementById('budgetMaxPriceDisplay').textContent;
+            const priceNum = parseFloat(priceText.replace(/[^0-9]/g, '')) || 200000000;
+            switchSimMode('price');
+            setCarPrice(priceNum);
+            window.scrollTo({ top: 400, behavior: 'smooth' });
+        }
+
+        // PANDUAN DOKUMEN TABS
+        function switchDocTab(type) {
+            const btnKaryawan = document.getElementById('tabDocKaryawan');
+            const btnWiraswasta = document.getElementById('tabDocWiraswasta');
+            const btnPerusahaan = document.getElementById('tabDocPerusahaan');
+
+            const contentKaryawan = document.getElementById('docContentKaryawan');
+            const contentWiraswasta = document.getElementById('docContentWiraswasta');
+            const contentPerusahaan = document.getElementById('docContentPerusahaan');
+
+            const allBtns = [btnKaryawan, btnWiraswasta, btnPerusahaan];
+            allBtns.forEach(btn => {
+                btn.className = "px-5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 transition-all";
+            });
+
+            contentKaryawan.classList.add('hidden');
+            contentWiraswasta.classList.add('hidden');
+            contentPerusahaan.classList.add('hidden');
+
+            if (type === 'karyawan') {
+                btnKaryawan.className = "px-5 py-2.5 rounded-xl bg-brand-navy text-white shadow-sm transition-all";
+                contentKaryawan.classList.remove('hidden');
+            } else if (type === 'wiraswasta') {
+                btnWiraswasta.className = "px-5 py-2.5 rounded-xl bg-brand-navy text-white shadow-sm transition-all";
+                contentWiraswasta.classList.remove('hidden');
+            } else {
+                btnPerusahaan.className = "px-5 py-2.5 rounded-xl bg-brand-navy text-white shadow-sm transition-all";
+                contentPerusahaan.classList.remove('hidden');
+            }
+        }
+
+        // FORMULIR PRE-APPROVAL SUBMIT
+        function handleQuickCreditSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('leadName').value;
+            const phone = document.getElementById('leadPhone').value;
+            const city = document.getElementById('leadCity').value;
+            const job = document.getElementById('leadJob').value;
+            const dpPlan = document.getElementById('leadDpPlan').value;
+
+            const carPrice = document.getElementById('inputCarPrice').value;
+            const monthlyPayment = document.getElementById('resultMonthlyPayment').textContent;
+
+            const msg = encodeURIComponent(
+                `Halo Showroom Mobile Second, saya ingin mengajukan Pra-Persetujuan Kredit Cepat:\n` +
+                `• Nama: ${name}\n` +
+                `• WhatsApp: ${phone}\n` +
+                `• Domisili: ${city}\n` +
+                `• Pekerjaan: ${job}\n` +
+                `• Rencana DP: ${dpPlan}\n` +
+                `• Target Harga Mobil: ${formatRupiah(carPrice)}\n` +
+                `• Estimasi Cicilan: ${monthlyPayment}\n\n` +
+                `Mohon dibantu verifikasi kelayakan kredit dan rekomendasi leasing-nya.`
+            );
+
+            showToast('Menghubungkan ke WhatsApp analis kredit...');
+            setTimeout(() => {
+                window.open(`https://wa.me/6281234567890?text=${msg}`, '_blank');
+            }, 600);
+        }
+
+        // FAQ ACCORDION
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+            const isHidden = content.classList.contains('hidden');
+
+            document.querySelectorAll('#creditFaqAccordion .faq-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('#creditFaqAccordion .faq-icon').forEach(i => i.classList.remove('rotate-180'));
+
+            if (isHidden) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        function toggleMobileNav() {
+            const menu = document.getElementById('mobileNavMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        // PRINT QUOTATION MODAL HANDLER
+        function openPrintQuotationModal() {
+            // 1. Ambil data kendaraan
+            const selectCar = document.getElementById('selectCarCatalog');
+            let carName = "Unit Mobil Pilihan Showroom";
+            let carYear = "-";
+            let carTrans = "-";
+            let carMileage = "-";
+            let carCity = "Jakarta Selatan";
+
+            if (selectCar.value !== 'custom') {
+                const car = getCarById(selectCar.value);
+                if (car) {
+                    carName = `${car.brand} ${car.model}`;
+                    carYear = car.year;
+                    carTrans = car.transmission;
+                    carMileage = car.mileageText || `${car.mileage.toLocaleString('id-ID')} km`;
+                    carCity = car.city;
+                }
+            }
+
+            // 2. Ambil data kalkulasi saat ini
+            const price = parseFloat(document.getElementById('inputCarPrice').value) || 0;
+            const dpPercent = parseFloat(document.getElementById('sliderDp').value) || 20;
+            const dpAmount = price * (dpPercent / 100);
+            const loanPrincipal = Math.max(0, price - dpAmount);
+            const annualRate = (parseFloat(document.getElementById('inputCustomRate').value) || 8.0);
+            const tenorYears = selectedTenor / 12;
+            const totalInterest = loanPrincipal * (annualRate / 100) * tenorYears;
+            const totalLoan = loanPrincipal + totalInterest;
+            const monthlyPayment = selectedTenor > 0 ? (totalLoan / selectedTenor) : 0;
+
+            const insuranceType = document.getElementById('selectInsurance').value;
+            let insuranceLabel = "Kombinasi (All Risk Thn 1, TLO Sisa)";
+            let insuranceRatePerYear = 0.021;
+            if (insuranceType === 'allrisk') {
+                insuranceLabel = "All Risk Komprehensif Penuh";
+                insuranceRatePerYear = 0.026;
+            } else if (insuranceType === 'tlo') {
+                insuranceLabel = "Total Loss Only (TLO Saja)";
+                insuranceRatePerYear = 0.015;
+            }
+            const insuranceFee = Math.round(price * insuranceRatePerYear * (tenorYears > 3 ? 1.5 : 1.0));
+
+            const adminFee = selectedTenor >= 48 ? 2000000 : 1500000;
+            const fidusiaFee = 500000;
+            const polisFee = 150000;
+            const totalAdmin = adminFee + fidusiaFee + polisFee;
+
+            let tdp = dpAmount + insuranceFee + totalAdmin;
+            let firstInstallmentText = "Rp 0 (Dibayar Bulan Depan / ADDB)";
+            if (selectedPaymentScheme === 'ADDM') {
+                tdp += monthlyPayment;
+                firstInstallmentText = formatRupiah(monthlyPayment);
+            }
+
+            const leasingSelect = document.getElementById('selectLeasing');
+            const leasingName = leasingSelect.options[leasingSelect.selectedIndex].text;
+
+            // 3. Update elements in Printable Document
+            const randCode = Math.floor(10000 + Math.random() * 90000);
+            document.getElementById('printDocNo').textContent = `MS-SIM/202610/${randCode}`;
+            
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('printDocDate').textContent = `${dateStr}, ${timeStr} WIB`;
+
+            // Tanggal berlaku (+14 hari)
+            const expiry = new Date();
+            expiry.setDate(expiry.getDate() + 14);
+            const expiryStr = expiry.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            document.getElementById('printDocExpiry').textContent = `14 Hari (s/d ${expiryStr})`;
+
+            document.getElementById('printCarName').textContent = carName;
+            document.getElementById('printCarYear').textContent = carYear;
+            document.getElementById('printCarTrans').textContent = carTrans;
+            document.getElementById('printCarMileage').textContent = carMileage;
+            document.getElementById('printCarCity').textContent = carCity;
+            if (document.getElementById('printCarPriceTag')) {
+                document.getElementById('printCarPriceTag').textContent = formatRupiah(price);
+            }
+
+            document.getElementById('printOtrPrice').textContent = formatRupiah(price);
+            document.getElementById('printDp').textContent = `${formatRupiah(dpAmount)} (${dpPercent}%)`;
+            document.getElementById('printLoanPrincipal').textContent = formatRupiah(loanPrincipal);
+            document.getElementById('printTenor').textContent = `${tenorYears} Tahun (${selectedTenor} Bulan)`;
+            document.getElementById('printRate').textContent = `${annualRate.toFixed(1)}% Flat per Tahun`;
+            document.getElementById('printScheme').textContent = `${selectedFinanceType.toUpperCase()} • ${selectedPaymentScheme}`;
+            document.getElementById('printLeasing').textContent = leasingName;
+
+            document.getElementById('printBdDp').textContent = formatRupiah(dpAmount);
+            document.getElementById('printBdFirstInst').textContent = firstInstallmentText;
+            document.getElementById('printBdInsurance').textContent = `${formatRupiah(insuranceFee)} (${insuranceLabel})`;
+            document.getElementById('printBdAdmin').textContent = formatRupiah(adminFee);
+            document.getElementById('printBdFidusia').textContent = formatRupiah(fidusiaFee);
+            document.getElementById('printBdPolis').textContent = formatRupiah(polisFee);
+            document.getElementById('printFinalTdp').textContent = formatRupiah(tdp);
+            document.getElementById('printFinalMonthly').textContent = formatRupiah(monthlyPayment);
+            document.getElementById('printFinalMonthsCount').textContent = `${selectedTenor} Bulan Angsuran`;
+
+            // Generate Alternate Tenor Rows
+            const altBody = document.getElementById('printAltTenorBody');
+            altBody.innerHTML = '';
+            const tenors = [
+                { y: 1, m: 12, r: 7.2 },
+                { y: 2, m: 24, r: 7.5 },
+                { y: 3, m: 36, r: 7.8 },
+                { y: 4, m: 48, r: 8.0 },
+                { y: 5, m: 60, r: 8.3 },
+                { y: 6, m: 72, r: 8.8 }
+            ];
+
+            tenors.forEach(t => {
+                const iRate = t.r / 100;
+                const totInt = loanPrincipal * iRate * t.y;
+                const totLoan = loanPrincipal + totInt;
+                const mPay = totLoan / t.m;
+                const ins = Math.round(price * 0.02 * (t.y > 3 ? 1.5 : 1.0));
+                let tdpAlt = dpAmount + ins + totalAdmin;
+                if (selectedPaymentScheme === 'ADDM') tdpAlt += mPay;
+
+                const tr = document.createElement('tr');
+                const isSelected = t.m === selectedTenor;
+                tr.className = isSelected ? "bg-amber-100/70 font-bold text-slate-900 border-l-2 border-brand-orange" : "border-b border-slate-200 text-slate-700";
+                tr.innerHTML = `
+                    <td class="py-1 px-2">${t.y} Thn (${t.m} Bln) ${isSelected ? '★ (Pilihan)' : ''}</td>
+                    <td class="py-1 px-2">${t.r}%</td>
+                    <td class="py-1 px-2 font-bold text-slate-900">${formatRupiah(mPay)} /bln</td>
+                    <td class="py-1 px-2">${formatRupiah(tdpAlt)}</td>
+                    <td class="py-1 px-2">${formatRupiah(totInt)}</td>
+                `;
+                altBody.appendChild(tr);
+            });
+
+            // 5. Buka Modal
+            const modal = document.getElementById('printQuotationModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePrintQuotationModal() {
+            const modal = document.getElementById('printQuotationModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        }
+
+        // DYNAMIC STICKY NAVBAR SCROLL (SMOOTH TRANSITION)
+        const mainNavbar = document.getElementById('mainStickyNavbar');
+        function updateNavbarOnScroll() {
+            if (!mainNavbar) return;
+            if (window.scrollY > 20) {
+                mainNavbar.classList.add('border-slate-700/80', 'shadow-[0_4px_25px_rgba(0,0,0,0.35)]');
+                mainNavbar.classList.remove('border-transparent', 'shadow-none');
+            } else {
+                mainNavbar.classList.remove('border-slate-700/80', 'shadow-[0_4px_25px_rgba(0,0,0,0.35)]');
+                mainNavbar.classList.add('border-transparent', 'shadow-none');
+            }
+        }
+        window.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
+
+        window.addEventListener('DOMContentLoaded', () => {
+            initSimulationPage();
+            updateNavbarOnScroll();
+        });
+    </script>
+
+    <!-- ==================== MODAL PREVIEW & DOKUMEN CETAK STANDAR INDUSTRI ==================== -->
+    <div id="printQuotationModal" class="fixed inset-0 z-[9999] hidden bg-slate-950/80 backdrop-blur-sm overflow-y-auto p-2 sm:p-6 lg:p-10 flex items-center justify-center">
+        <div class="relative w-full max-w-4xl bg-white rounded-3xl shadow-2xl border border-slate-200 overflow-hidden my-auto flex flex-col max-h-[92vh]">
+            
+            <!-- Modal Header (Screen Only - Hidden in Print) -->
+            <div id="printModalBackdropActions" class="no-print bg-slate-900 text-white p-4 sm:p-5 flex flex-wrap items-center justify-between gap-3 border-b border-slate-800 flex-shrink-0">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-orange/20 text-brand-accent flex items-center justify-center text-lg border border-brand-orange/30">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-extrabold text-sm sm:text-base">Pratinjau Ringkasan Simulasi Kredit Mobil</h3>
+                        <p class="text-[11px] text-slate-400">Rincian Lengkap Angsuran, Uang Muka (DP), & Total Bayar Pertama (Siap Print / PDF)</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="window.print()" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-4 py-2 rounded-xl text-xs font-bold flex items-center gap-1.5 shadow-md transition-all">
+                        <i class="fa-solid fa-print"></i> Cetak / Simpan PDF
+                    </button>
+                    <button type="button" onclick="closePrintQuotationModal()" class="p-2 bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white rounded-xl text-xs transition-colors" title="Tutup Pratinjau">
+                        <i class="fa-solid fa-xmark text-base"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scrollable Container for Preview Document -->
+            <div class="p-3 sm:p-8 overflow-y-auto bg-slate-200/70 flex-grow">
+                
+                <!-- ==================== LEMBAR PENAWARAN RESMI A4 ==================== -->
+                <div id="printableCreditQuotation" class="bg-white p-6 sm:p-10 rounded-2xl shadow-md border border-slate-300 max-w-3xl mx-auto text-slate-800 text-[11px] leading-relaxed font-sans space-y-4">
+                    
+                    <!-- KOP SURAT RESMI SHOWROOM -->
+                    <div class="flex items-start justify-between border-b-2 border-brand-navy pb-3 gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="h-14 w-14 rounded-xl bg-brand-navy p-1 flex items-center justify-center shadow overflow-hidden flex-shrink-0">
+                                <img src="logo.jpg" alt="Logo" class="h-full w-full object-contain" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3202/3202926.png';">
+                            </div>
+                            <div>
+                                <h1 class="text-lg font-black text-slate-900 tracking-tight leading-none">PT. MOBILE SECOND NUSANTARA</h1>
+                                <p class="text-[10px] font-bold text-brand-orange uppercase tracking-wider mt-0.5">Showroom Mobil Bekas Resmi & Pusat Sertifikasi Kendaraan</p>
+                                <p class="text-[9px] text-slate-500 mt-1 leading-tight">
+                                    Head Showroom: Jl. Sultan Iskandar Muda No. 88, Kebayoran Lama, Jakarta Selatan 12240<br>
+                                    Telp: (021) 7289-9900 | WhatsApp: 0812-3456-7890 | Website: www.mobilesecond.id
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text-right flex-shrink-0">
+                            <span class="inline-block bg-emerald-100 text-emerald-800 border border-emerald-300 px-2.5 py-0.5 rounded-md text-[9px] font-extrabold uppercase">
+                                <i class="fa-solid fa-shield-halved"></i> Mitra Multifinance OJK
+                            </span>
+                            <div class="text-[9px] text-slate-400 mt-1">Sertifikasi Asosiasi Otomotif ID</div>
+                        </div>
+                    </div>
+
+                    <!-- JUDUL DOKUMEN & META INFORMASI -->
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                        <div>
+                            <h2 class="text-xs font-black text-slate-900 tracking-wide uppercase">
+                                RINGKASAN SIMULASI KREDIT & ESTIMASI CICILAN KENDARAAN
+                            </h2>
+                            <div class="text-[9px] text-slate-500">Sifat: Lembar Estimasi Simulasi Mandiri (Personal Credit Calculation)</div>
+                        </div>
+                        <div class="text-right text-[10px]">
+                            <div><strong>No. Dokumen:</strong> <span id="printDocNo" class="font-mono font-bold text-brand-orange">MS-SIM/202610/00000</span></div>
+                            <div><strong>Tanggal Cetak:</strong> <span id="printDocDate" class="text-slate-600">-</span></div>
+                            <div><strong>Masa Berlaku:</strong> <span id="printDocExpiry" class="text-slate-600 font-semibold">-</span></div>
+                        </div>
+                    </div>
+
+                    <!-- BAGIAN I: DATA OBJEK KENDARAAN SIMULASI -->
+                    <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <div class="text-[10px] font-bold uppercase text-slate-900 border-b border-slate-200 pb-1.5 flex items-center justify-between">
+                            <span class="flex items-center gap-1.5">
+                                <i class="fa-solid fa-car text-brand-orange"></i> I. Objek Kendaraan Simulasi
+                            </span>
+                            <span class="text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                                <i class="fa-solid fa-circle-check"></i> Lulus Inspeksi 160 Titik & Garansi Mesin 1 Thn
+                            </span>
+                        </div>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-[10px]">
+                            <div>
+                                <span class="text-slate-500 block text-[9px]">Model Kendaraan</span>
+                                <span class="font-bold text-slate-900 text-xs" id="printCarName">-</span>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 block text-[9px]">Tahun & Transmisi</span>
+                                <span class="font-semibold text-slate-800"><span id="printCarYear">-</span> • <span id="printCarTrans">-</span></span>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 block text-[9px]">Odometer & Lokasi Unit</span>
+                                <span class="font-semibold text-slate-800"><span id="printCarMileage">-</span> • <span id="printCarCity">-</span></span>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 block text-[9px]">Harga Acuan (OTR)</span>
+                                <span class="font-black text-brand-orange text-xs" id="printCarPriceTag">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BAGIAN II: STRUKTUR PEMBIAYAAN KREDIT -->
+                    <div class="space-y-1">
+                        <div class="text-[10px] font-bold uppercase text-slate-900 flex items-center gap-1.5">
+                            <i class="fa-solid fa-sliders text-brand-orange"></i> II. Struktur Paket Pembiayaan
+                        </div>
+                        <table class="w-full text-left border border-slate-200 rounded-lg overflow-hidden text-[10px]">
+                            <tbody class="divide-y divide-slate-200">
+                                <tr class="bg-slate-50">
+                                    <td class="py-1.5 px-3 text-slate-600 font-semibold w-1/4">Harga Kendaraan (OTR)</td>
+                                    <td class="py-1.5 px-3 font-bold text-slate-900 w-1/4" id="printOtrPrice">-</td>
+                                    <td class="py-1.5 px-3 text-slate-600 font-semibold w-1/4">Jangka Waktu (Tenor)</td>
+                                    <td class="py-1.5 px-3 font-bold text-slate-900 w-1/4" id="printTenor">-</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-1.5 px-3 text-slate-600 font-semibold">Uang Muka Murni (DP)</td>
+                                    <td class="py-1.5 px-3 font-bold text-brand-orange" id="printDp">-</td>
+                                    <td class="py-1.5 px-3 text-slate-600 font-semibold">Suku Bunga / Margin</td>
+                                    <td class="py-1.5 px-3 font-bold text-slate-900" id="printRate">-</td>
+                                </tr>
+                                <tr class="bg-slate-50">
+                                    <td class="py-1.5 px-3 text-slate-600 font-semibold">Pokok Hutang (Plafond)</td>
+                                    <td class="py-1.5 px-3 font-bold text-slate-900" id="printLoanPrincipal">-</td>
+                                    <td class="py-1.5 px-3 text-slate-600 font-semibold">Skema & Mitra Leasing</td>
+                                    <td class="py-1.5 px-3 font-bold text-slate-900"><span id="printScheme">-</span> (<span id="printLeasing">-</span>)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- BAGIAN III: RINCIAN PEMBAYARAN PERTAMA (TDP) & ANGSURAN BULANAN -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Breakdown TDP -->
+                        <div class="border border-slate-200 rounded-xl p-3 space-y-1.5">
+                            <div class="text-[10px] font-bold uppercase text-slate-900 border-b border-slate-200 pb-1">
+                                III. Rincian Pembayaran Pertama (TDP)
+                            </div>
+                            <div class="space-y-1 text-[10px]">
+                                <div class="flex justify-between text-slate-600">
+                                    <span>1. Uang Muka (DP Murni):</span>
+                                    <span class="font-bold text-slate-900" id="printBdDp">-</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>2. Angsuran Pertama:</span>
+                                    <span class="font-bold text-slate-900" id="printBdFirstInst">-</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>3. Premi Asuransi:</span>
+                                    <span class="font-bold text-slate-900" id="printBdInsurance">-</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>4. Biaya Administrasi Kredit:</span>
+                                    <span class="font-bold text-slate-900" id="printBdAdmin">-</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>5. Biaya Fidusia & Legalisir:</span>
+                                    <span class="font-bold text-slate-900" id="printBdFidusia">-</span>
+                                </div>
+                                <div class="flex justify-between text-slate-600">
+                                    <span>6. Biaya Polis & Materai:</span>
+                                    <span class="font-bold text-slate-900" id="printBdPolis">-</span>
+                                </div>
+                            </div>
+                            <div class="border-t-2 border-brand-orange pt-1.5 flex justify-between items-center text-xs">
+                                <span class="font-bold text-slate-900 uppercase">TOTAL BAYAR PERTAMA (TDP):</span>
+                                <span class="font-black text-brand-orange text-sm" id="printFinalTdp">-</span>
+                            </div>
+                        </div>
+
+                        <!-- Kewajiban Angsuran Bulanan -->
+                        <div class="border border-slate-200 rounded-xl p-3 flex flex-col justify-between space-y-2 bg-gradient-to-br from-slate-50 to-orange-50/40">
+                            <div>
+                                <div class="text-[10px] font-bold uppercase text-slate-900 border-b border-slate-200 pb-1">
+                                    IV. Kewajiban Angsuran Bulanan
+                                </div>
+                                <div class="mt-3 text-center p-3 rounded-xl bg-white border border-brand-orange/30 shadow-sm space-y-1">
+                                    <div class="text-[10px] text-slate-500 font-bold uppercase">Estimasi Angsuran Tiap Bulan</div>
+                                    <div class="text-xl sm:text-2xl font-black text-brand-orange" id="printFinalMonthly">-</div>
+                                    <div class="text-[10px] text-slate-600 font-semibold" id="printFinalMonthsCount">-</div>
+                                </div>
+                            </div>
+                            <div class="text-[9px] text-slate-500 space-y-0.5">
+                                <div>• Pembayaran angsuran jatuh tempo setiap bulan via Virtual Account / ATM.</div>
+                                <div>• Bebas biaya penagihan resmi dan didukung layanan autodebet bank.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- BAGIAN IV: TABEL KOMPARASI ALTERNATIF TENOR (1-6 TAHUN) -->
+                    <div class="space-y-1">
+                        <div class="text-[10px] font-bold uppercase text-slate-900">
+                            V. Tabel Perbandingan Opsi Alternatif Tenor (1 s/d 6 Tahun)
+                        </div>
+                        <table class="w-full text-left border border-slate-200 text-[9px] leading-tight">
+                            <thead>
+                                <tr class="bg-slate-100 font-bold text-slate-800 border-b border-slate-300">
+                                    <th class="py-1 px-2">Pilihan Tenor</th>
+                                    <th class="py-1 px-2">Bunga Flat/Thn</th>
+                                    <th class="py-1 px-2">Angsuran per Bulan</th>
+                                    <th class="py-1 px-2">Estimasi TDP</th>
+                                    <th class="py-1 px-2">Total Bunga/Margin</th>
+                                </tr>
+                            </thead>
+                            <tbody id="printAltTenorBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- CATATAN & KETENTUAN STANDAR INDUSTRI / OJK -->
+                    <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200 text-[8.5px] text-slate-600 leading-tight space-y-0.5">
+                        <div class="font-bold text-slate-900 uppercase text-[9px]">Ketentuan & Catatan Penting:</div>
+                        <div>1. Penawaran pembiayaan ini merupakan estimasi resmi indikatif dan berlaku selama 14 hari kalender sejak tanggal penerbitan.</div>
+                        <div>2. Nilai akhir angsuran dan persetujuan kredit tunduk pada keputusan komite pembiayaan leasing rekanan resmi yang diawasi OJK.</div>
+                        <div>3. Seluruh unit yang dijual Mobile Second telah melalui Inspeksi 160 Titik, berdokumen sah (BPKB/STNK asli), dan bergaransi mesin 1 tahun.</div>
+                    </div>
+
+                    <!-- INFORMASI LAYANAN & VALIDASI SISTEM -->
+                    <div class="grid grid-cols-2 pt-3 border-t border-slate-200 text-[10px] gap-4">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[9px] font-bold uppercase text-slate-500">Validasi Kalkulasi Sistem</span>
+                                <span class="text-[8px] bg-emerald-100 text-emerald-800 font-extrabold px-1.5 py-0.5 rounded border border-emerald-300">
+                                    <i class="fa-solid fa-check"></i> SYSTEM VERIFIED
+                                </span>
+                            </div>
+                            <div class="font-bold text-slate-900">Mobile Second Automated Loan Engine</div>
+                            <p class="text-[8.5px] text-slate-500 leading-tight">
+                                Estimasi cicilan dihitung otomatis berdasarkan formula standar lembaga pembiayaan otomotif Indonesia dengan suku bunga flat/margin yang berlaku.
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[9px] font-bold uppercase text-slate-500">Konsultasi Showroom</span>
+                                <span class="text-[8px] text-brand-orange font-bold">Layanan Siap Bantu</span>
+                            </div>
+                            <div class="font-bold text-slate-900">Showroom Mobile Second Jakarta</div>
+                            <p class="text-[8.5px] text-slate-500 leading-tight">
+                                Bawa ringkasan cetak ini saat survei unit di showroom atau hubungi WhatsApp <strong>0812-3456-7890</strong> untuk informasi promo bunga & simulasi khusus.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Modal Footer (No Print) -->
+            <div class="no-print bg-slate-50 p-3 sm:p-4 border-t border-slate-200 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 flex-shrink-0">
+                <div class="flex items-center gap-2 text-[11px]">
+                    <i class="fa-solid fa-circle-check text-emerald-600"></i>
+                    <span>Format telah disesuaikan dengan standar cetak kertas A4 portrait (siap print atau simpan PDF).</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button type="button" onclick="window.print()" class="bg-brand-orange hover:bg-brand-orangeHover text-white px-5 py-2 rounded-xl text-xs font-bold shadow-md transition-all">
+                        <i class="fa-solid fa-print mr-1"></i> Cetak / Simpan PDF
+                    </button>
+                    <button type="button" onclick="closePrintQuotationModal()" class="px-4 py-2 bg-slate-200 hover:bg-slate-300 text-slate-700 rounded-xl text-xs font-semibold transition-colors">
+                        Tutup
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ==================== FLOATING ROUND WHATSAPP BUTTON ==================== -->
+    <a 
+        id="floatingWaBtn"
+        href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20konsultasi%20kredit%20mobil" 
+        target="_blank" 
+        class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group"
+        title="Hubungi WhatsApp Sales"
+        aria-label="WhatsApp Sales"
+    >
+        <i class="fa-brands fa-whatsapp text-3xl group-hover:scale-105 transition-transform"></i>
+        <!-- Ping Indicator -->
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white"></span>
+        </span>
+        <!-- Tooltip on Hover (Desktop) -->
+        <span class="hidden md:group-hover:block absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl whitespace-nowrap shadow-xl border border-slate-700 pointer-events-none transition-all">
+            Chat WhatsApp Sales
+        </span>
+    </a>
+</body>
+</html>

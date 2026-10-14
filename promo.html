@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Program Promo & Penawaran Spesial Showroom - Mobile Second</title>
+    <meta name="description" content="Program promo resmi showroom Mobile Second: subsidi DP mobil hingga Rp 15 Juta, paket bunga kredit 0%, cashback tukar tambah Rp 5 Juta, dan gratis servis 1 tahun.">
+
+    <!-- Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#121824',
+                            navy: '#1b2434',
+                            navyLight: '#243046',
+                            orange: '#ea580c',
+                            orangeHover: '#c2410c',
+                            accent: '#f97316',
+                            yellow: '#f59e0b',
+                            blue: '#2563eb',
+                            cardBg: '#ffffff',
+                            bg: '#f4f6f9',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 2px 10px rgba(0, 0, 0, 0.04)',
+                        'card-hover': '0 12px 25px -4px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
+                        'nav': '0 4px 20px -2px rgba(15, 23, 42, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-bg text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-orange selection:text-white">
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="fixed top-6 right-6 z-[9999] hidden transform transition-all duration-300">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700">
+            <div id="toastIcon" class="text-emerald-400 text-lg"><i class="fa-solid fa-circle-check"></i></div>
+            <div id="toastMessage" class="text-xs sm:text-sm font-semibold">Pesan notifikasi</div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER & NAVBAR (STICKY) ==================== -->
+    <header id="mainStickyNavbar" class="sticky top-0 z-50 bg-brand-navy text-white py-3.5 px-4 sm:px-6 lg:px-8 border-b border-transparent shadow-none transition-all duration-500 ease-in-out">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="flex items-center justify-between">
+                
+                <!-- Logo & Brand -->
+                <a href="index.html" class="flex items-center gap-3 group focus:outline-none" title="Mobile Second - Halaman Utama">
+                    <div class="h-11 w-11 rounded-xl bg-white p-1 flex items-center justify-center shadow-md overflow-hidden ring-2 ring-white/20 group-hover:ring-brand-accent transition-all">
+                        <img src="logo.jpg" alt="Mobile Second Logo" class="h-full w-full object-contain" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3202/3202926.png';">
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-center tracking-tight font-extrabold text-xl sm:text-2xl leading-none">
+                            <span class="text-white">Mobile</span>
+                            <span class="text-brand-accent ml-1">Second</span>
+                        </div>
+                        <span class="text-[10px] text-amber-400 font-semibold tracking-wider mt-0.5 uppercase flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-[9px]"></i> Jual Beli Mobil Bekas
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Navigasi Menu Lengkap -->
+                <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-200">
+                    <a href="index.html" class="text-slate-300 hover:text-brand-accent transition-colors">Beli Mobil</a>
+                    <a href="jual-mobil.html" class="text-slate-300 hover:text-brand-accent transition-colors">Jual Mobil</a>
+                    <a href="promo.html" class="text-brand-accent font-semibold flex items-center gap-1.5">
+                        <span>Promo</span>
+                        <span class="bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse">HOT</span>
+                    </a>
+                    <a href="tentang-kami.html" class="text-slate-300 hover:text-brand-accent transition-colors">Tentang Kami</a>
+                    <a href="simulasi-kredit.html" class="text-slate-300 hover:text-brand-accent transition-colors">Simulasi Kredit</a>
+                </nav>
+
+                <!-- Tombol Hotline WhatsApp (Desktop) & Mobile Trigger -->
+                <div class="flex items-center gap-3">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20saya%20ingin%20tanya%20promo%20mobil" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>0812-3456-7890</span>
+                    </a>
+                    <!-- Mobile Hamburger -->
+                    <button onclick="toggleMobileNav()" class="lg:hidden p-2 text-slate-200 hover:text-white focus:outline-none" aria-label="Buka Menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Nav Menu Dropdown -->
+            <div id="mobileNavMenu" class="hidden lg:hidden pt-4 pb-2 border-t border-slate-700/60 mt-4 space-y-3">
+                <a href="index.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Beli Mobil (Katalog)</a>
+                <a href="jual-mobil.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Jual Mobil</a>
+                <a href="promo.html" class="block text-brand-orange font-semibold py-1 text-sm">Promo Spesial</a>
+                <a href="tentang-kami.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Tentang Kami</a>
+                <a href="simulasi-kredit.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Simulasi Kredit</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second" target="_blank" class="block text-emerald-400 font-semibold py-1 text-sm flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> Hubungi WhatsApp Sales
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="flex-grow max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+        
+        <!-- Hero Promo Showroom Banner -->
+        <div class="relative bg-gradient-to-r from-slate-900 via-brand-navy to-slate-900 rounded-3xl p-6 sm:p-12 text-white overflow-hidden shadow-2xl border border-slate-800">
+            <!-- Background Ornaments -->
+            <div class="absolute -right-16 -top-16 w-96 h-96 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute right-1/4 -bottom-16 w-64 h-64 bg-blue-600/15 rounded-full blur-2xl pointer-events-none"></div>
+            
+            <div class="relative z-10 max-w-3xl space-y-4">
+                <div class="inline-flex items-center gap-2 bg-brand-orange/20 border border-brand-orange/40 text-brand-accent px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+                    <span class="w-2 h-2 rounded-full bg-brand-orange animate-ping"></span>
+                    Program Resmi Showroom & Rekanan Multifinance OJK
+                </div>
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
+                    Pesta Promo & Paket Kredit Spesial Showroom
+                </h1>
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-2xl">
+                    Wujudkan mobil impian keluarga dengan kemudahan pembiayaan resmi. Dapatkan subsidi uang muka (DP), penawaran bunga flat super kompetitif, ekstra cashback tukar tambah, dan paket garansi servis komprehensif. <strong>Semua promo otomatis langsung diaplikasikan ke faktur pemesanan Anda di showroom.</strong>
+                </p>
+
+                <!-- Status Periode & Hotline -->
+                <div class="pt-2 flex flex-wrap items-center gap-4 text-xs">
+                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
+                        <i class="fa-solid fa-calendar-check text-amber-400"></i>
+                        <span>Periode Program: <strong class="text-amber-300 font-semibold">1 s/d 31 Oktober 2026</strong></span>
+                    </div>
+                    <div class="flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-xl border border-white/10">
+                        <i class="fa-solid fa-shield-halved text-emerald-400"></i>
+                        <span>7 Mitra Multifinance Berizin OJK</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strip 4 Highlight Angka Showroom -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8 pt-8 border-t border-slate-800 text-center relative z-10">
+                <div class="p-3 bg-white/5 rounded-2xl border border-white/5">
+                    <div class="text-xl sm:text-2xl font-black text-brand-accent">Rp 15 Juta</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">Subsidi Uang Muka (DP)</div>
+                </div>
+                <div class="p-3 bg-white/5 rounded-2xl border border-white/5">
+                    <div class="text-xl sm:text-2xl font-black text-amber-400">Mulai 0% / 2.9%</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">Bunga Kredit Ringan</div>
+                </div>
+                <div class="p-3 bg-white/5 rounded-2xl border border-white/5">
+                    <div class="text-xl sm:text-2xl font-black text-emerald-400">Rp 5 Juta</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">Cashback Tukar Tambah</div>
+                </div>
+                <div class="p-3 bg-white/5 rounded-2xl border border-white/5">
+                    <div class="text-xl sm:text-2xl font-black text-blue-400">1 Tahun Penuh</div>
+                    <div class="text-[11px] text-slate-400 mt-0.5">Garansi Mesin & Asuransi</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filter Kategori Program Promo -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+                <h2 class="text-xl font-extrabold text-slate-900">Daftar Paket & Program Promo Aktif</h2>
+                <p class="text-xs text-slate-500">Pilih kategori penawaran yang sesuai dengan rencana kepemilikan mobil Anda.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-2">
+                <button onclick="filterPromo('all', this)" class="promo-filter-btn active bg-brand-navy text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm">
+                    Semua Program (6)
+                </button>
+                <button onclick="filterPromo('dp', this)" class="promo-filter-btn bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl border border-slate-200 transition-all">
+                    Subsidi DP Mobil
+                </button>
+                <button onclick="filterPromo('bunga', this)" class="promo-filter-btn bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl border border-slate-200 transition-all">
+                    Paket Bunga Rendah
+                </button>
+                <button onclick="filterPromo('cashback', this)" class="promo-filter-btn bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl border border-slate-200 transition-all">
+                    Cashback Trade-In
+                </button>
+                <button onclick="filterPromo('servis', this)" class="promo-filter-btn bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl border border-slate-200 transition-all">
+                    Bonus Servis & Dokumen
+                </button>
+            </div>
+        </div>
+
+        <!-- Grid Kartu Program Promo Showroom -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Program 1: Subsidi DP -->
+            <div class="promo-card dp bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 transition-all flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-28 h-28 bg-brand-orange/10 rounded-bl-full pointer-events-none"></div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-orange-100 text-brand-orange text-[10px] font-extrabold uppercase px-3 py-1 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-tag"></i> Program Subsidi Showroom
+                        </span>
+                        <span class="text-[11px] text-emerald-600 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
+                            Kuota Tersedia
+                        </span>
+                    </div>
+
+                    <div>
+                        <div class="text-2xl font-black text-slate-900 group-hover:text-brand-orange transition-colors">
+                            Potongan DP s/d Rp 15 Juta
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Bantuan subsidi langsung dari showroom untuk meringankan total pembayaran pertama (TDP) khusus segmen MPV & SUV keluarga.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Keuntungan -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2 text-xs">
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-brand-orange text-xs mt-0.5 shrink-0"></i>
+                            <span>Langsung memotong Total Uang Muka (TDP) di SPK</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-brand-orange text-xs mt-0.5 shrink-0"></i>
+                            <span>Berlaku untuk skema kredit 7 leasing rekanan resmi</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-brand-orange text-xs mt-0.5 shrink-0"></i>
+                            <span>Bonus tambahan karpet mobil premium & talang air</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-5 mt-4 border-t border-slate-100 space-y-2.5">
+                    <div class="flex items-center justify-between text-[11px] text-slate-400">
+                        <span><i class="fa-regular fa-clock mr-1"></i> Berlaku s/d 31 Okt 2026</span>
+                        <span class="font-semibold text-slate-600">Unit Bertanda Khusus</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20konsultasi%20Program%20Subsidi%20DP%20hingga%2015%20Juta%20untuk%20unit%20MPV/SUV" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Klaim Promo
+                        </a>
+                        <a href="index.html" class="w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all">
+                            Lihat Unit MPV/SUV
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Program 2: Bunga Kredit 0% -->
+            <div class="promo-card bunga bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 transition-all flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-28 h-28 bg-blue-500/10 rounded-bl-full pointer-events-none"></div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-blue-100 text-blue-700 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-percent"></i> Kemitraan Bank & Leasing
+                        </span>
+                        <span class="text-[11px] text-blue-600 font-bold bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-200">
+                            Bunga Spesial
+                        </span>
+                    </div>
+
+                    <div>
+                        <div class="text-2xl font-black text-slate-900 group-hover:text-blue-600 transition-colors">
+                            Bunga 0% Flat Tenor 1 Tahun
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Fasilitas suku bunga 0% untuk tenor 12 bulan atau bunga super ringan mulai 2.9% per tahun untuk tenor hingga 5 tahun.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Keuntungan -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2 text-xs">
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-blue-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Bebas bunga pinjaman untuk masa kredit 1 tahun</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-blue-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Bunga kompetitif 2.9% - 3.8% untuk tenor 2 s/d 5 tahun</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-blue-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Proses persetujuan (approval) ekspres 1x24 jam</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-5 mt-4 border-t border-slate-100 space-y-2.5">
+                    <div class="flex items-center justify-between text-[11px] text-slate-400">
+                        <span><i class="fa-regular fa-clock mr-1"></i> Kuota Terbatas Bulanan</span>
+                        <span class="font-semibold text-slate-600">DP Minimal 25%</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20tanya%20Paket%20Kredit%20Bunga%200%20Persen%20dan%20Bunga%20Ringan" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Ajukan Paket
+                        </a>
+                        <a href="simulasi-kredit.html" class="w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all">
+                            Hitung Simulasi
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Program 3: Cashback Trade-In -->
+            <div class="promo-card cashback bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 transition-all flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-28 h-28 bg-emerald-500/10 rounded-bl-full pointer-events-none"></div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-arrows-rotate"></i> Program Trade-In Showroom
+                        </span>
+                        <span class="text-[11px] text-emerald-600 font-bold bg-emerald-50 px-2.5 py-0.5 rounded-md border border-emerald-200">
+                            Langsung Cair
+                        </span>
+                    </div>
+
+                    <div>
+                        <div class="text-2xl font-black text-slate-900 group-hover:text-emerald-600 transition-colors">
+                            Cashback Trade-In Rp 5.000.000
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Tukar mobil lama Anda apa pun mereknya dengan unit bersertifikasi di showroom kami dan dapatkan bonus tambahan Rp 5 Juta.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Keuntungan -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2 text-xs">
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Nilai taksiran mobil lama dijamin transparan & di atas pasaran</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Bisa langsung dialihkan menjadi uang muka (DP) unit baru</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Inspeksi gratis di showroom atau petugas datang ke rumah</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-5 mt-4 border-t border-slate-100 space-y-2.5">
+                    <div class="flex items-center justify-between text-[11px] text-slate-400">
+                        <span><i class="fa-regular fa-clock mr-1"></i> Semua Merek & Tahun</span>
+                        <span class="font-semibold text-slate-600">Proses 1 Jam Tuntas</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20tukar%20tambah%20mobil%20lama%20dan%20klaim%20Cashback%20Trade-In%205%20Juta" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Janji Inspeksi
+                        </a>
+                        <a href="jual-mobil.html" class="w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all">
+                            Form Tukar Tambah
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Program 4: Free Asuransi All-Risk -->
+            <div class="promo-card servis bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 transition-all flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-28 h-28 bg-purple-500/10 rounded-bl-full pointer-events-none"></div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-purple-100 text-purple-700 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-shield-halved"></i> Perlindungan Menyeluruh
+                        </span>
+                        <span class="text-[11px] text-purple-600 font-bold bg-purple-50 px-2.5 py-0.5 rounded-md border border-purple-200">
+                            Gratis 1 Tahun
+                        </span>
+                    </div>
+
+                    <div>
+                        <div class="text-2xl font-black text-slate-900 group-hover:text-purple-600 transition-colors">
+                            Free Asuransi All-Risk 1 Tahun
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Nikmati rasa tenang berkendara tanpa perlu membayar premi asuransi komprehensif (All-Risk) untuk tahun pertama kepemilikan.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Keuntungan -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2 text-xs">
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-purple-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Menanggung klaim lecet, benturan, banjir, hingga kehilangan</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-purple-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Didukung bengkel resmi rekanan se-Indonesia & towing 24 jam</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-purple-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Hemat pengeluaran awal hingga Rp 4.500.000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-5 mt-4 border-t border-slate-100 space-y-2.5">
+                    <div class="flex items-center justify-between text-[11px] text-slate-400">
+                        <span><i class="fa-regular fa-clock mr-1"></i> Asuransi Ternama</span>
+                        <span class="font-semibold text-slate-600">Tenor Kredit Min. 3 Thn</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20info%20Promo%20Free%20Asuransi%20All-Risk%201%20Tahun" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Klaim Paket
+                        </a>
+                        <a href="index.html" class="w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all">
+                            Pilih Mobil
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Program 5: Paket Siap Pakai (BBM & Servis) -->
+            <div class="promo-card servis bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 transition-all flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-28 h-28 bg-amber-500/10 rounded-bl-full pointer-events-none"></div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-amber-100 text-amber-800 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-gas-pump"></i> Paket Serah Terima Unit
+                        </span>
+                        <span class="text-[11px] text-amber-600 font-bold bg-amber-50 px-2.5 py-0.5 rounded-md border border-amber-200">
+                            Langsung Pakai
+                        </span>
+                    </div>
+
+                    <div>
+                        <div class="text-2xl font-black text-slate-900 group-hover:text-amber-600 transition-colors">
+                            Free BBM Pertamax & Servis 1 Thn
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Beli mobil langsung siap jalan untuk perjalanan keluarga tanpa perlu repot mengeluarkan biaya perawatan awal.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Keuntungan -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2 text-xs">
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-amber-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Saldo pengisian bahan bakar Pertamax senilai Rp 2.000.000</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-amber-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Gratis jasa servis berkala & ganti oli mesin selama 1 tahun</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-amber-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Dilengkapi buku riwayat servis resmi dari Mobile Second</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-5 mt-4 border-t border-slate-100 space-y-2.5">
+                    <div class="flex items-center justify-between text-[11px] text-slate-400">
+                        <span><i class="fa-regular fa-clock mr-1"></i> Diberikan Saat Delivery</span>
+                        <span class="font-semibold text-slate-600">Unit Siap Pakai</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20tanya%20unit%20yang%20masuk%20Paket%20Free%20BBM%20Pertamax%20dan%20Servis" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Tanya Sales
+                        </a>
+                        <a href="index.html" class="w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all">
+                            Lihat Stok Mobil
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Program 6: Gratis Balik Nama (BBN-KB) -->
+            <div class="promo-card servis bg-white rounded-3xl p-6 shadow-card hover:shadow-card-hover border border-slate-200/90 transition-all flex flex-col justify-between relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-28 h-28 bg-rose-500/10 rounded-bl-full pointer-events-none"></div>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="bg-rose-100 text-rose-700 text-[10px] font-extrabold uppercase px-3 py-1 rounded-full flex items-center gap-1.5">
+                            <i class="fa-solid fa-file-signature"></i> Legalitas & Dokumen
+                        </span>
+                        <span class="text-[11px] text-rose-600 font-bold bg-rose-50 px-2.5 py-0.5 rounded-md border border-rose-200">
+                            Bebas Antre
+                        </span>
+                    </div>
+
+                    <div>
+                        <div class="text-2xl font-black text-slate-900 group-hover:text-rose-600 transition-colors">
+                            Gratis Balik Nama (BBN-KB)
+                        </div>
+                        <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                            Beli mobil bekas langsung ganti nama kepemilikan STNK & BPKB ke nama Anda tanpa biaya jasa pengurusan biro.
+                        </p>
+                    </div>
+
+                    <!-- Highlight Keuntungan -->
+                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200 space-y-2 text-xs">
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-rose-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Diurus tuntas oleh tim legalitas resmi Mobile Second</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-rose-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Cek fisik Samsat resmi menjamin nomor rangka & mesin asli</span>
+                        </div>
+                        <div class="flex items-start gap-2 text-slate-700">
+                            <i class="fa-solid fa-circle-check text-rose-600 text-xs mt-0.5 shrink-0"></i>
+                            <span>Dokumen baru langsung diantar ke alamat rumah Anda</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-5 mt-4 border-t border-slate-100 space-y-2.5">
+                    <div class="flex items-center justify-between text-[11px] text-slate-400">
+                        <span><i class="fa-regular fa-clock mr-1"></i> Khusus Plat B (Jabodetabek)</span>
+                        <span class="font-semibold text-slate-600">Dokumen Sah 100%</span>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20konsultasi%20Program%20Gratis%20Balik%20Nama%20STNK%20BPKB" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all shadow-sm">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Konsultasi Berkas
+                        </a>
+                        <a href="index.html" class="w-full bg-slate-100 hover:bg-brand-navy hover:text-white text-slate-800 font-bold py-2.5 px-3 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all">
+                            Pilih Mobil Plat B
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ==================== 3 LANGKAH MUDAH MENGKLAIM PROMO SHOWROOM ==================== -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200/90 shadow-card space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-brand-orange bg-orange-100 px-3 py-1 rounded-full">
+                    Transparan & Tanpa Ribet
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-slate-900">
+                    Cara Menikmati Program Promo di Mobile Second
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-500 leading-relaxed">
+                    Karena kami adalah showroom fisik resmi dan bukan toko e-commerce online, Anda <strong>tidak perlu menyalin kode voucher atau mengisi kupon</strong>. Semua penawaran promo diproses langsung dan tercantum sah pada Surat Pesanan Kendaraan (SPK).
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Langkah 1 -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3 relative group hover:border-brand-orange transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-navy text-white flex items-center justify-center text-lg font-black shadow-md group-hover:bg-brand-orange transition-colors">
+                        1
+                    </div>
+                    <h4 class="text-base font-extrabold text-slate-900">Pilih Mobil Impian Anda</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Cari mobil yang sesuai kebutuhan keluarga di katalog website kami, atau kunjungi langsung showroom Mobile Second untuk melihat dan melakukan test drive unit.
+                    </p>
+                </div>
+
+                <!-- Langkah 2 -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3 relative group hover:border-brand-orange transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-navy text-white flex items-center justify-center text-lg font-black shadow-md group-hover:bg-brand-orange transition-colors">
+                        2
+                    </div>
+                    <h4 class="text-base font-extrabold text-slate-900">Sampaikan Pilihan Promo</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Hubungi kami melalui WhatsApp atau bicarakan langsung dengan Financial Advisor di showroom mengenai paket promo yang ingin Anda gunakan (Subsidi DP, Bunga 0%, atau Trade-In).
+                    </p>
+                </div>
+
+                <!-- Langkah 3 -->
+                <div class="p-6 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3 relative group hover:border-brand-orange transition-all">
+                    <div class="w-12 h-12 rounded-2xl bg-brand-navy text-white flex items-center justify-center text-lg font-black shadow-md group-hover:bg-brand-orange transition-colors">
+                        3
+                    </div>
+                    <h4 class="text-base font-extrabold text-slate-900">Promo Otomatis Tertera di SPK</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Potongan DP, bunga flat khusus, atau bonus servis langsung tercatat resmi di Surat Pesanan Kendaraan (SPK) dan faktur pelunasan tanpa ada potongan tersembunyi.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FAQ SEPUTAR PROMO SHOWROOM ==================== -->
+        <section class="bg-slate-50 rounded-3xl p-6 sm:p-10 border border-slate-200 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-orange">Informasi Ketentuan</span>
+                    <h3 class="text-2xl font-extrabold text-slate-900 mt-1">Tanya Jawab Seputar Promo Showroom</h3>
+                </div>
+                <a href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20tanya%20syarat%20ketentuan%20promo" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-emerald-600 hover:text-emerald-700">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Butuh bantuan lain? Chat Sales
+                </a>
+            </div>
+
+            <div class="space-y-3">
+                <!-- FAQ 1 -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-slate-50 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Apakah program subsidi DP bisa digabungkan dengan promo lainnya?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-slate-50 text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Sebagian besar program promo memiliki ketentuan bundling khusus. Misalnya, promo Subsidi DP dapat digabungkan dengan bonus Free Servis & BBM Pertamax. Namun untuk paket Bunga 0% biasanya berlaku secara terpisah dari subsidi DP besar. Konsultasikan dengan tim sales kami untuk mendapatkan kombinasi paket paling menguntungkan.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-slate-50 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Apakah promo juga berlaku untuk pembelian mobil bekas secara tunai (Cash)?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-slate-50 text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        <strong>Ya!</strong> Untuk pembelian secara tunai, kami menyediakan program diskon khusus harga OTR tunai, bonus Free Balik Nama (BBN-KB), voucher BBM Pertamax, serta garansi mesin 1 tahun penuh.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="bg-white border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left hover:bg-slate-50 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Bagaimana cara mendapatkan ekstra Cashback Trade-In Rp 5 Juta?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-slate-50 text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Cukup bawa mobil lama Anda ke showroom kami untuk dilakukan pengecekan kondisi oleh tim appraiser profesional, atau jadwalkan inspeksi gratis di rumah Anda. Setelah harga taksiran disepakati, bonus cashback Rp 5.000.000 langsung dipotongkan dari total DP unit pengganti yang Anda beli.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-brand-navy text-slate-400 text-xs mt-16 pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="h-9 w-9 rounded-lg bg-white p-1 flex items-center justify-center">
+                            <img src="logo.jpg" alt="Logo" class="h-full w-full object-contain">
+                        </div>
+                        <span class="text-white font-extrabold text-lg">Mobile <span class="text-brand-accent">Second</span></span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Showroom resmi penjualan mobil bekas berkualitas. Semua unit bergaransi mesin 1 tahun dan lulus inspeksi 160 titik.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Navigasi Halaman</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-brand-accent">Beli Mobil (Katalog Lengkap)</a></li>
+                        <li><a href="jual-mobil.html" class="hover:text-brand-accent">Jual & Tukar Tambah Mobil</a></li>
+                        <li><a href="promo.html" class="hover:text-brand-accent text-brand-orange font-bold">Promo & Diskon DP Spesial</a></li>
+                        <li><a href="simulasi-kredit.html" class="hover:text-brand-accent">Kalkulator Simulasi Kredit</a></li>
+                        <li><a href="tentang-kami.html" class="hover:text-brand-accent">Tentang Kami & Inspeksi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Layanan Showroom</h4>
+                    <ul class="space-y-2">
+                        <li>Garansi 1 Tahun Mesin & Transmisi</li>
+                        <li>Inspeksi 160 Titik Bersertifikat</li>
+                        <li>5 Hari Garansi Uang Kembali</li>
+                        <li>Layanan Antar Unit se-Jabodetabek</li>
+                        <li>Bantuan Pengurusan Balik Nama & STNK</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Hubungi Showroom</h4>
+                    <p class="text-slate-400 leading-relaxed mb-2">
+                        Jl. Sultan Iskandar Muda No. 88, Kebayoran Lama, Jakarta Selatan
+                    </p>
+                    <p class="text-slate-300 font-semibold mb-1">WhatsApp: 0812-3456-7890</p>
+                    <p class="text-slate-300 font-semibold">Email: halo@mobilesecond.id</p>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-3">
+                <p>&copy; 2026 Mobile Second. Seluruh Hak Cipta Dilindungi.</p>
+                <div class="flex gap-4">
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Kebijakan Privasi</a>
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        function filterPromo(category, btnElement) {
+            const cards = document.querySelectorAll('.promo-card');
+            const btns = document.querySelectorAll('.promo-filter-btn');
+
+            btns.forEach(b => {
+                b.className = "promo-filter-btn bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold px-4 py-2 rounded-xl border border-slate-200 transition-all";
+            });
+            if (btnElement) {
+                btnElement.className = "promo-filter-btn active bg-brand-navy text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm";
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.classList.contains(category)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        }
+
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+            const isHidden = content.classList.contains('hidden');
+
+            // Close other FAQs
+            document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotate-180'));
+
+            if (isHidden) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        function toggleMobileNav() {
+            const menu = document.getElementById('mobileNavMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // DYNAMIC STICKY NAVBAR SCROLL (SMOOTH TRANSITION)
+        const mainNavbar = document.getElementById('mainStickyNavbar');
+        function updateNavbarOnScroll() {
+            if (!mainNavbar) return;
+            if (window.scrollY > 20) {
+                mainNavbar.classList.add('border-slate-700/80', 'shadow-[0_4px_25px_rgba(0,0,0,0.35)]');
+                mainNavbar.classList.remove('border-transparent', 'shadow-none');
+            } else {
+                mainNavbar.classList.remove('border-slate-700/80', 'shadow-[0_4px_25px_rgba(0,0,0,0.35)]');
+                mainNavbar.classList.add('border-transparent', 'shadow-none');
+            }
+        }
+        window.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
+
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateNavbarOnScroll();
+        });
+    </script>
+
+    <!-- ==================== FLOATING ROUND WHATSAPP BUTTON ==================== -->
+    <a 
+        href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20tanya%20promo%20mobil" 
+        target="_blank" 
+        class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group"
+        title="Hubungi WhatsApp Sales"
+        aria-label="WhatsApp Sales"
+    >
+        <i class="fa-brands fa-whatsapp text-3xl group-hover:scale-105 transition-transform"></i>
+        <!-- Ping Indicator -->
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white"></span>
+        </span>
+        <!-- Tooltip on Hover (Desktop) -->
+        <span class="hidden md:group-hover:block absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl whitespace-nowrap shadow-xl border border-slate-700 pointer-events-none transition-all">
+            Chat WhatsApp Sales
+        </span>
+    </a>
+</body>
+</html>

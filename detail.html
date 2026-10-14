@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">Detail Mobil - Mobile Second</title>
+    <meta name="description" content="Detail spesifikasi lengkap, foto, hasil inspeksi 160 titik, dan simulasi kredit mobil bekas terverifikasi di Mobile Second.">
+
+    <!-- Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#121824',
+                            navy: '#1b2434',
+                            navyLight: '#243046',
+                            orange: '#ea580c',
+                            orangeHover: '#c2410c',
+                            accent: '#f97316',
+                            yellow: '#f59e0b',
+                            blue: '#2563eb',
+                            cardBg: '#ffffff',
+                            bg: '#f4f6f9',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 2px 10px rgba(0, 0, 0, 0.04)',
+                        'card-hover': '0 12px 25px -4px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
+                        'nav': '0 4px 20px -2px rgba(15, 23, 42, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-bg text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-orange selection:text-white">
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="fixed top-6 right-6 z-[9999] hidden transform transition-all duration-300">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700">
+            <div id="toastIcon" class="text-emerald-400 text-lg"><i class="fa-solid fa-circle-check"></i></div>
+            <div id="toastMessage" class="text-xs sm:text-sm font-semibold">Pesan notifikasi</div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER & NAVBAR (STICKY) ==================== -->
+    <header class="sticky top-0 z-50 bg-brand-navy text-white border-b border-slate-700/60 shadow-md py-3.5 px-4 sm:px-6 lg:px-8 transition-all duration-300">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="flex items-center justify-between">
+                
+                <!-- Logo & Brand -->
+                <a href="index.html" class="flex items-center gap-3 group focus:outline-none" title="Mobile Second - Halaman Utama">
+                    <div class="h-11 w-11 rounded-xl bg-white p-1 flex items-center justify-center shadow-md overflow-hidden ring-2 ring-white/20 group-hover:ring-brand-accent transition-all">
+                        <img src="logo.jpg" alt="Mobile Second Logo" class="h-full w-full object-contain" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3202/3202926.png';">
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-center tracking-tight font-extrabold text-xl sm:text-2xl leading-none">
+                            <span class="text-white">Mobile</span>
+                            <span class="text-brand-accent ml-1">Second</span>
+                        </div>
+                        <span class="text-[10px] text-amber-400 font-semibold tracking-wider mt-0.5 uppercase flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-[9px]"></i> Jual Beli Mobil Bekas
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Navigasi Menu Lengkap -->
+                <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-200">
+                    <a href="index.html" class="text-slate-300 hover:text-brand-accent transition-colors">Beli Mobil</a>
+                    <a href="jual-mobil.html" class="text-slate-300 hover:text-brand-accent transition-colors">Jual Mobil</a>
+                    <a href="promo.html" class="text-slate-300 hover:text-brand-accent transition-colors flex items-center gap-1.5">
+                        <span>Promo</span>
+                        <span class="bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse">HOT</span>
+                    </a>
+                    <a href="tentang-kami.html" class="text-slate-300 hover:text-brand-accent transition-colors">Tentang Kami</a>
+                    <a href="simulasi-kredit.html" class="text-slate-300 hover:text-brand-accent transition-colors">Simulasi Kredit</a>
+                </nav>
+
+                <!-- Tombol Hotline WhatsApp (Desktop) & Mobile Trigger -->
+                <div class="flex items-center gap-3">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>0812-3456-7890</span>
+                    </a>
+                    <!-- Mobile Hamburger -->
+                    <button onclick="toggleMobileNav()" class="lg:hidden p-2 text-slate-200 hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Nav Menu Dropdown -->
+            <div id="mobileNavMenu" class="hidden lg:hidden pt-4 pb-2 border-t border-slate-700/60 mt-4 space-y-3">
+                <a href="index.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Beli Mobil (Katalog)</a>
+                <a href="jual-mobil.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Jual Mobil</a>
+                <a href="promo.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Promo Spesial</a>
+                <a href="tentang-kami.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Tentang Kami</a>
+                <a href="simulasi-kredit.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Simulasi Kredit</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second" target="_blank" class="block text-emerald-400 font-semibold py-1 text-sm flex items-center gap-2"><i class="fa-brands fa-whatsapp"></i> Hubungi WhatsApp Sales</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="flex-grow max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        
+        <!-- Breadcrumb & Back Button -->
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+            <nav class="flex items-center gap-2 text-xs sm:text-sm text-slate-500">
+                <a href="index.html" class="hover:text-brand-orange transition-colors flex items-center gap-1">
+                    <i class="fa-solid fa-house text-xs"></i> Beranda
+                </a>
+                <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                <a href="index.html" class="hover:text-brand-orange transition-colors">Katalog Mobil</a>
+                <i class="fa-solid fa-chevron-right text-[10px] text-slate-400"></i>
+                <span id="breadcrumbCarName" class="font-semibold text-slate-800 line-clamp-1">Detail Mobil</span>
+            </nav>
+            <a href="index.html" class="inline-flex items-center gap-2 text-xs font-semibold text-slate-600 hover:text-brand-orange bg-white px-3.5 py-1.5 rounded-full border border-slate-200 shadow-sm transition-all hover:shadow">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Katalog
+            </a>
+        </div>
+
+        <!-- Detail Grid Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Column: Media Gallery & Highlights (7 cols) -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Main Image Preview Card -->
+                <div class="bg-white rounded-3xl p-3 sm:p-4 shadow-card border border-slate-200/80 overflow-hidden relative group">
+                    <div class="relative h-72 sm:h-96 md:h-[420px] rounded-2xl overflow-hidden bg-slate-900">
+                        <img id="mainCarImage" src="" alt="Foto Mobil" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        
+                        <!-- Badges Overlay -->
+                        <div class="absolute top-4 left-4 flex flex-col gap-2">
+                            <span id="badgeWarranty" class="inline-flex items-center gap-1.5 bg-emerald-600/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                                <i class="fa-solid fa-shield-halved"></i> Garansi 1 Tahun Mesin
+                            </span>
+                            <span id="badgeInspection" class="inline-flex items-center gap-1.5 bg-brand-navy/90 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
+                                <i class="fa-solid fa-clipboard-check text-emerald-400"></i> Lulus Inspeksi 160 Titik
+                            </span>
+                        </div>
+
+
+
+                        <!-- Showroom Watermark Badge -->
+                        <div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-xl text-xs flex items-center gap-2">
+                            <i class="fa-solid fa-building-circle-check text-amber-400"></i>
+                            <span>Unit Resmi Showroom Mobile Second</span>
+                        </div>
+
+                        <!-- Foto Count Badge -->
+                        <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md text-white px-3 py-1 rounded-xl text-xs flex items-center gap-1.5">
+                            <i class="fa-regular fa-images"></i>
+                            <span id="photosCountText">8 Foto HD</span>
+                        </div>
+                    </div>
+
+                    <!-- Thumbnails Gallery -->
+                    <div id="thumbnailsContainer" class="grid grid-cols-4 sm:grid-cols-5 gap-2 sm:gap-3 mt-3">
+                        <!-- Dynamic Thumbnails inserted by JS -->
+                    </div>
+                </div>
+
+                <!-- Inspection & Guarantee Highlight Banners -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div class="bg-emerald-50 border border-emerald-200/80 rounded-2xl p-4 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-water-ladder"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-emerald-950">Bebas Banjir</h4>
+                            <p class="text-[11px] text-emerald-700">Pemeriksaan interior, kelistrikan & karpet tuntas.</p>
+                        </div>
+                    </div>
+                    <div class="bg-blue-50 border border-blue-200/80 rounded-2xl p-4 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-car-burst"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-blue-950">Bebas Tabrak Besar</h4>
+                            <p class="text-[11px] text-blue-700">Struktur sasis, apron & pilar utuh standar pabrik.</p>
+                        </div>
+                    </div>
+                    <div class="bg-amber-50 border border-amber-200/80 rounded-2xl p-4 flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-600 text-white flex items-center justify-center text-lg flex-shrink-0">
+                            <i class="fa-solid fa-file-shield"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-xs font-bold text-amber-950">Dokumen Lengkap</h4>
+                            <p class="text-[11px] text-amber-700">BPKB, STNK & Faktur asli terverifikasi kepolisian.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spesifikasi Teknis Mendalam -->
+                <div class="bg-white rounded-3xl p-6 shadow-card border border-slate-200/80 space-y-5">
+                    <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-brand-orange"></i>
+                        <span>Spesifikasi Kendaraan</span>
+                    </h3>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 text-xs">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block mb-0.5">Merek</span>
+                            <strong id="specBrand" class="text-slate-800 text-sm font-bold">-</strong>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block mb-0.5">Model / Tipe</span>
+                            <strong id="specModel" class="text-slate-800 text-sm font-bold">-</strong>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block mb-0.5">Tahun Pembuatan</span>
+                            <strong id="specYear" class="text-slate-800 text-sm font-bold">-</strong>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block mb-0.5">Jarak Tempuh (Odo)</span>
+                            <strong id="specMileage" class="text-slate-800 text-sm font-bold">-</strong>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block mb-0.5">Transmisi</span>
+                            <strong id="specTransmission" class="text-slate-800 text-sm font-bold">-</strong>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block mb-0.5">Warna Bodi</span>
+                            <strong id="specColor" class="text-slate-800 text-sm font-bold capitalize">-</strong>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block mb-0.5">Tipe Bodi</span>
+                            <strong id="specBodyType" class="text-slate-800 text-sm font-bold">-</strong>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block mb-0.5">Lokasi Showroom</span>
+                            <strong id="specCity" class="text-slate-800 text-sm font-bold">-</strong>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                            <span class="text-slate-400 block mb-0.5">Status Pajak STNK</span>
+                            <strong class="text-emerald-600 text-sm font-bold flex items-center gap-1">
+                                <i class="fa-solid fa-circle-check text-[10px]"></i> Hidup & Aktif
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Laporan Inspeksi 160 Titik Tabbed/Accordion -->
+                <div class="bg-white rounded-3xl p-6 shadow-card border border-slate-200/80 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                            <i class="fa-solid fa-clipboard-check text-emerald-600"></i>
+                            <span>Laporan Hasil Inspeksi 160 Titik</span>
+                        </h3>
+                        <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded-full">Nilai: 9.8 / 10 (Sangat Baik)</span>
+                    </div>
+                    <p class="text-xs text-slate-500 leading-relaxed">
+                        Diperiksa oleh teknisi tersertifikasi Mobile Second menggunakan scanner diagnostik OBD-II digital dan alat pengukur ketebalan cat bodi.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-gears text-slate-600"></i>
+                                <span class="text-xs font-semibold text-slate-700">Kondisi Mesin & Kompresi</span>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                                <i class="fa-solid fa-check"></i> Prima
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-car text-slate-600"></i>
+                                <span class="text-xs font-semibold text-slate-700">Rangka Sasis & Bodi</span>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                                <i class="fa-solid fa-check"></i> Lulus Uji
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-bolt text-slate-600"></i>
+                                <span class="text-xs font-semibold text-slate-700">Kelistrikan & Modul ECU</span>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                                <i class="fa-solid fa-check"></i> Normal
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-snowflake text-slate-600"></i>
+                                <span class="text-xs font-semibold text-slate-700">Sistem AC Dingin & Steril</span>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                                <i class="fa-solid fa-check"></i> Dingin
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-circle-notch text-slate-600"></i>
+                                <span class="text-xs font-semibold text-slate-700">Ban & Kaki-kaki (Suspensi)</span>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                                <i class="fa-solid fa-check"></i> Tebal (85%)
+                            </span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-couch text-slate-600"></i>
+                                <span class="text-xs font-semibold text-slate-700">Kebersihan Interior Bebas Bau</span>
+                            </div>
+                            <span class="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                                <i class="fa-solid fa-check"></i> Bersih
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Sticky Pricing & Action Card (5 cols) -->
+            <div class="lg:col-span-5 space-y-6 lg:sticky lg:top-6">
+                
+                <!-- Main Booking & Pricing Card -->
+                <div class="bg-white rounded-3xl p-6 sm:p-7 shadow-card border border-slate-200/90 space-y-6">
+                    
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-1.5">
+                            <span id="badgeCategory" class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-orange-100 text-brand-orange uppercase">
+                                Hatchback
+                            </span>
+                            <span id="carYearText" class="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-0.5 rounded">Tahun 2017</span>
+                        </div>
+                        <h1 id="carTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+                            Daihatsu Ayla 1.0 D Plus MT
+                        </h1>
+                        <p id="carSubtitle" class="text-xs sm:text-sm text-slate-500 mt-1">
+                            2017 • 68.000 km • Manual • Showroom Jakarta
+                        </p>
+                    </div>
+
+                    <!-- Price Block -->
+                    <div class="p-4 sm:p-5 bg-gradient-to-br from-slate-900 to-brand-navy rounded-2xl text-white">
+                        <div class="flex items-baseline justify-between mb-2">
+                            <span class="text-xs text-slate-300 font-medium">Harga Tunai (OTR)</span>
+                            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2 py-0.5 rounded-full font-bold">
+                                Bebas Biaya Balik Nama
+                            </span>
+                        </div>
+                        <div id="carPriceDisplay" class="text-2xl sm:text-3xl font-extrabold text-brand-accent tracking-tight">
+                            Rp 85.000.000
+                        </div>
+
+                        <!-- Installment Estimate -->
+                        <div class="mt-4 pt-3 border-t border-slate-700/60 flex items-center justify-between text-xs">
+                            <span class="text-slate-300">Estimasi Cicilan Mulai:</span>
+                            <div class="text-right">
+                                <span id="estimateInstallmentText" class="font-bold text-amber-400 text-sm">Rp 1.450.000</span>
+                                <span class="text-[10px] text-slate-400">/bulan (DP 20%)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="space-y-3">
+                        <!-- WhatsApp Direct CTA -->
+                        <a id="btnWhatsAppSales" href="#" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 px-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2.5 shadow-lg shadow-emerald-600/25 transition-all transform hover:-translate-y-0.5">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                            <span>Hubungi Sales via WhatsApp</span>
+                        </a>
+
+                        <!-- Booking Test Drive CTA -->
+                        <button onclick="openBookingTestDriveModal()" class="w-full bg-brand-navy hover:bg-brand-navyLight text-white py-3.5 px-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2.5 shadow-md transition-all transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-car-side"></i>
+                            <span>Jadwalkan Test Drive Gratis</span>
+                        </button>
+
+                        <!-- Simulasi Kredit Link -->
+                        <a id="btnSimulasiKredit" href="simulasi-kredit.html" class="w-full bg-slate-100 hover:bg-orange-50 hover:text-brand-orange text-slate-700 border border-slate-200 hover:border-orange-200 py-3 px-4 rounded-2xl font-semibold text-xs flex items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-calculator text-brand-orange"></i>
+                            <span>Hitung Simulasi Cicilan Lengkap Mobil Ini</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Signals -->
+                    <div class="pt-4 border-t border-slate-100 space-y-2.5 text-xs text-slate-600">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-certificate text-brand-orange w-4 text-center"></i>
+                            <span>Unit siap pakai, sudah diservis & salon interior</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-rotate-left text-blue-600 w-4 text-center"></i>
+                            <span>Jaminan 5 hari uang kembali 100% jika tidak sesuai</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-truck text-emerald-600 w-4 text-center"></i>
+                            <span>Layanan antar unit gratis ke rumah se-Jabodetabek</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Showroom Contact Box -->
+                <div class="bg-white rounded-3xl p-5 shadow-card border border-slate-200/90 flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-orange-100 text-brand-orange flex items-center justify-center text-xl flex-shrink-0">
+                        <i class="fa-solid fa-shop"></i>
+                    </div>
+                    <div class="flex-grow">
+                        <h4 class="text-xs font-bold text-slate-900">Showroom Mobile Second</h4>
+                        <p id="showroomLocationText" class="text-xs text-slate-500">Cabang Jakarta Selatan • Buka Setiap Hari (08:00 - 20:00)</p>
+                    </div>
+                    <a href="tentang-kami.html" class="text-xs font-bold text-brand-orange hover:underline flex-shrink-0">
+                        Lokasi & Peta
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Rekomendasi Mobil Serupa & Semerek -->
+        <section class="mt-16 pt-8 border-t border-slate-200">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="bg-orange-100 text-brand-orange text-[11px] font-bold px-2.5 py-0.5 rounded-full"><i class="fa-solid fa-award mr-1"></i> Rekomendasi Unit</span>
+                        <span id="similarBrandBadge" class="bg-blue-100 text-blue-800 text-[11px] font-bold px-2.5 py-0.5 rounded-full">Semerek</span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900">Rekomendasi Mobil Serupa & Semerek</h2>
+                    <p class="text-xs sm:text-sm text-slate-500">Pilihan unit mobil bekas showroom resmi yang sejenis, semerek, atau dalam rentang harga setara</p>
+                </div>
+                
+                <!-- Filter Tabs Rekomendasi -->
+                <div class="flex flex-wrap items-center gap-2">
+                    <button onclick="filterSimilarCars('all')" id="tabSimilarAll" class="similar-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-brand-navy text-white transition-all shadow-sm">
+                        Semua (<span id="countSimilarAll">0</span>)
+                    </button>
+                    <button onclick="filterSimilarCars('brand')" id="tabSimilarBrand" class="similar-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                        Semerek <span id="labelSimilarBrand"></span> (<span id="countSimilarBrand">0</span>)
+                    </button>
+                    <button onclick="filterSimilarCars('body')" id="tabSimilarBody" class="similar-tab-btn px-4 py-1.5 rounded-full text-xs font-bold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                        Sejenis <span id="labelSimilarBody"></span> (<span id="countSimilarBody">0</span>)
+                    </button>
+                    <a href="index.html" class="ml-2 text-xs font-bold text-brand-orange hover:underline flex items-center gap-1">
+                        Katalog Lengkap <i class="fa-solid fa-chevron-right text-[10px]"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Grid Rekomendasi Mobil -->
+            <div id="similarCarsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+                <!-- Injected via JavaScript -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Modal Booking Test Drive -->
+    <div id="testDriveModal" class="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-100 p-6 space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+                <h3 class="text-base font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-check text-brand-orange"></i> Booking Test Drive
+                </h3>
+                <button onclick="closeBookingTestDriveModal()" class="text-slate-400 hover:text-slate-700">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <form onsubmit="handleTestDriveSubmit(event)" class="space-y-3.5 text-xs">
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nama Lengkap</label>
+                    <input type="text" id="tdName" required placeholder="Contoh: Budi Santoso" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-orange">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Nomor WhatsApp Aktif</label>
+                    <input type="tel" id="tdPhone" required placeholder="Contoh: 081234567890" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-orange">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Pilih Tanggal</label>
+                        <input type="date" id="tdDate" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-orange">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">Pilih Jam</label>
+                        <select id="tdTime" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-orange">
+                            <option>10:00 WIB</option>
+                            <option>13:00 WIB</option>
+                            <option>15:00 WIB</option>
+                            <option>17:00 WIB</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-700 mb-1">Lokasi Test Drive</label>
+                    <select id="tdLocation" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 focus:outline-none focus:border-brand-orange">
+                        <option>Showroom Mobile Second (Sesuai Unit)</option>
+                        <option>Test Drive Diantar ke Rumah / Kantor Saya</option>
+                    </select>
+                </div>
+                <button type="submit" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white font-bold py-3 rounded-xl transition-all shadow-md text-sm mt-2">
+                    Konfirmasi Booking Test Drive
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-brand-navy text-slate-400 text-xs mt-16 pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="h-9 w-9 rounded-lg bg-white p-1 flex items-center justify-center">
+                            <img src="logo.jpg" alt="Logo" class="h-full w-full object-contain">
+                        </div>
+                        <span class="text-white font-extrabold text-lg">Mobile <span class="text-brand-accent">Second</span></span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Showroom resmi penjualan mobil bekas berkualitas. Semua unit bergaransi mesin 1 tahun dan lulus inspeksi 160 titik.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Navigasi Halaman</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-brand-accent">Beli Mobil (Katalog Lengkap)</a></li>
+                        <li><a href="jual-mobil.html" class="hover:text-brand-accent">Jual & Tukar Tambah Mobil</a></li>
+                        <li><a href="promo.html" class="hover:text-brand-accent">Promo & Diskon DP Spesial</a></li>
+                        <li><a href="simulasi-kredit.html" class="hover:text-brand-accent">Kalkulator Simulasi Kredit</a></li>
+                        <li><a href="tentang-kami.html" class="hover:text-brand-accent">Tentang Kami & Inspeksi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Layanan Showroom</h4>
+                    <ul class="space-y-2">
+                        <li>Garansi 1 Tahun Mesin & Transmisi</li>
+                        <li>Inspeksi 160 Titik Bersertifikat</li>
+                        <li>5 Hari Garansi Uang Kembali</li>
+                        <li>Layanan Antar Unit se-Jabodetabek</li>
+                        <li>Bantuan Pengurusan Balik Nama & STNK</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Hubungi Showroom</h4>
+                    <p class="text-slate-400 leading-relaxed mb-2">
+                        Jl. Sultan Iskandar Muda No. 88, Kebayoran Lama, Jakarta Selatan
+                    </p>
+                    <p class="text-slate-300 font-semibold mb-1">WhatsApp: 0812-3456-7890</p>
+                    <p class="text-slate-300 font-semibold">Email: halo@mobilesecond.id</p>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-3">
+                <p>&copy; 2026 Mobile Second. Seluruh Hak Cipta Dilindungi.</p>
+                <div class="flex gap-4">
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Kebijakan Privasi</a>
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Load Shared Cars Data Script -->
+    <script src="cars-data.js"></script>
+
+    <script>
+        let currentCar = null;
+        let similarCarsCache = {
+            all: [],
+            brand: [],
+            body: []
+        };
+        let currentFilter = 'all';
+
+        // Ambil ID dari URL query string (?id=101)
+        function initPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const carId = urlParams.get('id');
+            currentCar = getCarById(carId);
+
+            if (!currentCar) {
+                currentCar = carCatalog[0];
+            }
+
+            renderCarDetails(currentCar);
+            setupSimilarCars(currentCar);
+        }
+
+        function renderCarDetails(car) {
+            document.getElementById('pageTitle').textContent = `${car.brand} ${car.model} (${car.year}) - Mobile Second`;
+            document.getElementById('breadcrumbCarName').textContent = `${car.brand} ${car.model}`;
+            document.getElementById('carTitle').textContent = `${car.brand} ${car.model}`;
+            document.getElementById('carSubtitle').textContent = `${car.year} • ${car.mileage.toLocaleString()} km • ${car.transmission} • Showroom ${car.city}`;
+            document.getElementById('carYearText').textContent = `Tahun ${car.year}`;
+            document.getElementById('badgeCategory').textContent = car.bodyType;
+            document.getElementById('carPriceDisplay').textContent = car.priceDisplay;
+            document.getElementById('mainCarImage').src = car.image;
+            document.getElementById('mainCarImage').alt = `${car.brand} ${car.model}`;
+            document.getElementById('photosCountText').textContent = `${car.photosCount || '08'} Foto HD`;
+            document.getElementById('showroomLocationText').textContent = `Cabang Showroom ${car.city} • Buka Setiap Hari (08:00 - 20:00)`;
+
+            // Spesifikasi tabel
+            document.getElementById('specBrand').textContent = car.brand;
+            document.getElementById('specModel').textContent = car.model;
+            document.getElementById('specYear').textContent = car.year;
+            document.getElementById('specMileage').textContent = `${car.mileage.toLocaleString()} km`;
+            document.getElementById('specTransmission').textContent = car.transmission;
+            document.getElementById('specColor').textContent = car.color || 'Putih';
+            document.getElementById('specBodyType').textContent = car.bodyType;
+            document.getElementById('specCity').textContent = `Showroom ${car.city}`;
+
+            // Hitung estimasi cicilan (DP 20%, tenor 60 bln)
+            const installment = calculateInstallment(car.price, 20, 60);
+            document.getElementById('estimateInstallmentText').textContent = formatRupiah(installment.monthlyPayment);
+
+            // WhatsApp link
+            const waBtn = document.getElementById('btnWhatsAppSales');
+            const waMsg = encodeURIComponent(`Halo Showroom Mobile Second, saya tertarik dengan unit *${car.brand} ${car.model}* (${car.year}) seharga ${car.priceDisplay}. Apakah unit masih tersedia untuk dijadwalkan test drive?`);
+            waBtn.href = `https://wa.me/6281234567890?text=${waMsg}`;
+
+            // Simulasi kredit link dengan pre-fill ID
+            document.getElementById('btnSimulasiKredit').href = `simulasi-kredit.html?id=${car.id}&price=${car.price}`;
+
+            // Render thumbnails
+            renderThumbnails(car);
+        }
+
+        function renderThumbnails(car) {
+            const container = document.getElementById('thumbnailsContainer');
+            container.innerHTML = '';
+            
+            // Variasi gambar simulasi interior, velg, speedometer, dll
+            const photos = [
+                car.image,
+                "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=650&q=80",
+                "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=650&q=80",
+                "https://images.unsplash.com/photo-1583121274602-3e2820c69888?auto=format&fit=crop&w=650&q=80",
+                "https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=650&q=80"
+            ];
+
+            photos.forEach((photoUrl, idx) => {
+                const thumb = document.createElement('div');
+                thumb.className = `relative h-16 sm:h-20 rounded-xl overflow-hidden cursor-pointer border-2 transition-all ${idx === 0 ? 'border-brand-orange ring-2 ring-orange-200' : 'border-transparent hover:border-slate-300'}`;
+                thumb.innerHTML = `<img src="${photoUrl}" class="w-full h-full object-cover">`;
+                thumb.onclick = () => {
+                    document.getElementById('mainCarImage').src = photoUrl;
+                    container.querySelectorAll('div').forEach(el => el.classList.remove('border-brand-orange', 'ring-2', 'ring-orange-200'));
+                    thumb.classList.add('border-brand-orange', 'ring-2', 'ring-orange-200');
+                };
+                container.appendChild(thumb);
+            });
+        }
+
+        // ================= REKOMENDASI MOBIL SERUPA & SEMEREK =================
+        function setupSimilarCars(car) {
+            // Mobil semerek (misal sesama Toyota, sesama Honda, dll)
+            const sameBrand = carCatalog.filter(c => c.id !== car.id && c.brand.toLowerCase() === car.brand.toLowerCase());
+            
+            // Mobil sejenis tipe bodi (misal sesama MPV, SUV, Hatchback, dll)
+            const sameBody = carCatalog.filter(c => c.id !== car.id && c.bodyType.toLowerCase() === car.bodyType.toLowerCase());
+
+            // Kombinasi rekomendasi: semerek dulu, lalu sejenis tipe bodi
+            const combinedMap = new Map();
+            sameBrand.forEach(c => combinedMap.set(c.id, c));
+            sameBody.forEach(c => combinedMap.set(c.id, c));
+            
+            // Tambahkan alternatif jika kurang dari 4
+            if (combinedMap.size < 4) {
+                carCatalog.filter(c => c.id !== car.id).forEach(c => {
+                    if (combinedMap.size < 8) combinedMap.set(c.id, c);
+                });
+            }
+
+            similarCarsCache.all = Array.from(combinedMap.values());
+            similarCarsCache.brand = sameBrand.length > 0 ? sameBrand : similarCarsCache.all.slice(0, 4);
+            similarCarsCache.body = sameBody.length > 0 ? sameBody : similarCarsCache.all.slice(0, 4);
+
+            // Update badge dan counter
+            const badgeEl = document.getElementById('similarBrandBadge');
+            if (badgeEl) badgeEl.textContent = `Semerek ${car.brand}`;
+
+            const labelBrand = document.getElementById('labelSimilarBrand');
+            if (labelBrand) labelBrand.textContent = `(${car.brand})`;
+
+            const labelBody = document.getElementById('labelSimilarBody');
+            if (labelBody) labelBody.textContent = `(${car.bodyType})`;
+
+            const countAll = document.getElementById('countSimilarAll');
+            if (countAll) countAll.textContent = Math.min(similarCarsCache.all.length, 4);
+
+            const countBrand = document.getElementById('countSimilarBrand');
+            if (countBrand) countBrand.textContent = Math.min(similarCarsCache.brand.length, 4);
+
+            const countBody = document.getElementById('countSimilarBody');
+            if (countBody) countBody.textContent = Math.min(similarCarsCache.body.length, 4);
+
+            filterSimilarCars('all');
+        }
+
+        function filterSimilarCars(type) {
+            currentFilter = type;
+
+            // Update tab styles
+            document.querySelectorAll('.similar-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-navy', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-slate-100', 'text-slate-700');
+            });
+
+            if (type === 'all') {
+                document.getElementById('tabSimilarAll').classList.add('bg-brand-navy', 'text-white', 'shadow-sm');
+                document.getElementById('tabSimilarAll').classList.remove('bg-slate-100', 'text-slate-700');
+            } else if (type === 'brand') {
+                document.getElementById('tabSimilarBrand').classList.add('bg-brand-navy', 'text-white', 'shadow-sm');
+                document.getElementById('tabSimilarBrand').classList.remove('bg-slate-100', 'text-slate-700');
+            } else if (type === 'body') {
+                document.getElementById('tabSimilarBody').classList.add('bg-brand-navy', 'text-white', 'shadow-sm');
+                document.getElementById('tabSimilarBody').classList.remove('bg-slate-100', 'text-slate-700');
+            }
+
+            // Tampilkan 1 baris saja (maksimal 4 mobil)
+            const itemsToRender = (similarCarsCache[type] || similarCarsCache.all).slice(0, 4);
+            renderSimilarCarsGrid(itemsToRender);
+        }
+
+        function renderSimilarCarsGrid(cars) {
+            const grid = document.getElementById('similarCarsGrid');
+            if (!grid) return;
+            grid.innerHTML = '';
+
+            if (cars.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full bg-slate-50 border border-slate-200 rounded-2xl p-8 text-center text-slate-500 text-sm">
+                        Belum ada unit lain dalam kategori ini saat ini. Silakan periksa rekomendasi lainnya.
+                    </div>
+                `;
+                return;
+            }
+
+            cars.forEach(item => {
+                const installment = calculateInstallment(item.price, 20, 60);
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl overflow-hidden border border-slate-200/90 shadow-card hover:shadow-card-hover hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group";
+                card.innerHTML = `
+                    <div>
+                        <!-- Foto Mobil -->
+                        <div class="relative h-44 w-full bg-slate-100 overflow-hidden cursor-pointer" onclick="window.location.href='detail.html?id=${item.id}'">
+                            <img src="${item.image}" alt="${item.brand} ${item.model}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                            
+                            <!-- Badges -->
+                            <div class="absolute top-2.5 left-2.5 flex flex-col gap-1">
+                                <span class="bg-slate-900/85 text-white text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">
+                                    ${item.year}
+                                </span>
+                                ${item.hasWarranty ? `
+                                    <span class="bg-amber-500/95 text-white text-[10px] font-bold px-1.5 py-0.5 rounded shadow-sm">
+                                        Garansi
+                                    </span>
+                                ` : ''}
+                            </div>
+
+                            <div class="absolute bottom-2.5 right-2.5">
+                                <span class="bg-slate-900/75 text-white text-[10px] font-medium px-1.5 py-0.5 rounded">
+                                    ${item.photosCount || '08'} Foto
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Info Mobil -->
+                        <div class="p-3.5">
+                            <div class="flex items-center justify-between gap-1">
+                                <h4 onclick="window.location.href='detail.html?id=${item.id}'" class="font-bold text-slate-900 text-sm hover:text-brand-orange cursor-pointer transition-colors line-clamp-1">
+                                    ${item.brand} ${item.model}
+                                </h4>
+                                <span class="text-[9px] font-bold px-1.5 py-0.5 bg-slate-100 text-slate-600 rounded uppercase flex-shrink-0">
+                                    ${item.bodyType}
+                                </span>
+                            </div>
+                            <p class="text-[11px] text-slate-500 mt-1">
+                                ${item.year} • ${item.mileage.toLocaleString()} km • ${item.transmission}
+                            </p>
+                            <p class="text-[11px] text-emerald-600 font-semibold mt-0.5">
+                                <i class="fa-solid fa-location-dot text-[10px]"></i> Showroom ${item.city}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Harga & CTA -->
+                    <div class="p-3.5 pt-0">
+                        <div class="pt-2.5 border-t border-slate-100 flex items-center justify-between">
+                            <div>
+                                <div class="text-[10px] text-slate-400 font-medium">Harga Cash</div>
+                                <div class="font-extrabold text-sm text-slate-900">${item.priceDisplay}</div>
+                                <div class="text-[10px] text-brand-orange font-semibold">Cicilan: ${formatRupiah(installment.monthlyPayment)}/bln</div>
+                            </div>
+                            <a href="detail.html?id=${item.id}" class="bg-brand-navy hover:bg-brand-orange text-white text-xs font-semibold px-3 py-2 rounded-lg transition-all shadow-sm">
+                                Detail
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Test Drive Modal Handlers
+        function openBookingTestDriveModal() {
+            document.getElementById('testDriveModal').classList.remove('hidden');
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('tdDate').min = today;
+            document.getElementById('tdDate').value = today;
+        }
+
+        function closeBookingTestDriveModal() {
+            document.getElementById('testDriveModal').classList.add('hidden');
+        }
+
+        function handleTestDriveSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('tdName').value;
+            const phone = document.getElementById('tdPhone').value;
+            const date = document.getElementById('tdDate').value;
+            const time = document.getElementById('tdTime').value;
+            closeBookingTestDriveModal();
+            showToast(`Jadwal test drive untuk ${name} pada ${date} (${time}) berhasil dikonfirmasi! Sales kami segera menghubungi Anda di ${phone}.`);
+        }
+
+        // Mobile Nav
+        function toggleMobileNav() {
+            const menu = document.getElementById('mobileNavMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Toast
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        window.addEventListener('DOMContentLoaded', initPage);
+    </script>
+
+    <!-- ==================== FLOATING ROUND WHATSAPP BUTTON ==================== -->
+    <a 
+        href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20tanya%20unit%20mobil" 
+        target="_blank" 
+        class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group"
+        title="Hubungi WhatsApp Sales"
+        aria-label="WhatsApp Sales"
+    >
+        <i class="fa-brands fa-whatsapp text-3xl group-hover:scale-105 transition-transform"></i>
+        <!-- Ping Indicator -->
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white"></span>
+        </span>
+        <!-- Tooltip on Hover (Desktop) -->
+        <span class="hidden md:group-hover:block absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl whitespace-nowrap shadow-xl border border-slate-700 pointer-events-none transition-all">
+            Chat WhatsApp Sales
+        </span>
+    </a>
+</body>
+</html>

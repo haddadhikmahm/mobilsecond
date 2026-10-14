@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jual & Tukar Tambah Mobil Bekas Resmi - Harga Tertinggi & Cair 1 Jam | Mobile Second</title>
+    <meta name="description" content="Jual mobil bekas Anda dengan taksiran harga pasar tertinggi dan transparan di Mobile Second. Gratis inspeksi 160 titik langsung ke rumah, dana cair 1 jam, dan bonus trade-in Rp 5 Juta.">
+
+    <!-- Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#121824',
+                            navy: '#1b2434',
+                            navyLight: '#243046',
+                            orange: '#ea580c',
+                            orangeHover: '#c2410c',
+                            accent: '#f97316',
+                            yellow: '#f59e0b',
+                            blue: '#2563eb',
+                            cardBg: '#ffffff',
+                            bg: '#f4f6f9',
+                        }
+                    },
+                    boxShadow: {
+                        'card': '0 2px 10px rgba(0, 0, 0, 0.04)',
+                        'card-hover': '0 12px 25px -4px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.04)',
+                        'nav': '0 4px 20px -2px rgba(15, 23, 42, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-bg text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-brand-orange selection:text-white">
+
+    <!-- Toast Notification -->
+    <div id="toastNotification" class="fixed top-6 right-6 z-[9999] hidden transform transition-all duration-300">
+        <div class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700">
+            <div id="toastIcon" class="text-emerald-400 text-lg"><i class="fa-solid fa-circle-check"></i></div>
+            <div id="toastMessage" class="text-xs sm:text-sm font-semibold">Pesan notifikasi</div>
+        </div>
+    </div>
+
+    <!-- ==================== HEADER & NAVBAR (STICKY) ==================== -->
+    <header id="mainStickyNavbar" class="sticky top-0 z-50 bg-brand-navy text-white py-3.5 px-4 sm:px-6 lg:px-8 border-b border-transparent shadow-none transition-all duration-500 ease-in-out">
+        <div class="max-w-[1440px] mx-auto">
+            <div class="flex items-center justify-between">
+                
+                <!-- Logo & Brand -->
+                <a href="index.html" class="flex items-center gap-3 group focus:outline-none" title="Mobile Second - Halaman Utama">
+                    <div class="h-11 w-11 rounded-xl bg-white p-1 flex items-center justify-center shadow-md overflow-hidden ring-2 ring-white/20 group-hover:ring-brand-accent transition-all">
+                        <img src="logo.jpg" alt="Mobile Second Logo" class="h-full w-full object-contain" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3202/3202926.png';">
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-center tracking-tight font-extrabold text-xl sm:text-2xl leading-none">
+                            <span class="text-white">Mobile</span>
+                            <span class="text-brand-accent ml-1">Second</span>
+                        </div>
+                        <span class="text-[10px] text-amber-400 font-semibold tracking-wider mt-0.5 uppercase flex items-center gap-1">
+                            <i class="fa-solid fa-circle-check text-[9px]"></i> Jual Beli Mobil Bekas
+                        </span>
+                    </div>
+                </a>
+
+                <!-- Navigasi Menu Lengkap -->
+                <nav class="hidden lg:flex items-center space-x-7 text-sm font-medium text-slate-200">
+                    <a href="index.html" class="text-slate-300 hover:text-brand-accent transition-colors">Beli Mobil</a>
+                    <a href="jual-mobil.html" class="text-brand-accent font-semibold flex items-center gap-1">
+                        Jual Mobil
+                        <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+                    </a>
+                    <a href="promo.html" class="text-slate-300 hover:text-brand-accent transition-colors flex items-center gap-1.5">
+                        <span>Promo</span>
+                        <span class="bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.5 rounded-full animate-pulse">HOT</span>
+                    </a>
+                    <a href="tentang-kami.html" class="text-slate-300 hover:text-brand-accent transition-colors">Tentang Kami</a>
+                    <a href="simulasi-kredit.html" class="text-slate-300 hover:text-brand-accent transition-colors">Simulasi Kredit</a>
+                </nav>
+
+                <!-- Tombol Hotline WhatsApp (Desktop) & Mobile Trigger -->
+                <div class="flex items-center gap-3">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20jual%20atau%20tukar%20tambah%20mobil" target="_blank" class="hidden sm:flex items-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-full text-xs font-bold transition-all shadow-sm">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>0812-3456-7890</span>
+                    </a>
+                    <!-- Mobile Hamburger -->
+                    <button onclick="toggleMobileNav()" class="lg:hidden p-2 text-slate-200 hover:text-white focus:outline-none" aria-label="Buka Menu">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Nav Menu Dropdown -->
+            <div id="mobileNavMenu" class="hidden lg:hidden pt-4 pb-2 border-t border-slate-700/60 mt-4 space-y-3">
+                <a href="index.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Beli Mobil (Katalog)</a>
+                <a href="jual-mobil.html" class="block text-brand-orange font-semibold py-1 text-sm">Jual Mobil</a>
+                <a href="promo.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Promo Spesial</a>
+                <a href="tentang-kami.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Tentang Kami</a>
+                <a href="simulasi-kredit.html" class="block text-slate-200 hover:text-brand-orange py-1 text-sm font-medium">Simulasi Kredit</a>
+                <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second" target="_blank" class="block text-emerald-400 font-semibold py-1 text-sm flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp"></i> Hubungi WhatsApp Sales
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="flex-grow max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+        
+        <!-- Hero Section: Standar Industri Marketplace Otomotif -->
+        <div class="relative bg-gradient-to-br from-brand-navy via-slate-900 to-slate-950 rounded-3xl p-6 sm:p-10 lg:p-12 text-white overflow-hidden shadow-2xl border border-slate-800">
+            <div class="absolute -right-24 -bottom-24 w-96 h-96 bg-brand-orange/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute right-1/3 -top-20 w-80 h-80 bg-blue-600/15 rounded-full blur-2xl pointer-events-none"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                <div class="lg:col-span-8 space-y-4">
+                    <div class="inline-flex items-center gap-2 bg-brand-orange/20 border border-brand-orange/40 text-brand-accent px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase">
+                        <i class="fa-solid fa-shield-halved"></i> Penaksiran Harga Resmi • Terpercaya Sejak 2018
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
+                        Jual Mobil Anda dengan <span class="text-brand-accent">Harga Pasar Tertinggi</span>
+                    </h1>
+                    <p class="text-slate-300 text-xs sm:text-base leading-relaxed max-w-2xl">
+                        Dapatkan penawaran harga objektif dan transparan tanpa perantara. Tim inspektor bersertifikat kami siap datang ke rumah Anda secara <strong>100% Gratis</strong>. Jika harga cocok, dana langsung cair ke rekening bank Anda dalam 1 jam!
+                    </p>
+
+                    <!-- 3 Benefit Pillars -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 text-xs">
+                        <div class="flex items-center gap-2.5 bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">
+                            <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-house-chimney"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white">Inspeksi Gratis</div>
+                                <div class="text-[10px] text-slate-300">Teknisi datang ke rumah</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2.5 bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">
+                            <div class="w-8 h-8 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white">Dana Cair 1 Jam</div>
+                                <div class="text-[10px] text-slate-300">Transfer realtime tanpa tunda</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-2.5 bg-white/10 backdrop-blur-md p-3 rounded-2xl border border-white/10">
+                            <div class="w-8 h-8 rounded-xl bg-brand-orange/20 text-brand-accent flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-arrows-rotate"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white">Bonus Trade-In</div>
+                                <div class="text-[10px] text-slate-300">Ekstra cashback Rp 5 Juta</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side Quick Stats Box -->
+                <div class="lg:col-span-4 bg-white/5 rounded-3xl p-6 border border-white/10 backdrop-blur-md space-y-4">
+                    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                        <span class="text-xs text-slate-300">Mobil Terjual Bulan Ini</span>
+                        <span class="text-sm font-extrabold text-amber-400">142 Unit</span>
+                    </div>
+                    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                        <span class="text-xs text-slate-300">Rata-rata Waktu Inspeksi</span>
+                        <span class="text-sm font-extrabold text-white">35 Menit</span>
+                    </div>
+                    <div class="flex items-center justify-between border-b border-white/10 pb-3">
+                        <span class="text-xs text-slate-300">Tingkat Kepuasan Penjual</span>
+                        <span class="text-sm font-extrabold text-emerald-400 flex items-center gap-1">
+                            <i class="fa-solid fa-star text-amber-400 text-xs"></i> 4.9 / 5.0
+                        </span>
+                    </div>
+                    <div class="pt-1">
+                        <a href="#sectionSellForm" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-3 rounded-xl font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-orange-500/30 transition-all">
+                            <span>Mulai Estimasi Harga Sekarang</span>
+                            <i class="fa-solid fa-arrow-down text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== FORMULIR APPRAISAL & BOOKING INSPEKSI 160 TITIK ==================== -->
+        <div id="sectionSellForm" class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            
+            <!-- Left Column: Form Estimasi & Booking Lengkap (8 Cols) -->
+            <div class="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-8 shadow-card border border-slate-200/90 space-y-6">
+                
+                <!-- Form Header -->
+                <div class="border-b border-slate-100 pb-4">
+                    <div class="flex items-center justify-between gap-2">
+                        <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Layanan Penaksiran Mobil</span>
+                        <span class="text-[10px] bg-emerald-50 text-emerald-700 font-extrabold px-2.5 py-1 rounded-full border border-emerald-200">
+                            <i class="fa-solid fa-circle-check"></i> Bebas Biaya Layanan
+                        </span>
+                    </div>
+                    <h2 class="text-xl sm:text-2xl font-extrabold text-slate-900 mt-1">Formulir Estimasi Harga & Jadwal Inspeksi</h2>
+                    <p class="text-xs sm:text-sm text-slate-500 mt-1">
+                        Lengkapi rincian spesifikasi kendaraan Anda di bawah ini untuk mendapatkan simulasi taksiran harga pasar dan konfirmasi kunjungan inspektor.
+                    </p>
+                </div>
+
+                <form id="sellCarForm" onsubmit="handleSellCarSubmit(event)" class="space-y-6">
+                    
+                    <!-- TAB TIPE PENGAJUAN: JUAL LANGSUNG vs TUKAR TAMBAH -->
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-slate-800">Pilih Jenis Transaksi Penjualan:</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="cursor-pointer border-2 border-brand-orange bg-orange-50/40 rounded-2xl p-3.5 flex items-center gap-3 transition-all" id="labelOptionSellCash">
+                                <input type="radio" name="sellTransactionType" value="cash" checked onchange="updateTransactionType(this.value)" class="text-brand-orange focus:ring-brand-orange h-4 w-4">
+                                <div>
+                                    <div class="font-extrabold text-xs text-slate-900">Jual Langsung (Cash Cair 1 Jam)</div>
+                                    <div class="text-[10px] text-slate-500">Mobil dibeli tunai oleh showroom, dana langsung ditransfer.</div>
+                                </div>
+                            </label>
+
+                            <label class="cursor-pointer border-2 border-slate-200 hover:border-brand-orange bg-white rounded-2xl p-3.5 flex items-center gap-3 transition-all" id="labelOptionTradeIn">
+                                <input type="radio" name="sellTransactionType" value="tradein" onchange="updateTransactionType(this.value)" class="text-brand-orange focus:ring-brand-orange h-4 w-4">
+                                <div>
+                                    <div class="font-extrabold text-xs text-slate-900 flex items-center gap-1.5">
+                                        <span>Tukar Tambah (Trade-In)</span>
+                                        <span class="bg-red-500 text-white text-[9px] font-extrabold px-1.5 py-0.2 rounded-full">BONUS 5JT</span>
+                                    </div>
+                                    <div class="text-[10px] text-slate-500">Tukar mobil lama dengan unit baru bersertifikasi di Mobile Second.</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- STEP 1: SPESIFIKASI UTAMA KENDARAAN -->
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center gap-2 text-xs font-extrabold text-slate-900 uppercase tracking-wider pb-1 border-b border-slate-100">
+                            <span class="w-5 h-5 rounded-full bg-brand-navy text-white text-[10px] flex items-center justify-center font-bold">1</span>
+                            <span>Spesifikasi Identitas Kendaraan</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Merek Mobil *</label>
+                                <select id="sellBrand" required onchange="onBrandChange()" class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="">-- Pilih Merek Kendaraan --</option>
+                                    <option value="Toyota">Toyota</option>
+                                    <option value="Honda">Honda</option>
+                                    <option value="Daihatsu">Daihatsu</option>
+                                    <option value="Mitsubishi">Mitsubishi</option>
+                                    <option value="Suzuki">Suzuki</option>
+                                    <option value="Nissan">Nissan</option>
+                                    <option value="Hyundai">Hyundai</option>
+                                    <option value="Wuling">Wuling</option>
+                                    <option value="Mazda">Mazda</option>
+                                    <option value="BMW">BMW</option>
+                                    <option value="Mercedes-Benz">Mercedes-Benz</option>
+                                    <option value="Lainnya">Merek Lainnya</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Model & Varian / Trim *</label>
+                                <input type="text" id="sellModel" required placeholder="Contoh: Avanza 1.3 G / Brio RS / Xpander Ultimate" class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Tahun Pembuatan *</label>
+                                <select id="sellYear" required class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="2024">2024 (Mobil Baru / Like New)</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                    <option value="2019" selected>2019</option>
+                                    <option value="2018">2018</option>
+                                    <option value="2017">2017</option>
+                                    <option value="2016">2016</option>
+                                    <option value="2015">2015</option>
+                                    <option value="2014">2014</option>
+                                    <option value="2013">2013</option>
+                                    <option value="2012">2012</option>
+                                    <option value="2011">2011</option>
+                                    <option value="2010">2010</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Tipe Transmisi *</label>
+                                <select id="sellTrans" required class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="Otomatis (AT/CVT)">Otomatis (AT/CVT)</option>
+                                    <option value="Manual (MT)">Manual (MT)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Jarak Tempuh (Odometer) *</label>
+                                <div class="relative">
+                                    <input type="number" id="sellMileage" required value="48000" step="5000" placeholder="Contoh: 45000" class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">km</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Warna Bodi Mobil *</label>
+                                <input type="text" id="sellColor" required placeholder="Contoh: Putih Mutiara / Hitam Metalik" class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Wilayah Plat Nomor / STNK *</label>
+                                <select id="sellPlateArea" required class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="Plat B - Jakarta">Plat B (Jakarta / Depok / Tangerang / Bekasi)</option>
+                                    <option value="Plat D - Bandung">Plat D (Bandung / Cimahi)</option>
+                                    <option value="Plat F - Bogor">Plat F (Bogor / Sukabumi / Cianjur)</option>
+                                    <option value="Plat Lainnya">Plat Luar Jabodetabek / Jawa Barat</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 2: STATUS DOKUMEN & KONDISI FISIK -->
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center gap-2 text-xs font-extrabold text-slate-900 uppercase tracking-wider pb-1 border-b border-slate-100">
+                            <span class="w-5 h-5 rounded-full bg-brand-navy text-white text-[10px] flex items-center justify-center font-bold">2</span>
+                            <span>Status Legalitas Dokumen & Kondisi Fisik</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Status Kepemilikan BPKB *</label>
+                                <select id="sellBpkbStatus" required class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="Lunas (BPKB Ditangan)">BPKB Asli Ready (Sudah Lunas)</option>
+                                    <option value="Masih Nyicil Leasing">Masih Nyicil di Leasing (Over Kredit Resmi)</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Masa Berlaku Pajak STNK *</label>
+                                <select id="sellTaxStatus" required class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="Hidup / Panjang">Pajak Hidup / Panjang</option>
+                                    <option value="Mati < 1 Tahun">Pajak Telat < 1 Tahun</option>
+                                    <option value="Mati > 1 Tahun">Pajak Telat > 1 Tahun</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Riwayat Servis Kendaraan *</label>
+                                <select id="sellServiceRecord" required class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="Rutin Bengkel Resmi">Rutin Bengkel Resmi (Buku Servis Lengkap)</option>
+                                    <option value="Rutin Bengkel Umum">Rutin Bengkel Umum / Berkala</option>
+                                    <option value="Tidak Teratur">Jarang / Tidak Teratur</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Self Declaration Checklist -->
+                        <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 text-xs">
+                            <span class="block text-[11px] font-bold text-slate-700">Pernyataan Kejujuran Kondisi Kendaraan:</span>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-600">
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="checkNoFlood" checked class="rounded text-brand-orange focus:ring-brand-orange">
+                                    <span>Mobil bebas dari bekas rendaman banjir</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="checkNoAccident" checked class="rounded text-brand-orange focus:ring-brand-orange">
+                                    <span>Mobil bebas tabrakan berat (struktur rangka utuh)</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="checkOriginalOdo" checked class="rounded text-brand-orange focus:ring-brand-orange">
+                                    <span>Odometer asli (bukan hasil putaran/reset)</span>
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer">
+                                    <input type="checkbox" id="checkOriginalDocs" checked class="rounded text-brand-orange focus:ring-brand-orange">
+                                    <span>Nomor rangka & mesin sesuai STNK/BPKB</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- STEP 3: LOKASI INSPEKSI & KONTAK PEMILIK -->
+                    <div class="space-y-3 pt-2">
+                        <div class="flex items-center gap-2 text-xs font-extrabold text-slate-900 uppercase tracking-wider pb-1 border-b border-slate-100">
+                            <span class="w-5 h-5 rounded-full bg-brand-navy text-white text-[10px] flex items-center justify-center font-bold">3</span>
+                            <span>Jadwal Inspeksi & Kontak Pemilik</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Pilihan Lokasi Inspeksi *</label>
+                                <select id="sellInspectionPlace" required class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="Home Inspection">Inspeksi di Rumah / Kantor Saya (Free Home Visit)</option>
+                                    <option value="Showroom Inspection">Bawa Unit ke Showroom Mobile Second Jakarta</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Kota / Domisili Mobil Berada *</label>
+                                <select id="sellCity" required class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                    <option value="Jakarta Selatan">Jakarta Selatan</option>
+                                    <option value="Jakarta Barat">Jakarta Barat</option>
+                                    <option value="Jakarta Pusat">Jakarta Pusat</option>
+                                    <option value="Jakarta Timur">Jakarta Timur</option>
+                                    <option value="Jakarta Utara">Jakarta Utara</option>
+                                    <option value="Tangerang & Tangsel">Tangerang / Tangerang Selatan (BSD, Bintaro)</option>
+                                    <option value="Bekasi">Bekasi & Sekitarnya</option>
+                                    <option value="Depok & Bogor">Depok / Bogor</option>
+                                    <option value="Bandung">Bandung & Cimahi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap Pemilik *</label>
+                                <input type="text" id="sellOwnerName" required placeholder="Contoh: Bpk. Bambang Wijaya" class="w-full text-xs font-semibold px-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1">Nomor WhatsApp Aktif *</label>
+                                <div class="relative">
+                                    <span class="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400">+62</span>
+                                    <input type="tel" id="sellPhone" required placeholder="81234567890" class="w-full text-xs font-semibold pl-12 pr-3.5 py-3 rounded-xl border border-slate-200 bg-slate-50 focus:bg-white focus:outline-none focus:border-brand-orange">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Target Unit Trade-in (muncul hanya jika pilih trade in) -->
+                        <div id="tradeInTargetUnitBox" class="hidden p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2">
+                            <span class="text-xs font-bold text-emerald-800 flex items-center gap-1.5">
+                                <i class="fa-solid fa-car-side"></i> Mobil Pengganti yang Anda Minati di Mobile Second:
+                            </span>
+                            <input type="text" id="sellTradeTarget" placeholder="Contoh: Honda HR-V 2021 / Toyota Innova Reborn 2020" class="w-full text-xs font-semibold px-3 py-2.5 rounded-xl border border-emerald-300 bg-white focus:outline-none">
+                            <p class="text-[11px] text-emerald-700">
+                                Nilai taksiran mobil lama Anda akan langsung dipotongkan dari total DP unit pengganti + Ekstra cashback Rp 5.000.000.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- KOTAK HASIL ESTIMASI NILAI PASAR INSTAN (INTERAKTIF) -->
+                    <div id="valuationResultBox" class="hidden p-5 rounded-2xl bg-gradient-to-r from-orange-50 to-amber-50 border-2 border-brand-orange space-y-3 shadow-md">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-orange-200 pb-2">
+                            <div>
+                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-orange">Hasil Estimasi Harga Pasar Real-Time</span>
+                                <h4 class="text-xs text-slate-600 font-semibold mt-0.5" id="valVehicleSummary">-</h4>
+                            </div>
+                            <span class="text-[9px] bg-emerald-100 text-emerald-800 font-extrabold px-2 py-0.5 rounded border border-emerald-300">
+                                ESTIMASI INDIKATIF AKURAT
+                            </span>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                            <div>
+                                <span class="text-xs text-slate-500 font-medium">Rentang Harga Pasar Wajar:</span>
+                                <div id="valuationPriceText" class="text-2xl sm:text-3xl font-black text-brand-navy">
+                                    Rp 145.000.000 - Rp 165.000.000
+                                </div>
+                            </div>
+                            <div class="sm:text-right">
+                                <span class="text-[10px] text-slate-500 block">Estimasi Waktu Inspeksi:</span>
+                                <span class="text-xs font-bold text-emerald-600 bg-emerald-100/70 px-2 py-1 rounded-lg inline-block mt-0.5">
+                                    <i class="fa-regular fa-clock"></i> 30 - 45 Menit di Lokasi
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="p-3 bg-white rounded-xl border border-orange-200/80 text-[11px] text-slate-600 space-y-1">
+                            <div>• Harga final mengikat akan ditetapkan setelah pengecekan fisik 160 titik oleh teknisi kami.</div>
+                            <div>• Pembayaran ditransfer langsung secara utuh begitu serah terima dokumen disepakati.</div>
+                        </div>
+
+                        <!-- Direct WhatsApp Followup Action -->
+                        <div class="pt-1 flex flex-col sm:flex-row gap-2">
+                            <a id="btnWaInstantDeal" href="#" target="_blank" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition-all">
+                                <i class="fa-brands fa-whatsapp text-base"></i>
+                                <span>Kunci Estimasi & Jadwalkan via WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Tombol Submit Form -->
+                    <div class="pt-2">
+                        <button type="submit" id="btnCalculateSell" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-4 rounded-2xl font-bold text-sm flex items-center justify-center gap-2 shadow-xl shadow-orange-500/25 transition-all transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-calculator text-base"></i>
+                            <span>Hitung Estimasi Harga & Ajukan Inspeksi Gratis</span>
+                        </button>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 text-[11px] text-slate-400">
+                        <span class="flex items-center gap-1"><i class="fa-solid fa-lock text-emerald-500"></i> Data Terenkripsi</span>
+                        <span class="flex items-center gap-1"><i class="fa-solid fa-circle-check text-emerald-500"></i> 100% Gratis Tanpa Komitmen</span>
+                        <span class="flex items-center gap-1"><i class="fa-solid fa-ban text-emerald-500"></i> Bebas Telepon Spam</span>
+                    </div>
+
+                </form>
+            </div>
+
+            <!-- Right Column: 3 Steps, Over Kredit Info, & Testimoni (4 Cols) -->
+            <div class="lg:col-span-4 space-y-6">
+                
+                <!-- 3 Langkah Transaksi Resmi -->
+                <div class="bg-white rounded-3xl p-6 shadow-card border border-slate-200/90 space-y-5">
+                    <div class="border-b border-slate-100 pb-3">
+                        <span class="text-[10px] font-bold uppercase tracking-wider text-brand-orange">Proses Cepat & Praktis</span>
+                        <h3 class="text-base font-extrabold text-slate-900 mt-0.5">3 Langkah Mudah Jual Mobil</h3>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-9 h-9 rounded-xl bg-orange-100 text-brand-orange font-black text-sm flex items-center justify-center shrink-0">
+                                1
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-900">Isi Data & Jadwal Inspeksi</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                                    Lengkapi rincian mobil Anda secara online. Petugas kami akan mengonfirmasi waktu kunjungan yang nyaman bagi Anda.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-600 font-black text-sm flex items-center justify-center shrink-0">
+                                2
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-900">Inspeksi 160 Titik Gratis</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                                    Inspektor profesional datang ke rumah untuk mengecek mesin, bodi, dan kelengkapan berkas secara transparan.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3.5">
+                            <div class="w-9 h-9 rounded-xl bg-emerald-100 text-emerald-600 font-black text-sm flex items-center justify-center shrink-0">
+                                3
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-slate-900">Penawaran & Dana Cair 1 Jam</h4>
+                                <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                                    Setelah sepakat, uang langsung ditransfer realtime ke rekening bank Anda saat itu juga tanpa potongan admin.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bantuan Mobil Masih Kredit (Over Kredit Resmi) -->
+                <div class="bg-gradient-to-br from-slate-900 to-brand-navy rounded-3xl p-6 text-white shadow-xl space-y-3.5 border border-slate-800">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-xl bg-amber-400/20 text-amber-300 flex items-center justify-center text-sm font-bold">
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+                        </div>
+                        <span class="text-xs font-bold text-amber-300 uppercase tracking-wider">Mobil Masih Nyicil Leasing?</span>
+                    </div>
+                    <h4 class="text-sm font-extrabold leading-snug">
+                        Kami Bantu Pelunasan Dipercepat Secara Resmi!
+                    </h4>
+                    <p class="text-slate-300 text-[11px] leading-relaxed">
+                        Tidak perlu pusing melunasi sisa hutang leasing sendiri. Tim kami akan mengurus pelunasan resmi ke pihak leasing rekanan, dan selisih lebih harga jual akan langsung kami transfer ke rekening Anda.
+                    </p>
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20mobil%20saya%20masih%20nyicil%20di%20leasing.%20Mohon%20bantuan%20proses%20pelunasan%20jual" target="_blank" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-900 py-2.5 px-4 rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 transition-colors">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>Konsultasi Over Kredit Resmi</span>
+                    </a>
+                </div>
+
+                <!-- Program Trade-In Eksklusif -->
+                <div class="bg-gradient-to-br from-emerald-600 to-teal-800 rounded-3xl p-6 text-white shadow-xl space-y-3">
+                    <div class="inline-flex items-center gap-1.5 bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full text-[10px] font-bold">
+                        <i class="fa-solid fa-arrows-rotate"></i> Tukar Tambah Showroom
+                    </div>
+                    <h4 class="text-base font-extrabold leading-snug">
+                        Mau Ganti Unit Lebih Baru?
+                    </h4>
+                    <p class="text-emerald-100 text-xs leading-relaxed">
+                        Tukar tambah mobil lama Anda sekarang dan nikmati <strong>Cashback Ekstra Rp 5.000.000</strong> plus DP ringan ke mobil impian bergaransi di showroom kami.
+                    </p>
+                    <a href="index.html" class="inline-flex items-center gap-2 bg-white text-emerald-900 hover:bg-emerald-50 px-4 py-2 rounded-xl font-bold text-xs shadow-md transition-all">
+                        <span>Pilih Unit Pengganti di Katalog</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                    </a>
+                </div>
+
+                <!-- Checklist Dokumen yang Diperlukan -->
+                <div class="bg-white rounded-3xl p-6 shadow-card border border-slate-200/90 space-y-3">
+                    <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2">
+                        <i class="fa-solid fa-folder-closed text-brand-orange"></i>
+                        <span>Dokumen yang Perlu Disiapkan</span>
+                    </h4>
+                    <div class="space-y-2 text-xs text-slate-600">
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs shrink-0"></i>
+                            <span>STNK Asli yang Masih Berlaku</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs shrink-0"></i>
+                            <span>BPKB & Faktur Asli (atau surat leasing)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs shrink-0"></i>
+                            <span>KTP Pemilik Sesuai Nama STNK/BPKB</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fa-solid fa-circle-check text-emerald-600 text-xs shrink-0"></i>
+                            <span>Buku Manual, Buku Servis, & Kunci Serep</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ==================== KOMPARASI LAYANAN: MOBILE SECOND VS MARKETPLACE UMUM ==================== -->
+        <section class="bg-gradient-to-b from-white to-slate-50 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-card border border-slate-200/90 space-y-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <div class="inline-flex items-center gap-2 bg-brand-orange/15 text-brand-orange border border-brand-orange/30 px-3.5 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider">
+                    <i class="fa-solid fa-scale-balanced"></i> Head-to-Head Perbandingan Layanan
+                </div>
+                <h3 class="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 tracking-tight">
+                    Mengapa Jual di Mobile Second <span class="text-brand-orange">Jauh Lebih Menguntungkan?</span>
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mx-auto">
+                    Bandingkan kenyamanan, kepastian waktu, dan keamanan finansial nyata yang Anda rasakan saat bertransaksi di showroom resmi kami dibandingkan menjual secara mandiri ke perorangan.
+                </p>
+            </div>
+
+            <!-- Side-by-Side Dual Comparison Cards with Center VS -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 relative items-stretch">
+                
+                <!-- CARD 1: MOBILE SECOND (PEMENANG / RECOMMENDED) -->
+                <div class="relative bg-white rounded-3xl p-6 sm:p-8 border-2 border-brand-orange shadow-xl hover:shadow-2xl transition-all flex flex-col justify-between overflow-hidden group">
+                    <!-- Accent Badge on Top -->
+                    <div class="absolute top-0 right-0 bg-gradient-to-l from-brand-orange to-amber-500 text-white text-[10px] sm:text-xs font-black uppercase px-5 py-1.5 rounded-bl-2xl shadow-sm flex items-center gap-1.5">
+                        <i class="fa-solid fa-crown text-amber-200"></i> Pilihan Terbaik & Tercepat
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Card Header -->
+                        <div class="border-b border-slate-100 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-brand-navy p-1 flex items-center justify-center shadow-md">
+                                    <img src="logo.jpg" alt="Logo" class="w-full h-full object-contain" onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/3202/3202926.png';">
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-black text-slate-900 leading-tight">Jual di Mobile Second Showroom</h4>
+                                    <p class="text-xs font-semibold text-emerald-600 flex items-center gap-1 mt-0.5">
+                                        <i class="fa-solid fa-circle-check"></i> Resmi, Transparan, & Terima Bersih
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5 Comparison Points -->
+                        <div class="space-y-4">
+                            <!-- Point 1 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-orange-50/50 border border-orange-100 transition-all hover:bg-orange-50">
+                                <div class="w-9 h-9 rounded-xl bg-brand-orange text-white flex items-center justify-center text-sm font-bold shrink-0 shadow-sm shadow-orange-500/30">
+                                    <i class="fa-solid fa-bolt"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-extrabold text-slate-900">Pasti Terjual dalam 1 Jam</h5>
+                                        <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 shrink-0">Cair Hari Ini</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                                        Selesai inspeksi dan harga disepakati, mobil langsung dibeli tunai oleh showroom saat itu juga. Tanpa waktu tunggu berlarut-larut.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Point 2 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-emerald-50/50 border border-emerald-100 transition-all hover:bg-emerald-50">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center text-sm font-bold shrink-0 shadow-sm shadow-emerald-600/30">
+                                    <i class="fa-solid fa-shield-halved"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-extrabold text-slate-900">Transfer Bank 100% Lunas di Tempat</h5>
+                                        <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 shrink-0">100% Aman</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                                        Dana langsung ditransfer realtime ke rekening bank pribadi Anda sebelum kendaraan dibawa. Bebas risiko cek kosong atau penipuan.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Point 3 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-blue-50/50 border border-blue-100 transition-all hover:bg-blue-50">
+                                <div class="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center text-sm font-bold shrink-0 shadow-sm shadow-blue-600/30">
+                                    <i class="fa-solid fa-house-chimney-user"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-extrabold text-slate-900">Inspeksi 160 Titik Gratis di Rumah</h5>
+                                        <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-blue-100 text-blue-800 shrink-0">Gratis Kunjungan</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                                        Inspektor kami yang datang ke rumah atau kantor Anda. Anda tidak perlu keluar biaya bensin, tol, atau waktu terjebak macet.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Point 4 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-purple-50/50 border border-purple-100 transition-all hover:bg-purple-50">
+                                <div class="w-9 h-9 rounded-xl bg-purple-600 text-white flex items-center justify-center text-sm font-bold shrink-0 shadow-sm shadow-purple-600/30">
+                                    <i class="fa-solid fa-file-invoice-dollar"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-extrabold text-slate-900">Bantuan Over Kredit & Pelunasan Leasing</h5>
+                                        <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-purple-100 text-purple-800 shrink-0">Over Kredit Resmi</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                                        Mobil masih nyicil? Kami urus pelunasan dipercepat ke pihak leasing rekanan, dan selisih lebih harga jual langsung kami serahkan ke Anda.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Point 5 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-amber-50/50 border border-amber-100 transition-all hover:bg-amber-50">
+                                <div class="w-9 h-9 rounded-xl bg-amber-500 text-white flex items-center justify-center text-sm font-bold shrink-0 shadow-sm shadow-amber-500/30">
+                                    <i class="fa-solid fa-file-signature"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-extrabold text-slate-900">Semua Dokumen & Balik Nama Diurus Tuntas</h5>
+                                        <span class="text-[9px] font-extrabold uppercase px-2 py-0.5 rounded bg-amber-100 text-amber-800 shrink-0">Bebas Pajak Progresif</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-600 mt-0.5 leading-relaxed">
+                                        Biro legalitas showroom mengurus berkas mutasi/balik nama dan blokir STNK, melindungi Anda dari tilang elektronik (ETLE) atau tagihan pajak progresif.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card Action Button -->
+                    <div class="pt-6 mt-4 border-t border-slate-100">
+                        <a href="#sectionSellForm" class="w-full bg-brand-orange hover:bg-brand-orangeHover text-white py-3.5 px-4 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-orange-500/30 transition-all transform hover:-translate-y-0.5">
+                            <i class="fa-solid fa-car"></i>
+                            <span>Ajukan Jual Mobil di Mobile Second Sekarang</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- CARD 2: JUAL SENDIRI KE PERORANGAN / MARKETPLACE UMUM (PAIN POINTS) -->
+                <div class="relative bg-slate-50/80 rounded-3xl p-6 sm:p-8 border border-slate-200/90 shadow-sm flex flex-col justify-between overflow-hidden">
+                    <!-- Warning Badge on Top -->
+                    <div class="absolute top-0 right-0 bg-slate-200 text-slate-600 text-[10px] sm:text-xs font-bold uppercase px-4 py-1.5 rounded-bl-2xl flex items-center gap-1.5">
+                        <i class="fa-solid fa-triangle-exclamation text-amber-600"></i> Proses Panjang & Rawan Masalah
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Card Header -->
+                        <div class="border-b border-slate-200/80 pb-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-12 h-12 rounded-2xl bg-slate-200 text-slate-500 flex items-center justify-center text-xl shrink-0">
+                                    <i class="fa-solid fa-user-xmark"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-black text-slate-700 leading-tight">Jual Sendiri ke Marketplace Umum</h4>
+                                    <p class="text-xs font-medium text-slate-400 mt-0.5">
+                                        Iklan Mandiri, Pembeli Perorangan, & Urus Berkas Sendiri
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5 Comparison Pain Points -->
+                        <div class="space-y-4 text-slate-500">
+                            <!-- Pain 1 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-white border border-slate-200">
+                                <div class="w-9 h-9 rounded-xl bg-slate-100 text-red-500 flex items-center justify-center text-sm font-bold shrink-0">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-bold text-slate-800">Waktu Tunggu Berbulan-bulan</h5>
+                                        <span class="text-[9px] font-semibold uppercase px-2 py-0.5 rounded bg-red-50 text-red-600 shrink-0">Tidak Pasti</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                                        Mobil bisa mengendap berbulan-bulan di garasi tanpa kepastian. Nilai depresiasi mobil terus turun seiring berjalannya waktu.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Pain 2 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-white border border-slate-200">
+                                <div class="w-9 h-9 rounded-xl bg-slate-100 text-red-500 flex items-center justify-center text-sm font-bold shrink-0">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-bold text-slate-800">Rawan Penipuan & Bukti Transfer Palsu</h5>
+                                        <span class="text-[9px] font-semibold uppercase px-2 py-0.5 rounded bg-red-50 text-red-600 shrink-0">Beresiko</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                                        Rentan modus penipuan bukti transfer editan, pembayaran uang muka (DP) fiktif, hingga tindak kejahatan saat sesi test drive perorangan.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Pain 3 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-white border border-slate-200">
+                                <div class="w-9 h-9 rounded-xl bg-slate-100 text-red-500 flex items-center justify-center text-sm font-bold shrink-0">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-bold text-slate-800">Repot Janji Temu & Banyak Calon Iseng</h5>
+                                        <span class="text-[9px] font-semibold uppercase px-2 py-0.5 rounded bg-slate-100 text-slate-600 shrink-0">Melelahkan</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                                        Harus menerima ratusan chat dan telepon dari pembeli iseng (*lowballer*) yang menawar harga tidak masuk akal serta membatalkan janji sepihak.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Pain 4 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-white border border-slate-200">
+                                <div class="w-9 h-9 rounded-xl bg-slate-100 text-red-500 flex items-center justify-center text-sm font-bold shrink-0">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-bold text-slate-800">Menolak Mobil yang Masih Nyicil</h5>
+                                        <span class="text-[9px] font-semibold uppercase px-2 py-0.5 rounded bg-red-50 text-red-600 shrink-0">Sangat Sulit</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                                        Pembeli perorangan umumnya tidak mau membeli mobil yang BPKB-nya masih di leasing karena khawatir pengurusan administrasi yang rumit.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Pain 5 -->
+                            <div class="flex items-start gap-3.5 p-3 rounded-2xl bg-white border border-slate-200">
+                                <div class="w-9 h-9 rounded-xl bg-slate-100 text-red-500 flex items-center justify-center text-sm font-bold shrink-0">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <h5 class="text-xs font-bold text-slate-800">Harus Urus Blokir & Balik Nama Sendiri</h5>
+                                        <span class="text-[9px] font-semibold uppercase px-2 py-0.5 rounded bg-slate-100 text-slate-600 shrink-0">Repot Samsat</span>
+                                    </div>
+                                    <p class="text-[11px] text-slate-500 mt-0.5 leading-relaxed">
+                                        Jika pembeli baru tidak segera melakukan balik nama, data KTP Anda akan terus dikenai pajak progresif kendaraan bermotor di Samsat.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Warning Note -->
+                    <div class="pt-6 mt-4 border-t border-slate-200/80 text-center text-xs text-slate-400">
+                        <span>Menjual sendiri membutuhkan waktu rata-rata 45–90 hari dengan risiko finansial mandiri.</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Guarantee Strip Bar -->
+            <div class="p-4 sm:p-5 rounded-2xl bg-brand-navy text-white flex flex-wrap items-center justify-between gap-4 text-xs">
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-base shrink-0">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-sm block">Garansi Kenyamanan Penjualan 100%</span>
+                        <span class="text-slate-300 text-[11px]">Tidak ada komitmen atau paksaan. Jika harga belum cocok, inspeksi tetap sepenuhnya gratis.</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20saya%20ingin%20tanya%20penawaran%20harga%20mobil%20saya" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-xl text-xs flex items-center gap-1.5 transition-colors shadow-md">
+                        <i class="fa-brands fa-whatsapp text-sm"></i>
+                        <span>Tanya Tim Appraiser via WA</span>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ==================== 4 PILAR STANDAR INSPEKSI TEKNIS ==================== -->
+        <section class="bg-gradient-to-br from-slate-900 via-brand-navy to-slate-900 rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-slate-800 space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-400 bg-amber-400/20 px-3 py-1 rounded-full">
+                    Sistem Penaksiran Objektif
+                </span>
+                <h3 class="text-2xl font-extrabold text-white">
+                    Standar 160 Titik Inspeksi Transparan
+                </h3>
+                <p class="text-xs sm:text-sm text-slate-300">
+                    Penawaran harga kami didasarkan pada data kondisi riil kendaraan yang dinilai secara objektif menggunakan peralatan diagnostik modern tanpa dipotong biaya tersembunyi.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Pilar 1 -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-orange/20 text-brand-accent flex items-center justify-center text-lg font-bold">
+                        <i class="fa-solid fa-gears"></i>
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Mesin & Transmisi</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Pemeriksaan kompresi, kebocoran oli, responsivitas transmisi matic/manual, serta kesehatan sistem pendingin radiator.
+                    </p>
+                </div>
+
+                <!-- Pilar 2 -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center text-lg font-bold">
+                        <i class="fa-solid fa-car-burst"></i>
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Struktur & Sasis Rangka</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Pengecekan titik las pabrik, pilar A/B/C, apron depan, dan lantai bagasi untuk memastikan mobil bebas tabrakan fatal.
+                    </p>
+                </div>
+
+                <!-- Pilar 3 -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-lg font-bold">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Komputer & Kelistrikan</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Scanning scanner OBD-II profesional mendeteksi error ECU, sensor ABS, airbag, kelistrikan alternator, dan aki mobil.
+                    </p>
+                </div>
+
+                <!-- Pilar 4 -->
+                <div class="p-5 rounded-2xl bg-white/5 border border-white/10 space-y-3">
+                    <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center text-lg font-bold">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <h4 class="font-bold text-sm text-white">Dokumen & Uji Jalan</h4>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Validasi fisik nomor rangka/mesin di Samsat, pengecekan keabsahan BPKB/STNK, dan uji performa suspensi di jalan raya.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== FAQ SEPUTAR PENJUALAN MOBIL ==================== -->
+        <section class="bg-white rounded-3xl p-6 sm:p-10 shadow-card border border-slate-200/90 space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <span class="text-xs font-bold text-brand-orange uppercase tracking-wider">Pusat Bantuan Penjual</span>
+                    <h3 class="text-2xl font-extrabold text-slate-900 mt-1">FAQ Seputar Penjualan & Tukar Tambah</h3>
+                </div>
+                <a href="https://wa.me/6281234567890?text=Halo%20Mobile%20Second,%20saya%20ingin%20tanya%20detail%20proses%20jual%20mobil" target="_blank" class="inline-flex items-center gap-2 text-xs font-bold text-emerald-600 hover:text-emerald-700">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Chat Langsung dengan Tim Appraiser
+                </a>
+            </div>
+
+            <div class="space-y-3">
+                <!-- FAQ 1 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Apakah inspeksi ke rumah benar-benar 100% gratis tanpa biaya tersembunyi?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        <strong>Ya, 100% gratis tanpa biaya apapun</strong> untuk seluruh wilayah Jabodetabek dan Bandung. Anda tidak memiliki kewajiban apapun untuk menjual mobil jika penawaran harga akhir kami belum sesuai dengan ekspektasi Anda.
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Berapa lama proses pencairan uang setelah harga disepakati?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Pembayaran langsung ditransfer via Realtime Bank Transfer (BCA, Mandiri, BRI, BNI, atau bank swasta lainnya) dalam waktu <strong>kurang dari 1 jam</strong> setelah penandatanganan berkas serah terima dan verifikasi kelengkapan dokumen sah.
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Bagaimana jika mobil saya masih dalam masa kredit leasing (belum lunas)?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Kami memiliki layanan <strong>Pelunasan Leasing Resmi</strong>. Tim kami akan mendampingi Anda untuk mengurus pelunasan dipercepat ke kantor leasing terkait. Showroom kami akan melunasi sisa tagihan pokok kredit, dan sisa uang penjualan akan langsung ditransfer ke rekening pribadi Anda.
+                    </div>
+                </div>
+
+                <!-- FAQ 4 -->
+                <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all faq-item">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 sm:p-5 text-left bg-slate-50 hover:bg-slate-100 transition-colors">
+                        <span class="font-bold text-slate-900 text-xs sm:text-sm flex items-center gap-2.5">
+                            <i class="fa-solid fa-circle-question text-brand-orange"></i>
+                            Bagaimana cara mendapatkan bonus Cashback Trade-In Rp 5.000.000?
+                        </span>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs transition-transform duration-300 faq-icon"></i>
+                    </button>
+                    <div class="faq-content hidden p-4 sm:p-5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+                        Pilih opsi <em>Tukar Tambah (Trade-In)</em> pada formulir. Setelah mobil lama Anda diinspeksi dan disetujui, bonus cashback Rp 5.000.000 akan langsung dipotongkan dari total DP unit pengganti yang Anda pilih di showroom Mobile Second.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="bg-brand-navy text-slate-400 text-xs mt-16 pt-12 pb-8 border-t border-slate-800">
+        <div class="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-8 border-b border-slate-800">
+                <div class="space-y-3">
+                    <div class="flex items-center gap-2">
+                        <div class="h-9 w-9 rounded-lg bg-white p-1 flex items-center justify-center">
+                            <img src="logo.jpg" alt="Logo" class="h-full w-full object-contain">
+                        </div>
+                        <span class="text-white font-extrabold text-lg">Mobile <span class="text-brand-accent">Second</span></span>
+                    </div>
+                    <p class="text-slate-400 text-xs leading-relaxed">
+                        Showroom resmi penjualan dan tukar tambah mobil bekas berkualitas. Semua unit bergaransi mesin 1 tahun dan lulus inspeksi 160 titik.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Navigasi Halaman</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="hover:text-brand-accent">Beli Mobil (Katalog Lengkap)</a></li>
+                        <li><a href="jual-mobil.html" class="hover:text-brand-accent text-brand-orange font-bold">Jual & Tukar Tambah Mobil</a></li>
+                        <li><a href="promo.html" class="hover:text-brand-accent">Promo & Diskon DP Spesial</a></li>
+                        <li><a href="simulasi-kredit.html" class="hover:text-brand-accent">Kalkulator Simulasi Kredit</a></li>
+                        <li><a href="tentang-kami.html" class="hover:text-brand-accent">Tentang Kami & Inspeksi</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Layanan Showroom</h4>
+                    <ul class="space-y-2">
+                        <li>Inspeksi 160 Titik Gratis di Rumah</li>
+                        <li>Pencairan Dana 1 Jam Transfer Utuh</li>
+                        <li>Bantuan Over Kredit & Pelunasan Leasing</li>
+                        <li>Tukar Tambah Cashback Rp 5 Juta</li>
+                        <li>Bantuan Pengurusan Balik Nama & STNK</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3">Hubungi Showroom</h4>
+                    <p class="text-slate-400 leading-relaxed mb-2">
+                        Jl. Sultan Iskandar Muda No. 88, Kebayoran Lama, Jakarta Selatan
+                    </p>
+                    <p class="text-slate-300 font-semibold mb-1">WhatsApp: 0812-3456-7890</p>
+                    <p class="text-slate-300 font-semibold">Email: halo@mobilesecond.id</p>
+                </div>
+            </div>
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 gap-3">
+                <p>&copy; 2026 Mobile Second. Seluruh Hak Cipta Dilindungi.</p>
+                <div class="flex gap-4">
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Kebijakan Privasi</a>
+                    <a href="tentang-kami.html" class="hover:text-slate-400">Syarat & Ketentuan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Comprehensive Scripts -->
+    <script>
+        function updateTransactionType(val) {
+            const labelCash = document.getElementById('labelOptionSellCash');
+            const labelTrade = document.getElementById('labelOptionTradeIn');
+            const targetBox = document.getElementById('tradeInTargetUnitBox');
+
+            if (val === 'tradein') {
+                labelTrade.className = "cursor-pointer border-2 border-brand-orange bg-orange-50/40 rounded-2xl p-3.5 flex items-center gap-3 transition-all";
+                labelCash.className = "cursor-pointer border-2 border-slate-200 hover:border-brand-orange bg-white rounded-2xl p-3.5 flex items-center gap-3 transition-all";
+                targetBox.classList.remove('hidden');
+            } else {
+                labelCash.className = "cursor-pointer border-2 border-brand-orange bg-orange-50/40 rounded-2xl p-3.5 flex items-center gap-3 transition-all";
+                labelTrade.className = "cursor-pointer border-2 border-slate-200 hover:border-brand-orange bg-white rounded-2xl p-3.5 flex items-center gap-3 transition-all";
+                targetBox.classList.add('hidden');
+            }
+        }
+
+        function onBrandChange() {
+            // Optional model pre-fill helper
+            const brand = document.getElementById('sellBrand').value;
+            const modelInput = document.getElementById('sellModel');
+            if (brand === 'Toyota' && !modelInput.value) modelInput.placeholder = 'Contoh: Avanza 1.3 G / Innova Reborn / Raize';
+            else if (brand === 'Honda' && !modelInput.value) modelInput.placeholder = 'Contoh: Brio RS / HR-V 1.5 E / CR-V Prestige';
+            else if (brand === 'Mitsubishi' && !modelInput.value) modelInput.placeholder = 'Contoh: Xpander Ultimate / Pajero Sport Dakar';
+            else if (brand === 'Daihatsu' && !modelInput.value) modelInput.placeholder = 'Contoh: Sigra 1.2 R / Terios R / Xenia 1.3 R';
+        }
+
+        function handleSellCarSubmit(e) {
+            e.preventDefault();
+
+            const brand = document.getElementById('sellBrand').value;
+            const model = document.getElementById('sellModel').value;
+            const year = parseInt(document.getElementById('sellYear').value) || 2019;
+            const trans = document.getElementById('sellTrans').value;
+            const mileage = parseInt(document.getElementById('sellMileage').value) || 50000;
+            const owner = document.getElementById('sellOwnerName').value;
+            const phone = document.getElementById('sellPhone').value;
+            const city = document.getElementById('sellCity').value;
+            const inspectionPlace = document.getElementById('sellInspectionPlace').value;
+            const txType = document.querySelector('input[name="sellTransactionType"]:checked')?.value || 'cash';
+            const bpkbStatus = document.getElementById('sellBpkbStatus').value;
+
+            // Accurate valuation modeling based on market data
+            let baseMarket = 175000000;
+            const brandLower = brand.toLowerCase();
+
+            if (brandLower === 'toyota') baseMarket = 185000000;
+            else if (brandLower === 'honda') baseMarket = 195000000;
+            else if (brandLower === 'mitsubishi') baseMarket = 210000000;
+            else if (brandLower === 'daihatsu') baseMarket = 140000000;
+            else if (brandLower === 'suzuki') baseMarket = 145000000;
+            else if (brandLower === 'bmw' || brandLower === 'mercedes-benz') baseMarket = 380000000;
+
+            // Age factor (depreciation 6% per year past 2024)
+            const yearDiff = Math.max(0, 2024 - year);
+            const depFactor = Math.max(0.45, 1 - (yearDiff * 0.065));
+            baseMarket = baseMarket * depFactor;
+
+            // Mileage factor
+            if (mileage > 100000) baseMarket *= 0.92;
+            else if (mileage < 30000) baseMarket *= 1.05;
+
+            // Transmission factor
+            if (trans.includes('Manual')) baseMarket *= 0.95;
+
+            const minPrice = Math.round((baseMarket * 0.94) / 1000000) * 1000000;
+            const maxPrice = Math.round((baseMarket * 1.08) / 1000000) * 1000000;
+
+            const formatRupiah = (num) => 'Rp ' + num.toLocaleString('id-ID');
+            const priceText = `${formatRupiah(minPrice)} - ${formatRupiah(maxPrice)}`;
+
+            // Populate valuation box
+            document.getElementById('valuationPriceText').textContent = priceText;
+            document.getElementById('valVehicleSummary').textContent = `${brand} ${model} (${year} • ${trans} • ${mileage.toLocaleString('id-ID')} km • ${city})`;
+            
+            // Build WhatsApp prefilled message
+            const tradeText = txType === 'tradein' ? ' (Tukar Tambah ke Unit Showroom)' : ' (Jual Langsung Cash)';
+            const waMsg = encodeURIComponent(
+                `Halo Showroom Mobile Second, saya ingin konfirmasi penaksiran & jadwal inspeksi mobil:\n\n` +
+                `• Pemilik: ${owner} (WA: 08${phone.replace(/^0+/, '')})\n` +
+                `• Unit: ${brand} ${model} (${year})\n` +
+                `• Transmisi/Odo: ${trans} / ${mileage.toLocaleString('id-ID')} km\n` +
+                `• Status BPKB: ${bpkbStatus}\n` +
+                `• Lokasi: ${city} (${inspectionPlace})\n` +
+                `• Jenis Transaksi: ${tradeText}\n` +
+                `• Estimasi Web: ${priceText}\n\n` +
+                `Mohon dibantu konfirmasi jadwal kedatangan teknisi inspektor gratis ke lokasi. Terima kasih!`
+            );
+            document.getElementById('btnWaInstantDeal').href = `https://wa.me/6281234567890?text=${waMsg}`;
+
+            // Show Result
+            const valBox = document.getElementById('valuationResultBox');
+            valBox.classList.remove('hidden');
+            valBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+            showToast(`Estimasi harga ${brand} ${model} berhasil dihitung! Silakan cek rincian dan konfirmasi via WhatsApp.`);
+        }
+
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+            const isHidden = content.classList.contains('hidden');
+
+            document.querySelectorAll('.faq-content').forEach(c => c.classList.add('hidden'));
+            document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('rotate-180'));
+
+            if (isHidden) {
+                content.classList.remove('hidden');
+                icon.classList.add('rotate-180');
+            }
+        }
+
+        function toggleMobileNav() {
+            const menu = document.getElementById('mobileNavMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // DYNAMIC STICKY NAVBAR SCROLL
+        const mainNavbar = document.getElementById('mainStickyNavbar');
+        function updateNavbarOnScroll() {
+            if (!mainNavbar) return;
+            if (window.scrollY > 20) {
+                mainNavbar.classList.add('border-slate-700/80', 'shadow-[0_4px_25px_rgba(0,0,0,0.35)]');
+                mainNavbar.classList.remove('border-transparent', 'shadow-none');
+            } else {
+                mainNavbar.classList.remove('border-slate-700/80', 'shadow-[0_4px_25px_rgba(0,0,0,0.35)]');
+                mainNavbar.classList.add('border-transparent', 'shadow-none');
+            }
+        }
+        window.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
+
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            toastMsg.textContent = message;
+            toast.classList.remove('hidden');
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3500);
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            updateNavbarOnScroll();
+        });
+    </script>
+
+    <!-- ==================== FLOATING ROUND WHATSAPP BUTTON ==================== -->
+    <a 
+        href="https://wa.me/6281234567890?text=Halo%20Showroom%20Mobile%20Second,%20saya%20ingin%20konsultasi%20jual%20mobil" 
+        target="_blank" 
+        class="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-2xl hover:scale-110 active:scale-95 transition-all duration-300 group"
+        title="Hubungi WhatsApp Sales"
+        aria-label="WhatsApp Sales"
+    >
+        <i class="fa-brands fa-whatsapp text-3xl group-hover:scale-105 transition-transform"></i>
+        <!-- Ping Indicator -->
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-emerald-500 border-2 border-white"></span>
+        </span>
+        <!-- Tooltip on Hover (Desktop) -->
+        <span class="hidden md:group-hover:block absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl whitespace-nowrap shadow-xl border border-slate-700 pointer-events-none transition-all">
+            Chat WhatsApp Sales
+        </span>
+    </a>
+</body>
+</html>
